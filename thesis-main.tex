@@ -23,6 +23,7 @@
 \acrodef{FP}{Functional Programming}
 \acrodef{RT}{Referential Transparency}
 \acrodef{AP}{Aggregate Programming}
+\acrodef{OOP}{Objective Oriented Programming}
 
 \mainlinespacing{1.241} % line spacing in mainmatter, comment to default (1)
 
@@ -78,19 +79,19 @@ you may need both \ac{vm} and \acp{vm}.
 
 I suggest referencing stuff as follows: \cref{fig:random-image} or \Cref{fig:random-image}
 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=.8\linewidth]{figures/random-image.pdf}
-%     \caption{Some random image}
-%     \label{fig:random-image}
-% \end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=.8\linewidth]{figures/random-image.pdf}
+    \caption{Some random image}
+    \label{fig:random-image}
+\end{figure}
 
 \section{Paradigma OOP e Programmazione Funzionale}
 
 \subsection{Paradigma OOP}
 
-L'Objective Oriented Programming è un paradigma nel senso stretto del termine poichè rappresenta un modo di organizzare e rappresentare un mondo. 
-Il paradigma in questione deve la sua potenza nella capacità di simulare entità reali ed è riassumbile con la frase \textit{Everything is an Object}. 
+L'Objective Oriented Programming è un paradigma nel senso stretto del termine poiché rappresenta un modo di organizzare e rappresentare un mondo. 
+Il paradigma in questione deve la sua potenza nella capacità di simulare entità reali ed è riassumibile con la frase \textit{Everything is an Object}. 
 È rilevante parlare di OOP in quanto il paradigma di programmazione funzionale, che è alla base di ScaFi, è un'estensione di esso. 
 Il potere della programmazione ad Oggetti (OOP), come detto precedentemente, risiede nella capacità di simulare un mondo e permette di farlo grazie agli "oggetti", essi sono istanze di Classi, le quali a loro volta sono strutture dati astratte che permettono ad ogni loro istanza di avere uno stato (definito dai \textit{fields}) e un comportamento (definito dai \textit{methods}).
 I pilastri della programmazione ad oggetti sono l'incapsulamento, l'ereditarietà e il polimorfismo\cref{fig:OOP}.
@@ -105,16 +106,16 @@ I pilastri della programmazione ad oggetti sono l'incapsulamento, l'ereditariet�
 \begin{itemize}
     \item \textbf{Incapsulamento}: Questo principio vuole che i dettagli implementativi di una classe siano nascosti ad altre classi. È un approccio progettuale che mira ad isolare ogni sistema e set di dati. 
     \item \textbf{Ereditarietà}: Con ereditarietà si intende la specializzazione di una classe figlia da una classe madre. Questo permette di creare classi più specifiche che ereditano le proprietà e i metodi della classe madre incoraggiando il riuso del codice.
-    \item \textbf{Polimorfismo}: Il polimorfismo è la capacità di un ogetto di assumere più forme. In OOP il polimorfismo è realizzato attraverso l'\textit{overloading} e l'\textit{overriding}. L'overloading è la possibilità di avere più metodi con lo stesso nome ma con diversi parametri \footnote{I parametri possono differire sia in numero che in tipo.}, mentre l'overriding è la possibilità di ridefinire un metodo della classe madre nella classe figlia\footnote{Quando viene chiamato un metodo su un oggetto polimorfico, la scelta di quale implementazione dello stesso metodo scegliere avviene a runtime, in base al tipo effettivo dell'oggetto.}.
+    \item \textbf{Polimorfismo}: Il polimorfismo è la capacità di un oggetto di assumere più forme. In OOP il polimorfismo è realizzato attraverso l'\textit{overloading} e l'\textit{overriding}. L'overloading è la possibilità di avere più metodi con lo stesso nome ma con diversi parametri \footnote{I parametri possono differire sia in numero che in tipo.}, mentre l'overriding è la possibilità di ridefinire un metodo della classe madre nella classe figlia\footnote{Quando viene chiamato un metodo su un oggetto polimorfico, la scelta di quale implementazione dello stesso metodo scegliere avviene a runtime, in base al tipo effettivo dell'oggetto.}.
 \end{itemize}
 
-La programmazione ad oggetti si differenzia dalla più clasica programmazione funzionale in quanto controlla la complessità del software supportando la scomposizione gerarchica attraverso sia i dati che l'astrazione procedurale.
+La programmazione ad oggetti si differenzia dalla più classica programmazione funzionale in quanto controlla la complessità del software supportando la scomposizione gerarchica attraverso sia i dati che l'astrazione procedurale.
 Tra i benefici della OOP troviamo la predisposizione al miglioramento della qualità e della leggibilità del codice e la facilità di manutenzione.
 
-Non è, tuttavia, priva di difetti, richiede un particolare impegno gestire il sistema da realizzzare all'aumentare della sua complessità. Altri paradigmi, come la programmazione funzionale, possono essere più adatti a determinati problemi.
+Non è, tuttavia, priva di difetti, richiede un particolare impegno gestire il sistema da realizzare all'aumentare della sua complessità. Altri paradigmi, come la programmazione funzionale, possono essere più adatti a determinati problemi.
 
 \subsection{Programmazione Funzionale}
-Nel caso della OOP abbiamo riassunto il paradigma con la frase \textit{"Everything is an Object"}, per la programmazione funzionale possiamo riassumerla con \textit{"Everything is a Function"}. Quando si parla di funzioni nel ambito della \ac{FP} si intendo \textbf{funzioni pure} cioè senza effetti collaterali. Per effetti collaterali si intende che la fuzione fa altro oltre a restituire un risultato. Un paio di esempi, presi da \texttt{Functional Programming in Scala}, sono:
+Nel caso della OOP abbiamo riassunto il paradigma con la frase \textit{"Everything is an Object"}, per la programmazione funzionale possiamo riassumerla con \textit{"Everything is a Function"}. Quando si parla di funzioni nel ambito della \ac{FP} si intendo \textbf{funzioni pure} cioè senza effetti collaterali. Per effetti collaterali si intende che la funzione fa altro oltre a restituire un risultato. Un paio di esempi, presi da \texttt{Functional Programming in Scala}, sono:
 
 \begin{itemize}
     \item Modifica di una variabile
@@ -123,7 +124,7 @@ Nel caso della OOP abbiamo riassunto il paradigma con la frase \textit{"Everythi
     \item "Disegnare" sullo schermo
 \end{itemize}
 
-Si potrebbe pensare che con l'uso della \ac{FP} si possano costruire solo programmi semplice, nella realtà non c'é alcuna limitazione sulla complessità del software da costruire poichè il paradigma della FP esprime un nuovo modo di pensare e scrivere il codice.
+Si potrebbe pensare che con l'uso della \ac{FP} si possano costruire solo programmi semplice, nella realtà non c'é alcuna limitazione sulla complessità del software da costruire poiché il paradigma della FP esprime un nuovo modo di pensare e scrivere il codice.
 
 Nel dettaglio, per \textbf{funzione pura} si intende una funzione $f:A\to B$, (una funzione che prende un input di tipo $A$ e restituisce un output di tipo $B$) che mette in relazione ogni elemento di $A$ con esattamente un valore di $B$. Qualsiasi altra operazione che non sia utile a calcolare $f(a)=b$ con $a\in A$ e $b\in B$ deve essere intesa come effetto collaterale della funzione e quindi evitata se si vuole creare una funzione pura.
 
@@ -132,6 +133,8 @@ Un esempio di funzione pura, senza effetti collaterali, è la funzione di somma 
 \begin{lstlisting}[language=Scala]
     def sum(a: Int, b: Int): Int = a + b
 \end{lstlisting}
+
+% TODO: aggiungere un contro esempio di funzione non pura
 
 Formalmente si può definire una funzione pura con il concetto di \ac{RT}:
 
@@ -143,13 +146,41 @@ Formalmente si può definire una funzione pura con il concetto di \ac{RT}:
 
 \section{Paradigma dell'Aggregate Programming}
 
-Nei capitoli precedenti si è esaminata l'evoluzione dal paradigma \ac{OOP} a quello \ac{FP}, la quale, ha pemesso di gestire in modo più pratico progetti più complessi e semplificandone la manutenibilità. Una ulteriore, più specificica, evoluzione è quella portata dal paradigma dell'\ac{AP}. Quest'ultimo mira a rendere la progettazione, manutenzione e testing nell'ambito del controllo di dispositivi hardware di larga-scala.
+Nei capitoli precedenti si è esaminata l'evoluzione dal paradigma \ac{OOP} a quello \ac{FP}, la quale, ha permesso di gestire in modo più pratico progetti più complessi e semplificandone la manutenibilità. Una ulteriore, più specifica, evoluzione è quella portata dal paradigma dell'\ac{AP}. Quest'ultimo mira a rendere la progettazione, manutenzione e testing nell'ambito del controllo di dispositivi hardware di larga-scala.
 
-La tecnica dellì\ac{AP} si basa su 3 principi fondamentali per la costruzione di sistemi robusti e resilienti:
+La tecnica dell'\ac{AP} si basa su 3 principi fondamentali per la costruzione di sistemi robusti e resilienti:
 
 \begin{itemize}
-    \item 
+    \item I dettagli implementativi dei sistemi hardware che si vuole andare a manipolare devono essere nascosti così da permettere ai programmatori di concentrarsi solo sulla logica di alto livello del sistema, in alcuni casi è possibile che questa astrazione delle specifiche di basso livello sia tale da poter essere pensato come uno spazio continuo, invece di un insieme di dispositivi separati. Per esempio, invece di immaginarci una stanza piena di sensori, la trattiamo come una area unificata definita da un flusso continuo di dati.
+    \item Il programma manipola le strutture dati della rete di dispositivi sia in funzione della loro estensione spaziale che di quella temporale. Approccio particolare utile in sistemi in cui l'informazione cambia in base al luogo.
+    \item Ogni dispositivo della rete esegue le operazioni necessarie in autonomia, coordinandosi con i dispositivi vicini attraverso meccanismi robusti e resilienti. In questo modo il sistema rimane fluido ed efficiente anche in situazioni anomale, ad esempio causate dal guasto di un qualche dispositivo.
 \end{itemize}
+
+% TODO: questa parte è terribile, va riscritta-----------------
+L'approccio \ac{AP} nella progettazione di sistemi si allontana dal più classico approccio "dispositivo centrico", nel quale ogni dispositivo della rete ha il compito di compiere tutte le operazioni richieste per il raggiungimento della soluzione e simultaneamente comunicare con gli altri dispositivi della rete. Questo approccio, seppur semplice, è poco scalabile e difficile da mantenere al crescere della complessità del sistema. Il nuovo paradigma prevede la scomposizione in componenti del programma assegnato ad ogni dispositivo, ogni componente esegue un compito specifico e comunica principalmente solo con i componenti dello stesso tipo presenti nel suo intorno per eseguire un servizio ed eventualmente con un altro componente presente nello stesso dispositivo al fine di realizzare una nuova soluzione inerente ad un'altro servizio. 
+% -----------------------------------------------------------
+
+Il paradigma \ac{AP}, che ha permesso la creazione di framework come Protelis e ScaFi, si basa sul concetto dei \textit{campi di calcolo}. Per \textit{campi di calcolo} o \textit{computationals fields} si intende la mappatura degli elementi del dominio in cui si opera in un insieme di valori.
+I campi di calcolo vengono utilizzati per standardizzare le interazioni tra i dispositivi, permettendo di analizzare e progettare sistemi distribuiti in modo più semplice e intuitivo. L'idea di campo prende ispirazione dai campi fisici, ad esempio quello magnetico. Ogni dispositivo della rete è considerato come un punto nello spazio ed il campo rappresenta un dato valore assegnato ad ognuno di questi punti. Questo insieme di valori, che chiameremo \textit{campi} o \textit{fields} rappresentano lo stato del sistema in un dato istante.
+Per la manipolazione dei campi si hanno a disposizione quattro costrutti: 
+% TODO: citare il paper "Aggregate Programming for the Internet of Things" per i seguenti costrutti
+
+\begin{itemize}
+    \item \textbf{Functions}: funzioni $$ b(e_1,\dots,e_n) $$ applicate agli argomenti $e_1,\dots,e_n$. Possono essere sia funzioni matematiche, logiche o algoritmiche ma possono anche rappresentare sensori o attuatori.
+    \item \textbf{Dynamics}: $$ rep(x \leftarrow v){s_1;\dots;s_n} $$ rappresenta un una variabile di stato locale $x$, inizialmente inizializzata con il valore $v$ e che può essere modificata dalle istruzioni $s_1,\dots,s_n$. In questo modo si definisce un campo dinamico.
+    \item \textbf{Interaction}: $$ nbr(s) $$ rappresenta il vicinato di un dispositivo, ovvero l'insieme dei dispositivi con cui è possibile interagire.
+    \item \textbf{Restrictions}: $$
+        \begin{array}{l}
+        \text{if } e \\
+        \qquad s_1; \quad \dots \quad s_n; \\
+        \text{else} \\
+        \qquad s_1'; \quad \dots \quad s_m';
+        \end{array}
+    $$
+    permette di andare a definire sotto spazio del campo principiale in base ad una condizione $e$ sul quale poi andare ad eseguire certe istruzioni invece di altre. È importante che le istruzioni riferite ad un certo sotto spazio non abbiano effetti su altri sotto spazi.
+\end{itemize}
+
+% TODO: questo capitolo è incompleto
 
 \section{ScaFi e Macro-Swarm}
 
@@ -162,7 +193,7 @@ La tecnica dellì\ac{AP} si basa su 3 principi fondamentali per la costruzione d
 \label{chap:analisi}
 %----------------------------------------------------------------------------------------
 
-\section{Estendibilità del sistema ad un nuovo modello di Robot (Thymio)}
+\section{Estensibilità del sistema ad un nuovo modello di Robot (Thymio)}
 
 \section{Gestione dei vincoli di compatibilità del sistema Thymio}
 
