@@ -113,6 +113,7 @@ Nel caso della OOP abbiamo riassunto il paradigma con la frase \textit{"Everythi
 
 Si potrebbe pensare che con l'uso della \ac{FP} si possano costruire solo programmi semplice, nella realtà non c'é alcuna limitazione sulla complessità del software da costruire poiché il paradigma della FP esprime un nuovo modo di pensare e scrivere il codice.
 
+\label{sec:fp}
 Nel dettaglio, per \textbf{funzione pura} si intende una funzione $f:A\to B$, (una funzione che prende un input di tipo $A$ e restituisce un output di tipo $B$) che mette in relazione ogni elemento di $A$ con esattamente un valore di $B$. Qualsiasi altra operazione che non sia utile a calcolare $f(a)=b$ con $a\in A$ e $b\in B$ deve essere intesa come effetto collaterale della funzione e quindi evitata se si vuole creare una funzione pura.
 
 Un esempio di funzione pura, senza effetti collaterali, è la funzione di somma che prende in input due valori e ne restituisce la loro somma \cref{lst:sum-function}. 
@@ -331,11 +332,27 @@ All'intero del Framework troviamo le API per progettazione dei sistemi aggregati
 \end{figure}
 
 È rilevante notare che in Macroswarm la computazione della attuazione da eseguire su un certo dispositivo e la reale attuazione nel mondo reale sono disaccoppiate. Il motivo di questa scelta è dovuto al fatto che ad ogni round\cref{sec:sense-compute-interact} il programma aggregato può variare un qualche parametro per completare il task. È, comunque, possibile scegliere quale modalità di computazione-attuazione scegliere poiché, in base al contesto, una può essere più adatta dell'altra. Le modalità sono:
+
 \begin{itemize}
-    \item \textbf{round-based}: è possibile eseguire l'attuazione al termine del prossimo round
-    \item \textbf{long-standing}: l'attuazione che si vuole eseguire è valida finché non viene revisionata o ritirata
+    \item \textbf{round-based}\cref{fig:round-based}: è possibile eseguire l'attuazione al termine del prossimo round
+    \item \textbf{long-standing}\cref{fig:long-standong}: l'attuazione che si vuole eseguire è valida finché non viene revisionata o ritirata
 \end{itemize}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=.6\linewidth]{figures/round-based.pdf}
+    \caption{Modalità Round Based}
+    \label{fig:round-based}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.99\linewidth]{figures/long-standing.pdf}
+    \caption{Modalità Long Standing}
+    \label{fig:long-standong}
+\end{figure}
+
+Questo modello di attuazione è modellato come una funzione pura\cref{sec:fp} quindi priva di effetti collaterali. Se ci si trova in un contesto in cui l'esecuzione dell'attuazione richiede un certo tempo allora il progettista del sistema aggregato può andare a modellare il sistema in modo tale da tenere in considerazione questo aspetto.
 
 
 % //TODO: completare la Macroswarm section con la descrizione dei moduli
@@ -344,6 +361,7 @@ All'intero del Framework troviamo le API per progettazione dei sistemi aggregati
 \section{Thymio e tdmclient}
 
 \begin{quote}
+    \raggedright
     "Thymio è un robot educativo open-source progettato da ricercatori dell'EPFL (Politecnico federale di Losanna), in collaborazione con l'ECAL (Università d'arte e design di Losanna), e prodotto da Mobsya, un'associazione no-profit la cui missione è quella di offrire percorsi STEAM completi e coinvolgenti a studenti di tutte le età."
     \begin{flushright}
         \textit{-- \href{https://www.thymio.org/}{Mobsya}}
