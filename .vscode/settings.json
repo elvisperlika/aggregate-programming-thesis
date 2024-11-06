@@ -1,10 +1,14 @@
 {
     "cSpell.words": [
         "Aseba",
+        "callsub",
         "l'ECAL",
         "l'implentazione",
+        "leds",
         "microcontrollore",
-        "Mobsya"
+        "Mobsya",
+        "onevent",
+        "sendevent"
     ],
     "todo-tree.tree.scanMode": "open files"
 }
