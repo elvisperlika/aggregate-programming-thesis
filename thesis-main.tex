@@ -97,18 +97,18 @@ you may need both \ac{vm} and \acp{vm}.
 L'Objective Oriented Programming è un paradigma nel senso stretto del termine poiché rappresenta un modo di organizzare e rappresentare un mondo. 
 Il paradigma in questione deve la sua potenza nella capacità di simulare entità reali ed è riassumibile con la frase \textit{Everything is an Object}. 
 È rilevante parlare di OOP in quanto il paradigma di programmazione funzionale, che è alla base di ScaFi, è un'estensione di esso. 
-Il potere della programmazione ad Oggetti (OOP), come detto precedentemente, risiede nella capacità di simulare un mondo e permette di farlo grazie agli "oggetti", essi sono istanze di Classi, le quali a loro volta sono strutture dati astratte che permettono ad ogni loro istanza di avere uno stato (definito dai \textit{fields}) e un comportamento (definito dai \textit{methods}).
+Il potere della programmazione ad Oggetti (OOP), come detto precedentemente, risiede nella capacità di simulare un mondo e permette di farlo grazie agli ``oggetti'', essi sono istanze di Classi, le quali a loro volta sono strutture dati astratte che permettono ad ogni loro istanza di avere uno stato (definito dai \textit{fields}) e un comportamento (definito dai \textit{methods}).
 I pilastri della programmazione ad oggetti sono l'incapsulamento, l'ereditarietà e il polimorfismo.
 
 Il difetto della programmazione ad oggetti è che richiede un particolare impegno nel gestire il sistema da realizzare all'aumentare della sua complessità. Altri paradigmi, come la programmazione funzionale, possono essere più adatti a determinati problemi.
 
-Nel caso della OOP abbiamo riassunto il paradigma con la frase \textit{"Everything is an Object"}, per la programmazione funzionale possiamo riassumerla con \textit{"Everything is a Function"}. Quando si parla di funzioni nel ambito della \ac{FP} si intendo \textbf{funzioni pure} cioè senza effetti collaterali. Per effetti collaterali si intende che la funzione fa altro oltre a restituire un risultato. Un paio di esempi, presi da \texttt{Functional Programming in Scala}, sono:
+Nel caso della OOP abbiamo riassunto il paradigma con la frase \textit{``Everything is an Object''}, per la programmazione funzionale possiamo riassumerla con \textit{``Everything is a Function''}. Quando si parla di funzioni nel ambito della \ac{FP} si intendo \textbf{funzioni pure} cioè senza effetti collaterali. Per effetti collaterali si intende che la funzione fa altro oltre a restituire un risultato. Un paio di esempi, presi da \texttt{Functional Programming in Scala}, sono:
 
 \begin{itemize}
     \item Modifica di una variabile
     \item Modifica del campo di un oggetto
     \item Leggere da o scrivere su un file
-    \item "Disegnare" sullo schermo
+    \item ``Disegnare'' sullo schermo
 \end{itemize}
 
 Si potrebbe pensare che con l'uso della \ac{FP} si possano costruire solo programmi semplice, nella realtà non c'é alcuna limitazione sulla complessità del software da costruire poiché il paradigma della FP esprime un nuovo modo di pensare e scrivere il codice.
@@ -178,7 +178,7 @@ La tecnica dell'\ac{AP} si basa su 3 principi fondamentali per la costruzione di
     \item Ogni dispositivo della rete esegue le operazioni necessarie in autonomia, coordinandosi con i dispositivi vicini attraverso meccanismi robusti e resilienti. In questo modo il sistema rimane fluido ed efficiente anche in situazioni anomale, ad esempio causate dal guasto di un qualche dispositivo.
 \end{itemize}
 
-L'approccio \ac{AP} nella progettazione di sistemi è profondamente diverso classico approccio "dispositivo centrico".
+L'approccio \ac{AP} nella progettazione di sistemi è profondamente diverso classico approccio ``dispositivo centrico''.
 Nel secondo caso, ogni dispositivo della rete ha il compito di compiere tutte le operazioni richieste per il raggiungimento della soluzione e simultaneamente comunicare con gli altri dispositivi della rete. Questo approccio, seppur semplice, è poco scalabile e difficile da mantenere al crescere della complessità del sistema. 
 Il nuovo paradigma, invece, prevede la scomposizione in componenti del programma assegnato ad ogni dispositivo, ogni componente esegue un compito specifico e comunica principalmente solo con i componenti dello stesso tipo presenti nel suo intorno per eseguire un servizio ed eventualmente con un altro componente presente nello stesso dispositivo al fine di realizzare una nuova soluzione inerente ad un'altro servizio. Le componenti sono una astrazioni dei \textit{campi di calcolo}.
 
@@ -202,7 +202,7 @@ Ogni dispositivo del proprio sistema aggregato esegue una computazione in modo a
 
 
 Posizionandoci in un livello più implementativo troviamo i seguenti costrutti per la manipolazione dei campi: 
-% //TODO: citare il paper "Aggregate Programming for the Internet of Things" per i seguenti costrutti
+% //TODO: citare il paper ``Aggregate Programming for the Internet of Things'' per i seguenti costrutti
 
 \begin{itemize}
     \item \textbf{Functions}: funzioni $$ b(e_1,\dots,e_n) $$ applicate agli argomenti $e_1,\dots,e_n$. Possono essere sia funzioni matematiche, logiche o algoritmiche ma possono anche rappresentare sensori o attuatori.
@@ -231,7 +231,7 @@ Implementazioni di questo tipo sono difficili da integrare in sistemi programmat
 
 \section{ScaFi}
 
-ScaFi è un toolkit open-source basato su Scala per l'\ac{AC} per la progettazione ad alto livello di sistemi aggregati.
+ScaFi è un toolkit open-source scritto in linguaggio Scala per l'\ac{AC} per la progettazione ad alto livello di sistemi aggregati.
 Il termine ScaFi deriva dalla unione di Scala e Fields. Scala è un linguaggio java-like moderno e flessibile progettato per unificare il paradigma \ac{OOP} e quello \ac{FP}. È stato progettato per essere coinciso e facilmente leggibile, inoltre si basa sulla Java Virtual Machine, la quale permette l'utilizzo delle librerie Java. L'utilizzo della JVM e la flessibilità del linguaggio sono state le caratteristiche chiave per il raggiungimento della popolarità di questo linguaggio. Il termine Field invece deriva dai \textit{field calculus} (campi di calcolo) di cui abbiamo parlato nei capitoli precedenti.
 
 L'Architettura di ScaFi è riassumibile nella immagine \cref{fig:scafi-arc}.
@@ -251,7 +251,7 @@ Ispezionando la figura, troviamo:
     \item \textbf{scafi-stdlib-ext}: librerie extra
     \item \textbf{scafi-simulator}: fornisce un supporto per la simulazione dei sistemi di \ac{AP} sviluppati
     \item \textbf{scafi-simulator-GUI}: fornisce un'interfaccia grafica per la simulazione
-    \item \textbf{spala}: ("spatial scala") si tratta di un \textit{middleware} che permette di eseguire programmi \ac{AC} basati sugli attori ed è indipendente dal DSL di ScaFi
+    \item \textbf{spala}: (``spatial scala'') si tratta di un \textit{middleware} che permette di eseguire programmi \ac{AC} basati sugli attori ed è indipendente dal DSL di ScaFi
     \item \textbf{scafi-distributed}: layer integrativo per l'utilizzo di \textbf{spala} in ScaFi
 \end{itemize}
 
@@ -305,7 +305,7 @@ ScaFi fornisce alcuni operatori, detti anche \textit{blocchi}, di alto livello g
     \begin{center}
         \verb|C[T](sink: Boolean, value: T, acc(T,T)=>T): T| 
     \end{center}
-    utilizzata per riassumere le informazioni distribuite in un unico dispositivo \verb|sink|, i valori \verb|values| prodotti dai dispositivi vengono "raccolti" dal gradiente che si muove in direzione di \verb|sink| e vengono accumulati secondo la funzione di accumulo \verb|acc|
+    utilizzata per riassumere le informazioni distribuite in un unico dispositivo \verb|sink|, i valori \verb|values| prodotti dai dispositivi vengono ``raccolti'' dal gradiente che si muove in direzione di \verb|sink| e vengono accumulati secondo la funzione di accumulo \verb|acc|
 \end{itemize}
 
 \section{Macroswarm}
@@ -334,8 +334,8 @@ All'intero del Framework troviamo le API per progettazione dei sistemi aggregati
 È rilevante notare che in Macroswarm la computazione della attuazione da eseguire su un certo dispositivo e la reale attuazione nel mondo reale sono disaccoppiate. Il motivo di questa scelta è dovuto al fatto che ad ogni round\cref{sec:sense-compute-interact} il programma aggregato può variare un qualche parametro per completare il task. È, comunque, possibile scegliere quale modalità di computazione-attuazione scegliere poiché, in base al contesto, una può essere più adatta dell'altra. Le modalità sono:
 
 \begin{itemize}
-    \item \textbf{round-based}\cref{fig:round-based}: è possibile eseguire l'attuazione al termine del prossimo round
-    \item \textbf{long-standing}\cref{fig:long-standong}: l'attuazione che si vuole eseguire è valida finché non viene revisionata o ritirata
+    \item \textbf{round-based}(\cref{fig:round-based}): è possibile eseguire l'attuazione al termine del prossimo round 
+    \item \textbf{long-standing}(\cref{fig:long-standong}): l'attuazione che si vuole eseguire è valida finché non viene revisionata o ritirata
 \end{itemize}
 
 \begin{figure}
@@ -354,15 +354,99 @@ All'intero del Framework troviamo le API per progettazione dei sistemi aggregati
 
 Questo modello di attuazione è modellato come una funzione pura\cref{sec:fp} quindi priva di effetti collaterali. Se ci si trova in un contesto in cui l'esecuzione dell'attuazione richiede un certo tempo allora il progettista del sistema aggregato può andare a modellare il sistema in modo tale da tenere in considerazione questo aspetto.
 
+Come è possibile vedere in \cref{fig:macro-swarm-int} il framework è composto da diversi moduli che a loro volta contengono diversi blocchi, ognuno con un compito specifico, solo alcuni di questi blocchi sono sono stati utilizzati per la realizzazione del progetto e saranno descritti nei prossimi paragrafi.
 
-% //TODO: completare la Macroswarm section con la descrizione dei moduli
+\paragraph{Movements blocks} 
+Questi blocchi si occupano di controllare i movimenti di ogni agente (dispositivo) della flotta. Il Movimento più semplice è descritto da un vettore \verb|Vector(x,y,z)| che rappresenta la direzione e la velocità del movimento, ad esempio 
 
+\begin{lstlisting}[language=Scala, label={lst:vector-example}]
+    Vector(3.6, 0, 0)
+\end{lstlisting}
+
+rappresenta un movimento di $3.6 \frac{m}{s}$ lungo l'asse $x$. Una volta definito il blocco di movimento per un certo agente, i valori $x,y,z$ devono essere accuratamente mappati sui motori del dispositivo per ottenere il movimento desiderato. Carattere di fondamentale importanza quando si lavora su un sistema eterogeneo e quindi formato da dispositivi differenti equipaggiati da motori differenti.
+
+Un'altro blocco ``semplice'' è \verb|brownian| che genera un vettore di movimento casuale ad ogni round, è possibile definire uno scalare (\verb|scale|) che rappresenta la velocità massima del movimento casuale.
+
+Sono disponibili anche blocchi più complessi (\cref{lst:movement-module}), alcuni di questi simulati in \cref{fig:movement-simulations}:
+\begin{itemize}
+    \item \verb|goTo|: permette di definire un target (posizione assoluta) alla quale un agente deve arrivare
+    \item \verb|explore|: definito uno spazio rettangolare con i valori \verb|minBound| e \verb|maxBound|, il blocco produce vettori da assegnare all'agente per esplorare l'intero spazio
+    \item \verb|maintainTrajectory|: permette di mantenere un certo vettore di movimento per un certo periodo di tempo
+    \item \verb|maintainUntil|: permette di mantenere un certo vettore di movimento fino a quando non viene raggiunta una certa condizione
+    \item \verb|obstacleAvoidance|: genera vettori di movimento da assegnare agli agenti per evitare ostacoli
+\end{itemize}
+
+In figura \cref{fig:movement-simulations} sono state simulate le funzioni \verb|goTo|, \verb|explore| \\ e \verb|obstacleAvoidance| su Alchemist, un simulatore di sistemi aggregati.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\linewidth]{figures/movement-simulations.pdf}
+    \caption{Simulazioni dei blocchi di movimento eseguita su Alchemist.}
+    \label{fig:movement-simulations}
+\end{figure}
+
+\begin{lstlisting}[language=Scala, label={lst:movement-module} caption={Funzioni del modulo di movimento}]
+    // movimento casuale
+    def brownian(scale: Double): Vector
+    
+    // posizioni assolute
+    def goTo(target: Point3D): Vector
+    def explore(minBound: Point3D, maxBound: Point3D): Vector
+
+    // condizioni temporali
+    def maintainTrajectory(trajectory: => Vector)(time: FiniteDuration):Vector
+
+    // condizioni booleane
+    def maintainUntil(direction: Vector)(condition: Boolean): Vector
+
+    // elusione ostacoli
+    def obstacleAvoidance(obstacles: List[Vector]): Vector
+\end{lstlisting}
+
+Questi blocchi possono essere assemblati per costruirne di nuovi più complessi, ad esempio, per creare un comportamento ``muovi fino a destinazione evitando gli ostacoli'':
+
+\begin{lstlisting}[language=Scala, label={lst:complex-movement} caption={Comportamento complesso}]
+    def moveToTargetAvoidingObstacles(target: Point3D, obstacles: List[Vector]): Vector = {
+        val targetMovement = goTo(target)
+        val obstacleAvoidanceMovement = obstacleAvoidance(obstacles)
+        (targetMovement + obstacleAvoidanceMovement).normalize
+    }
+\end{lstlisting}
+
+La composizione di questi blocchi permette di creare comportamenti complessi in modo semplice e intuitivo andando a sommare comportamenti più semplici. È importante andare a \textit{normalizzare} il risultato del comportamento complesso per produrre un singolo vettore nel caso in cui il movimento sia composto da più vettori.
+
+\paragraph{Leader-based blocks} Per gestire un insieme di agenti in modo coordinato per raggiungere un obiettivo si è valutato che ci fosse la necessità di avere un nodo leader che si occupasse di coordinare gli altri nodi. Il leader può essere scelto secondo un certo criterio (ad esempio per le sue caratteristiche speciali oppure per la sua posizione all'interno del gruppo) oppure casualmente ma è anche possibile andare a creare un leader \textit{virtuale}, che quindi non è realmente presente nel ambiente. Allo stato attuale sono presenti solo due blocchi ritenuti essenziali:
+\begin{itemize}
+    \item \verb|alignWithLeader|: permette di allineare la velocita degli agenti con quella del leader
+    \item \verb|sinkAt|: permette di far convergere gli agenti verso il leader
+\end{itemize} 
+
+Nel caso si necessiti di avere un comportamento più complesso che porti alla nascita di sotto-team si possono utilizzare i blocchi presenti in \textbf{Team formation blocks} che non approfondiremo in questo contesto.
+
+\paragraph{Pattern formation blocks}
+Per creare comportamenti coordinati per un team al fine di raggiungere un task si possono usare i blocchi presenti in \textbf{Leader-based blocks} e \textbf{Team formation blocks}, nel caso invece si è interessati soltanto alla forma geometrica che il team deve assumere si possono usare i blocchi presenti in \textbf{Pattern formation blocks}. La seconda tipologia di blocchi è una derivazione della prima poiché necessita della identificazione di un leader, il leader si occupa di collezionare le distanze dei propri ``sottoposti'' per poi assegnare loro una certa direzione per raggiungere la formazione desiderata. Il leader utilizza il Gradient-cast ed i Collect-cast per raccogliere le informazioni e utilizza, nuovamente, Gradient-cast per assegnare le direzioni.
+
+Allo stato attuale del framework è possibile costruire in modo semplice le seguenti figure geometriche:
+\begin{itemize}
+    \item formazione a ``V'', come quella dei volatili
+    \item linea
+    \item cerchio
+\end{itemize}
+
+Tutte e tre le formazioni \cref{fig:formation-simulations} si possono muovere nello spazio e necessitano di un leader che può anche variare velocità, in quel caso i nodi vicini si adatteranno alla velocità del leader. Questo tipo di formazioni sono capaci di ricostruirsi anche nel caso cambi il numero di nodi oppure un fenomeno esterno vada a disturbarne la struttura.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\linewidth]{figures/formation-simulations.pdf}
+    \caption{Simulazioni delle formazioni eseguite su Alchemist, in ordine: linea, formazione a V, cerchio.}
+    \label{fig:formation-simulations}
+\end{figure}
 
 \section{Thymio e tdmclient}
 
 \begin{quote}
     \raggedright
-    "Thymio è un robot educativo open-source progettato da ricercatori dell'EPFL (Politecnico federale di Losanna), in collaborazione con l'ECAL (Università d'arte e design di Losanna), e prodotto da Mobsya, un'associazione no-profit la cui missione è quella di offrire percorsi STEAM completi e coinvolgenti a studenti di tutte le età."
+    ``Thymio è un robot educativo open-source progettato da ricercatori dell'EPFL (Politecnico federale di Losanna), in collaborazione con l'ECAL (Università d'arte e design di Losanna), e prodotto da Mobsya, un'associazione no-profit la cui missione è quella di offrire percorsi STEAM completi e coinvolgenti a studenti di tutte le età.''
     \begin{flushright}
         \textit{-- \href{https://www.thymio.org/}{Mobsya}}
     \end{flushright}
@@ -372,7 +456,7 @@ Questo modello di attuazione è modellato come una funzione pura\cref{sec:fp} qu
     \centering
     \includegraphics[width=.7\linewidth]{figures/thymio.png}
     \caption{Robot Thymio}
-    \label{fig:interpreter-vs-compiler-robot}
+    \label{fig:thymio-robot}
 \end{figure}
 
 Thymio è un robot programmabile con un'ampia varietà di sensori e attuatori, tra cui:
@@ -401,9 +485,9 @@ Questo protocollo è stato scelto per la sua bassa potenza e la sua affidabilit�
 
 Il dispositivo è stato scelto per essere implementato nella demo per la notte dei ricercatori in quanto è un robot molto versatile e adatto a molteplici applicazioni. Inoltre, il robot è molto diffuso nelle scuole e nei laboratori di robotica educativa, quindi è un'ottima scelta per mostrare il potenziale di ScaFi in un contesto educativo.
 
-Questo piccolo robot nasce per essere programmato con linguaggi a blocchi come VPL, VPL3, Scratch, Blocky e non come Aseba, Python e Ros, tutti accessibili dalla suite dedicata \textit{"Thymio Suite"}.
+Questo piccolo robot nasce per essere programmato con linguaggi a blocchi come VPL, VPL3, Scratch, Blocky e non come Aseba, Python e Ros, tutti accessibili dalla suite dedicata \textit{``Thymio Suite''}.
 % //TODO: citare doc a tutti i linguaggi supportati dalla bibliografia
-Noi ci concentreremo nel uso di Python. 
+Noi ci concentreremo sul uso di Python. 
 
 % //TODO: da scrivere meglio
 Python a differenza di altri linguaggi (ad esempio C/C++) è interpretato e non compilato. I linguaggi compilati prevedono la conversione del programma scritto in un linguaggio ad alto livello in linguaggio macchina per poi farlo eseguire dal processore, occorre quindi compilare il sorgente ad ogni nuova modifica per poi re-eseguirlo. Python, invece, è un linguaggio interpretato, il codice sorgente viene eseguito direttamente dal programma interprete, il quale esegue ogni comando riga per riga.
@@ -501,9 +585,93 @@ Questo strumento è già presente nel sistema in questione.
 \label{chap:analisi}
 %----------------------------------------------------------------------------------------
 
-\section{Estensibilità del sistema ad un nuovo modello di Robot (Thymio)}
+\section{Obiettivi}
+Il progetto \href{https://github.com/cric96/researcher-night-demo.git}{``researcher-night-demo''} è nato per dimostrare, attraverso simulazioni in ambiente reale, le potenzialità di ScaFi. L'obiettivo di questo progetto è dimostrare l'eterogeneità di questo tipo di sistemi andando ad estendere ai robot già implementati il supporto per un nuovo modello di robot, il Thymio, e andando a gestire i vincoli di compatibilità del sistema Thymio.
 
-\section{Gestione dei vincoli di compatibilità del sistema Thymio}
+Inizialmente, la demo, presentava soltanto la possibilità di utilizzare i robot Wave \cref{fig:wave-robot}. I Wave sono robot equipaggiati da 4 ruote motrici (4WD), scocca d'acciaio ed un modulo ESP32 (microcontrollore programmabile) già implementato di software (open-source) con il quale si può comunicare tramite protocollo WiFi o Bluetooth.
+Il progetto è stato esteso per includere il modello di robot Thymio \cref{fig:thymio-robot}. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.3\linewidth]{figures/wave-robot.jpg}
+    \caption{Robot Wave}
+    \label{fig:wave-robot}
+\end{figure}
+
+\section{Requisiti}
+
+Requisiti funzionali:
+\begin{itemize}
+    \item Il sistema è progettato per l'utilizzo di grandi quantità di dispositivi eterogenei quindi si ritiene necessario che vengano caricati attraverso file di configurazione invece che essere definiti direttamente nel codice. Questo permette di avere un sistema più flessibile e facilmente estendibile.
+    \item Integrare robot Thymio nel sistema già esistente.
+\end{itemize}
+
+Requisiti non funzionali:
+\begin{itemize}
+    \item Refactoring del codice Java per il tracciamento dei robot.
+    \item Velocità nelle comunicazioni con i nuovi robot integrati.
+\end{itemize}
+
+\section{Dominio}
+
+Il progetto è stato sviluppato in linguaggio Scala ed è formato da tre componenti fisiche:
+\begin{itemize}
+    \item webcam per il tracciamento dei ArucoTag posizionati sopra ai robot
+    \item macchina che esegue il sistema aggregato e che comunica con i robot, solitamente un computer
+    \item robot (uno o più)
+\end{itemize}
+
+La struttura del progetto si basa sul principio di Macroswarm, posizionandosi ad un livello di astrazione abbastanza alto da nascondere i dettagli implementativi dei dispositivi che si vuole andare a controllare. Di seguito un breve sommario delle componenti principali del progetto:
+
+\paragraph{Tracciamento robot}.
+Per il tracciamento dei robot attraverso la webcam è stato sviluppato un applicativo Java di visione artificiale che rileva i tag Aruco e ne calcola la posizione e l'orientamento.
+
+\paragraph{Core}. 
+Il core del sistema è basato su ScaFi.
+Per costruire i sistemi aggregati si utilizza la classe \verb|AggregateIncarnation| \cref{lst:agg-inc} che serve a poter definire i diversi programmi aggregati.
+
+\begin{lstlisting}[language=Scala, label={lst:agg-inc}, caption={Classe AggregateIncarnation}]
+    import it.unibo.scafi.incarnations.BasicAbstractIncarnation
+
+    object AggregateIncarnation extends BasicAbstractIncarnation with BuildingBlocks
+\end{lstlisting}
+
+L'interfaccia \verb|Environment|\cref{lst:enviroment} rappresenta l'astrazione del mondo, essa rappresenta lo stato del mondo in un dato istante e va definita in base al contesto.
+
+\begin{lstlisting}[language=Scala, label={lst:enviroment}, caption={Interfaccia Enviroment}]
+    trait Environment[ID, Position, Info]:
+        def nodes: Set[ID] // insieme di nodi definiti dagli identificatori ID
+        def position(id: ID): Position // posizione di un certo nodo
+        def sensing(id: ID): Info // le informazioni che un certo nodo espone
+        def neighbors(id: ID): Set[ID] // vicinato di un certo nodo
+\end{lstlisting}
+
+La classe \verb|AggregateOrchestrator| è la componente principale del sistema poiché si occupa di leggere lo stato del mondo e ritornare l'attuazione da eseguire (export) per ogni agente.
+
+\paragraph{Demo}
+In demo si trova la reale implementazione del sistema aggregato che produce le attuazioni nel mondo reale a partire dalla definizione del ambiente in cui si lavora\cref{lst:demo-env}.
+
+\begin{lstlisting}[language=Scala, label={lst:demo-env}, caption={Definizione dell'ambiente}]
+    import it.unibo.core.DistanceEstimator.distance
+    import it.unibo.core.Environment
+    import it.unibo.demo.{ID, Info}
+    import it.unibo.utils.Position.{Position, *, given}
+
+    class DemoEnvironment(data: Map[ID, (Position, Info)], neighboursRadius: Double)
+        extends Environment[ID, Position, Info]:
+
+    override def nodes: Set[ID] = data.keySet
+
+    override def position(id: ID): (Double, Double) = data(id)._1
+
+    override def sensing(id: ID): Info = data(id)._2
+
+    override def neighbors(id: ID): Set[ID] =
+        data.filter { case (k, v) => data(id)._1.distance(v._1) <= neighboursRadius }.keys.toSet
+\end{lstlisting}
+
+\paragraph{Mock}
+Il progetto dispone anche di uno spazio per testare programmi aggregati in un ambiente simulato implementato utilizzando la libreria \verb|JavaFX|. Questo ambiente permette di vedere i nodi della rete e le connessioni tra di essi.
 
 
 %----------------------------------------------------------------------------------------
@@ -511,7 +679,24 @@ Questo strumento è già presente nel sistema in questione.
 \label{chap:design}
 %----------------------------------------------------------------------------------------
 
+A seguito di un analisi delle caratteristiche dei robot Thymio e dei protocolli di comunicazione che esso mette a disposizione si è optato per l'utilizzo del modulo \textbf{tdmclient} nel contesto di un server sviluppato utilizzando il framework Flask. Questo framework è stato sviluppato per la creazione di applicazioni web e, in particolare, per la creazione di \textit{API RESTful}\footnote{Le API sono l'interfaccia che utilizzano due o più sistemi informatici per lo scambio sicuro di informazioni. REST è un'architettura software sulla quale si possono progettare le API}. Questo framework è stato scelto per la sua semplicità, la sua flessibilità, scalabilità e indipendenza dalla tecnologia utilizzata. 
+
+Si è valutato anche l'utilizzo della libreria ScalaPy, che permette di sfruttare i moduli Python all'interno di un programma Scala, per incorporare le funzionalità di tdmclient direttamente all'interno del sistema aggregato ma data la ``non stabilità'' del progettato ScalaPy si è deciso di non impiegare questa soluzione.
+
 \section{Architettura server Flask}
+
+Nel nostro contesto si è sviluppato un server che comunica con due client\cref{fig:server-arc}:
+\begin{itemize}
+    \item il client Thymio Device Manager (TDM) che comunica con i robot Thymio
+    \item il client che ospita il programma aggregato
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.8\linewidth]{figures/server-arc.pdf}
+    \caption{Architettura del server Flask}
+    \label{fig:server-arc}
+\end{figure}
 
 \section{File di configurazione}
 
