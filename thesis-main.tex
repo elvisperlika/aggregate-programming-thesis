@@ -35,7 +35,7 @@
 \frontmatter\frontispiece
 
 \begin{abstract}	
-Max 2000 characters, strict.
+Massimo 2000 caratteri.
 \end{abstract}
 
 \begin{dedication} % this is optional
@@ -51,29 +51,13 @@ Max 2000 characters, strict.
 \mainmatter
 
 %----------------------------------------------------------------------------------------
-\chapter{Introduction}
+\chapter{Introduzione}
 \label{chap:introduction}
 %----------------------------------------------------------------------------------------
 
-Write your intro here.
-\sidenote{Add sidenotes in this way. They are named after the author of the thesis}
+Intro.
 
-You can use acronyms that your defined previously,
-such as \ac{IoT}.
-%
-If you use acronyms twice,
-they will be written in full only once
-(indeed, you can mention the \ac{IoT} now without it being fully explained).
-%
-In some cases, you may need a plural form of the acronym.
-%
-For instance,
-that you are discussing \acp{vm},
-you may need both \ac{vm} and \acp{vm}.
-
-\paragraph{Structure of the Thesis}
-
-\note{At the end, describe the structure of the paper}
+\paragraph{Struttura della tesi}
 
 %----------------------------------------------------------------------------------------
 \chapter{Background}
@@ -102,7 +86,7 @@ I pilastri della programmazione ad oggetti sono l'incapsulamento, l'ereditariet�
 
 Il difetto della programmazione ad oggetti è che richiede un particolare impegno nel gestire il sistema da realizzare all'aumentare della sua complessità. Altri paradigmi, come la programmazione funzionale, possono essere più adatti a determinati problemi.
 
-Nel caso della OOP abbiamo riassunto il paradigma con la frase \textit{``Everything is an Object''}, per la programmazione funzionale possiamo riassumerla con \textit{``Everything is a Function''}. Quando si parla di funzioni nel ambito della \ac{FP} si intendo \textbf{funzioni pure} cioè senza effetti collaterali. Per effetti collaterali si intende che la funzione fa altro oltre a restituire un risultato. Un paio di esempi, presi da \texttt{Functional Programming in Scala}, sono:
+Nel caso della OOP abbiamo riassunto il paradigma con la frase \textit{``Everything is an Object''}, per la programmazione funzionale possiamo riassumerla con \textit{``Everything is a Function''}. Quando si parla di funzioni nel ambito della \ac{FP} si intendo \textbf{funzioni pure}\cite{Hunt2018} cioè senza effetti collaterali. Per effetti collaterali si intende che la funzione fa altro oltre a restituire un risultato. Un paio di esempi, presi da \texttt{Functional Programming in Scala}, sono:
 
 \begin{itemize}
     \item Modifica di una variabile
@@ -128,7 +112,7 @@ Un esempio di funzione non pura, con effetti collaterali, è la funzione che pre
     def print(a: Int): Unit = println(a)
 \end{lstlisting}
 
-Formalmente si può definire una funzione pura con il concetto di \ac{RT}:
+Formalmente si può definire una funzione pura con il concetto di \ac{RT}\cite{Hunt2018}:
 
 \begin{quote}
     Una funzione $f$ è Referentially Transparent se per ogni contesto $C$ nel quale la funzione viene inserita, essa può essere sostituta dal risultato della stessa funzione $f$ senza condizionare il risultato di $C$.
@@ -138,9 +122,9 @@ Formalmente si può definire una funzione pura con il concetto di \ac{RT}:
 
 \subsection{Sistemi collettivi ed eterogenei} 
 
-Per comprendere il potenziale del paradigma dell'\ac{AP} è fondamentale definire quale tipo di problema si vuole risolvere. La crescita del mondo \ac{IoT} ha portato alla presenza di numerosi dispositivi connessi tra loro di ogni tipo e caratterizzati da protocolli di comunicazione eterogenei. Il mondo dell'IoT in continua evoluzione promette di migliore la produzione, gli spazi di lavoro e la sanità attraverso la raccolta e l'analisi di grandi quantità di dati. È nato di conseguenza il bisogno di progettare sistemi resistenti e resilienti che permettessero di gestire queste grandi quantità di dispositivi. È necessario che questi sistemi siano capaci di: adattarsi a cambiamenti imprevedibili, permettere l'implementazione di nuovi comportamenti, permettere una capacità di rilevazione e attuazione nel ambiente in modo distribuito e coordinato. Allo stato attuale della tecnologia è difficile progettare sistemi di questo tipo poiché non esistono framework che permettano di gestire in modo semplice e intuitivo la complessità di questi sistemi.
+Per comprendere il potenziale del paradigma dell'\ac{AP} è fondamentale definire quale tipo di problema si vuole risolvere. La crescita del mondo \ac{IoT} ha portato alla presenza di numerosi dispositivi connessi tra loro di ogni tipo e caratterizzati da protocolli di comunicazione eterogenei. Il mondo dell'IoT in continua evoluzione promette di migliore la produzione, gli spazi di lavoro e la sanità attraverso la raccolta e l'analisi di grandi quantità di dati. È nato di conseguenza il bisogno di progettare sistemi resistenti e resilienti che permettessero di gestire queste grandi quantità di dispositivi. È necessario che questi sistemi siano capaci di: adattarsi a cambiamenti imprevedibili, permettere l'implementazione di nuovi comportamenti, permettere una capacità di rilevazione e attuazione nel ambiente in modo distribuito e coordinato. Allo stato attuale della tecnologia è difficile progettare sistemi di questo tipo poiché non esistono framework che permettano di gestire in modo semplice e intuitivo la complessità di questi sistemi \cite{Beal2015} \cite{CasadeiPhDThesis}.
 
-Un'astrazione grafico del mondo IoT è presente in \cref{fig:iot-arc}. È possibile comprendere come ci sia uno strato contente i nodi (dispositivi)\footnote{HMI: Human-Machine-Interaction.}, uno strato che rappresenta la rete (internet) mediante la quale comunicano\footnote{Prima di accedere alla rete internet le informazioni dei sensori vengono raccolte dai Edge Gateway che si occupano di instradare le informazioni.} ed uno strato contente il mondo Cloud dove vengono raccolte tutte le informazioni prodotte dai nodi della rete e computate attraverso applicazioni complesse per l'analisi, la pianificazione, l'ottimizzazione ed altri scopi.
+Un'astrazione grafico del mondo IoT è presente in \cref{fig:iot-arc} \cite{Testa2022}. È possibile comprendere come ci sia uno strato contente i nodi (dispositivi)\footnote{HMI: Human-Machine-Interaction.}, uno strato che rappresenta la rete (internet) mediante la quale comunicano\footnote{Prima di accedere alla rete internet le informazioni dei sensori vengono raccolte dai Edge Gateway che si occupano di instradare le informazioni.} ed uno strato contente il mondo Cloud dove vengono raccolte tutte le informazioni prodotte dai nodi della rete e computate attraverso applicazioni complesse per l'analisi, la pianificazione, l'ottimizzazione ed altri scopi.
 
 \begin{figure}
     \centering
@@ -149,7 +133,7 @@ Un'astrazione grafico del mondo IoT è presente in \cref{fig:iot-arc}. È possib
     \label{fig:iot-arc}
 \end{figure}
 
-Il problema di questa architettura è che inviare queste ingenti quantità di dati da un numero elevato di nodi può avere effetti negati sui costi, le disponibilità, la scalabilità e la latenza delle comunicazioni. Una delle soluzione trovate è quella di spostare la computazione più vicino possibile ai nodi della rete, in modo da ridurre la quantità di dati da inviare e la latenza delle comunicazioni. Questo approccio è chiamato \textit{Edge Computing} non è sempre conveniente applicarlo, dipende dal contesto (non sarebbe adatto nel caso i nodi abbiamo specifiche tecniche, come memoria e capacità di calcolo, deboli). 
+Il problema di questa architettura è che inviare queste ingenti quantità di dati da un numero elevato di nodi può avere effetti negati sui costi, le disponibilità, la scalabilità e la latenza delle comunicazioni. Una delle soluzione trovate è quella di spostare la computazione più vicino possibile ai nodi della rete, in modo da ridurre la quantità di dati da inviare e la latenza delle comunicazioni. Questo approccio è chiamato \textit{Edge Computing} non è sempre conveniente applicarlo, dipende dal contesto (non sarebbe adatto nel caso i nodi abbiamo specifiche tecniche, come memoria e capacità di calcolo, deboli) \cite{Testa2022}. 
 
 Nella progettazione di sistemi per il controllo di sistemi aggregati\footnote{Sistemi caratterizzati da un insieme di dispositivi che collaborano tra di loro per raggiungere un obiettivo comune.} si sottolinea la necessità di meccanismi che rendano possibile ed intuitivo il riutilizzo e la capacità di composizione dei componenti così da poter costruire API\footnote{Application Programming Interface} a più strati.
 
@@ -166,7 +150,7 @@ Per andare in contro a queste necessità nasce il paradigma dell'\ac{AP} che da 
 
 \subsection{Stato dell'arte}
 
-Nei capitoli precedenti si è esaminata l'evoluzione dal paradigma \ac{OOP} a quello \ac{FP}, la quale, ha permesso di gestire in modo più pratico progetti più complessi e semplificandone la manutenibilità. Una ulteriore, più specifica, evoluzione è quella portata dal paradigma dell'\ac{AP}. Quest'ultimo mira a rendere la progettazione, manutenzione e testing nell'ambito del controllo di dispositivi hardware di larga-scala (anche conosciuti come \textbf{collective adaptive systems (CAS)}).
+Nei capitoli precedenti si è esaminata l'evoluzione dal paradigma \ac{OOP} a quello \ac{FP}, la quale, ha permesso di gestire in modo più pratico progetti più complessi e semplificandone la manutenibilità. Una ulteriore, più specifica, evoluzione è quella portata dal paradigma dell'\ac{AP}. Quest'ultimo mira a rendere la progettazione, manutenzione e testing nell'ambito del controllo di dispositivi hardware di larga-scala (anche conosciuti come \textbf{collective adaptive systems (CAS)} \cite{Casadei2021}).
 
 L'\ac{AC} si basa sulla mappatura di un mondo cyber-fisico in un diverso modello logico. Da un punto di vista strutturale possiamo vedere un sistema aggregato come una rete di dispositivi capaci di computare ed equipaggiati con (o sui quali è possibile equipaggiare) sensori ed attuatori, che corrispondono ai nodi. I nodi sono connessi tra loro secondo una logica di vicinato, che può essere definita in base alla distanza fisica o alla comunicazione. Da un punto di vista comportamentale, invece, ogni nodo interpreta il programma aggregato solo in relazione al proprio contesto locale. Da un punto di vista delle interazioni, i nodi estraggono informazione dal proprio vicinato e propagano le proprie nello stesso contesto. Queste interazioni son ciò che permettono al contesto locale e globale di influenzarsi reciprocamente.
 
@@ -179,15 +163,15 @@ La tecnica dell'\ac{AP} si basa su 3 principi fondamentali per la costruzione di
 \end{itemize}
 
 L'approccio \ac{AP} nella progettazione di sistemi è profondamente diverso classico approccio ``dispositivo centrico''.
-Nel secondo caso, ogni dispositivo della rete ha il compito di compiere tutte le operazioni richieste per il raggiungimento della soluzione e simultaneamente comunicare con gli altri dispositivi della rete. Questo approccio, seppur semplice, è poco scalabile e difficile da mantenere al crescere della complessità del sistema. 
+Nel secondo caso, ogni dispositivo della rete ha il compito di compiere tutte le operazioni richieste per il raggiungimento della soluzione e simultaneamente comunicare con gli altri dispositivi della rete. Questo approccio, seppur semplice, è poco scalabile e difficile da mantenere al crescere della complessità del sistema \cite{Pianini2017}. 
 Il nuovo paradigma, invece, prevede la scomposizione in componenti del programma assegnato ad ogni dispositivo, ogni componente esegue un compito specifico e comunica principalmente solo con i componenti dello stesso tipo presenti nel suo intorno per eseguire un servizio ed eventualmente con un altro componente presente nello stesso dispositivo al fine di realizzare una nuova soluzione inerente ad un'altro servizio. Le componenti sono una astrazioni dei \textit{campi di calcolo}.
 
 Il paradigma \ac{AP}, il quale ha permesso la creazione di framework come ScaFi, Protelis e MacroSwarm, si basa sul concetto dei sopracitati \textit{campi di calcolo}. Per \textit{campo di calcolo} o \textit{computationals field} si intende la mappatura degli elementi del dominio in cui si opera in un insieme di valori.
-I campi di calcolo vengono utilizzati per standardizzare le interazioni tra i dispositivi, permettendo di analizzare e progettare sistemi distribuiti in modo più semplice e intuitivo. L'idea di campo prende ispirazione dai campi fisici, ad esempio quello magnetico. Ogni dispositivo della rete è considerato come un punto nello spazio ed il campo rappresenta un dato valore assegnato ad ognuno di questi punti. L'insieme di tutti i valori, che chiameremo \textit{campi} o \textit{fields} rappresentano lo stato di un sistema in un dato istante.
+I campi di calcolo vengono utilizzati per standardizzare le interazioni tra i dispositivi, permettendo di analizzare e progettare sistemi distribuiti in modo più semplice e intuitivo. L'idea di campo prende ispirazione dai campi fisici, ad esempio quello magnetico. Ogni dispositivo della rete è considerato come un punto nello spazio ed il campo rappresenta un dato valore assegnato ad ognuno di questi punti. L'insieme di tutti i valori, che chiameremo \textit{campi} o \textit{fields} rappresentano lo stato di un sistema in un dato istante \cite{Audrito2019}.
 
 Questo approccio è generalmente utilizzato per un controllo prolungato dei dispositivi della rete sulla quale si vogliono eseguire task che necessitano di eseguire un gran numero di rilevazioni (ad esempio utilizzando sensori), computazioni ed attuazioni.
 
-Ogni dispositivo del proprio sistema aggregato esegue una computazione in modo asincrono attraverso i \textbf{sense-compute-(inter)act rounds}\label{sec:sense-compute-interact}, ogni round è composto da tre fasi concettuali:
+Ogni dispositivo del proprio sistema aggregato esegue una computazione in modo asincrono attraverso i \textbf{sense-compute-(inter)act rounds}\label{sec:sense-compute-interact} \cite{Macroswarm}, ogni round è composto da tre fasi concettuali:
 
 \begin{enumerate}
     \item \textbf{Aggiornamento del contesto (sense)}: ogni nodo memorizza il suo stato precedente, i dati ambientali restituiti da eventuali sensori e le più recenti informazioni ricevute dai nodi vicini.
@@ -195,13 +179,13 @@ Ogni dispositivo del proprio sistema aggregato esegue una computazione in modo a
     \item \textbf{Azione (inter-act)}: in questa fase il nodo effettua le seguenti azioni:
     \begin{enumerate}
         \item \textbf{Condivisione}: il nodo condivide il proprio \textit{export} verso i nodi del suo vicinato in formato broadcast
-        \item \textbf{Controllo di attuatori}: l'output del nodo viene 
+        \item \textbf{Controllo attuatori}: l'output del nodo viene 
         utilizzato per l'esecuzione di uno o più attuatori nel proprio ambiente
     \end{enumerate}
 \end{enumerate}
 
 
-Posizionandoci in un livello più implementativo troviamo i seguenti costrutti per la manipolazione dei campi: 
+Posizionandoci in un livello più implementativo troviamo i seguenti costrutti per la manipolazione dei campi \cite{Pianini2017}: 
 % //TODO: citare il paper ``Aggregate Programming for the Internet of Things'' per i seguenti costrutti
 
 \begin{itemize}
@@ -234,7 +218,7 @@ Implementazioni di questo tipo sono difficili da integrare in sistemi programmat
 ScaFi è un toolkit open-source scritto in linguaggio Scala per l'\ac{AC} per la progettazione ad alto livello di sistemi aggregati.
 Il termine ScaFi deriva dalla unione di Scala e Fields. Scala è un linguaggio java-like moderno e flessibile progettato per unificare il paradigma \ac{OOP} e quello \ac{FP}. È stato progettato per essere coinciso e facilmente leggibile, inoltre si basa sulla Java Virtual Machine, la quale permette l'utilizzo delle librerie Java. L'utilizzo della JVM e la flessibilità del linguaggio sono state le caratteristiche chiave per il raggiungimento della popolarità di questo linguaggio. Il termine Field invece deriva dai \textit{field calculus} (campi di calcolo) di cui abbiamo parlato nei capitoli precedenti.
 
-L'Architettura di ScaFi è riassumibile nella immagine \cref{fig:scafi-arc}.
+L'Architettura di ScaFi \cite{Casadei2022} è riassumibile nella immagine \cref{fig:scafi-arc}.
 
 \begin{figure}
     \centering
@@ -274,7 +258,7 @@ Di seguito l'interfaccia fondamentale per la definizione di un campo di calcolo 
 
 \lstinputlisting[float=tb,language=Scala,label={lst:constructs-scala},caption={Interfaccia per la definizione di un campo di calcolo in Scala}]{listings/Constructs.scala}
 
-Gli elementi principali di questa interfaccia sono:
+Gli elementi principali di questa interfaccia sono \cite{Casadei2022}:
 \begin{itemize}
     \item \verb|rep(init)(f)| cattura l'evoluzione di stato di un valore inizializzato ad \verb|init| e aggiornato ad ogni round con la funzione \verb|f|
     \item \verb|nbr(expr)|: rileva le comunicazioni relative al valore computato dalla espressione \verb|expr| dei nodi vicini
@@ -288,7 +272,7 @@ Gli elementi principali di questa interfaccia sono:
 In ScaFi, i campi non sono reificati esplicitamente ma esistono solo a livello semantico, questo significa che un'espressione Scala non viene gestita come un'espressione di campo finché non viene passata all'interprete ScaFi.
 % //TODO: citare la tesi PhD di Casadei
 
-ScaFi fornisce alcuni operatori, detti anche \textit{blocchi}, di alto livello già implementati tipici dei sistemi aggregati:
+ScaFi fornisce alcuni operatori, detti anche \textit{blocchi}, di alto livello già implementati tipici dei sistemi aggregati \cite{Casadei2022}:
 
 \begin{itemize}
     \item \textbf{Sparse choice (definizione di un leader)}: Blocco 
@@ -312,7 +296,7 @@ ScaFi fornisce alcuni operatori, detti anche \textit{blocchi}, di alto livello g
 
 Macroswarm è un framework per la programmazione di sistemi di robotica distribuita basato su ScaFi e che estende lo stesso ScaFi. Macroswarm nasce con l'avanzare delle tecnologie ed il crescente interesse verso il controllo di flotte di dispositivi come droni, robot, veicoli o folle di persone definite da dispositivi portatili/indossabili in modo.
 Si è voluto, quindi, creare un framework che permettesse di programmare sistemi distribuiti di robot in modo semplice ed intuitivo secondo degli \textit{swarm behavior}\footnote{Comportamenti di sciame/flotta}, permettendo di concentrarsi solo sulla logica di alto livello del sistema. Questo framework è stato scelto per il progetto in esamina.
-Il paradigma \ac{AP} e di conseguenza ScaFi sono state scelte naturali per la progettazione di tale framework (\cref{fig:macro-swarm-arc}).
+Il paradigma \ac{AP} e di conseguenza ScaFi sono state scelte naturali per la progettazione di tale framework (\cref{fig:macro-swarm-arc}) \cite{Macroswarm}.
 
 \begin{figure}
     \centering
@@ -331,7 +315,7 @@ All'intero del Framework troviamo le API per progettazione dei sistemi aggregati
     \label{fig:macro-swarm-int}
 \end{figure}
 
-È rilevante notare che in Macroswarm la computazione della attuazione da eseguire su un certo dispositivo e la reale attuazione nel mondo reale sono disaccoppiate. Il motivo di questa scelta è dovuto al fatto che ad ogni round\cref{sec:sense-compute-interact} il programma aggregato può variare un qualche parametro per completare il task. È, comunque, possibile scegliere quale modalità di computazione-attuazione scegliere poiché, in base al contesto, una può essere più adatta dell'altra. Le modalità sono:
+È rilevante notare che in Macroswarm la computazione della attuazione da eseguire su un certo dispositivo e la reale attuazione nel mondo reale sono disaccoppiate. Il motivo di questa scelta è dovuto al fatto che ad ogni round\cref{sec:sense-compute-interact} il programma aggregato può variare un qualche parametro per completare il task. È, comunque, possibile scegliere quale modalità di computazione-attuazione scegliere poiché, in base al contesto, una può essere più adatta dell'altra \cite{Macroswarm}. Le modalità sono:
 
 \begin{itemize}
     \item \textbf{round-based}(\cref{fig:round-based}): è possibile eseguire l'attuazione al termine del prossimo round 
@@ -354,7 +338,7 @@ All'intero del Framework troviamo le API per progettazione dei sistemi aggregati
 
 Questo modello di attuazione è modellato come una funzione pura\cref{sec:fp} quindi priva di effetti collaterali. Se ci si trova in un contesto in cui l'esecuzione dell'attuazione richiede un certo tempo allora il progettista del sistema aggregato può andare a modellare il sistema in modo tale da tenere in considerazione questo aspetto.
 
-Come è possibile vedere in \cref{fig:macro-swarm-int} il framework è composto da diversi moduli che a loro volta contengono diversi blocchi, ognuno con un compito specifico, solo alcuni di questi blocchi sono sono stati utilizzati per la realizzazione del progetto e saranno descritti nei prossimi paragrafi.
+Come è possibile vedere in \cref{fig:macro-swarm-int} \cite{Macroswarm} il framework è composto da diversi moduli che a loro volta contengono diversi blocchi, ognuno con un compito specifico, solo alcuni di questi blocchi sono sono stati utilizzati per la realizzazione del progetto e saranno descritti nei prossimi paragrafi.
 
 \paragraph{Movements blocks} 
 Questi blocchi si occupano di controllare i movimenti di ogni agente (dispositivo) della flotta. Il Movimento più semplice è descritto da un vettore \verb|Vector(x,y,z)| che rappresenta la direzione e la velocità del movimento, ad esempio 
@@ -376,7 +360,7 @@ Sono disponibili anche blocchi più complessi (\cref{lst:movement-module}), alcu
     \item \verb|obstacleAvoidance|: genera vettori di movimento da assegnare agli agenti per evitare ostacoli
 \end{itemize}
 
-In figura \cref{fig:movement-simulations} sono state simulate le funzioni \verb|goTo|, \verb|explore| \\ e \verb|obstacleAvoidance| su Alchemist, un simulatore di sistemi aggregati.
+In figura \cref{fig:movement-simulations} \cite{Macroswarm} sono state simulate le funzioni \verb|goTo|, \verb|explore| \\ e \verb|obstacleAvoidance| su Alchemist, un simulatore di sistemi aggregati.
 
 \begin{figure}
     \centering
@@ -433,7 +417,7 @@ Allo stato attuale del framework è possibile costruire in modo semplice le segu
     \item cerchio
 \end{itemize}
 
-Tutte e tre le formazioni \cref{fig:formation-simulations} si possono muovere nello spazio e necessitano di un leader che può anche variare velocità, in quel caso i nodi vicini si adatteranno alla velocità del leader. Questo tipo di formazioni sono capaci di ricostruirsi anche nel caso cambi il numero di nodi oppure un fenomeno esterno vada a disturbarne la struttura.
+Tutte e tre le formazioni \cref{fig:formation-simulations} \cite{Macroswarm} si possono muovere nello spazio e necessitano di un leader che può anche variare velocità, in quel caso i nodi vicini si adatteranno alla velocità del leader. Questo tipo di formazioni sono capaci di ricostruirsi anche nel caso cambi il numero di nodi oppure un fenomeno esterno vada a disturbarne la struttura.
 
 \begin{figure}
     \centering
@@ -459,7 +443,7 @@ Tutte e tre le formazioni \cref{fig:formation-simulations} si possono muovere ne
     \label{fig:thymio-robot}
 \end{figure}
 
-Thymio è un robot programmabile con un'ampia varietà di sensori e attuatori, tra cui:
+Thymio \cite{mobsyaThymioDevice} è un robot programmabile con un'ampia varietà di sensori e attuatori, tra cui:
 \begin{itemize}
     \item 9 sensori a infrarossi (portata circa 10 cm)
     \item 5 pulsanti a sfioramento (tecnologia capacitiva)
@@ -473,7 +457,7 @@ Thymio è un robot programmabile con un'ampia varietà di sensori e attuatori, t
 \end{itemize}
 
 Il deploy del codice sul robot Thymio avviene tramite un radio dongle USB.
-\paragraph{Thymio Network}: La connessione wireless dei robot è basata sul protocollo \href{https://en.wikipedia.org/wiki/IEEE_802.15.4}{802.15.4} in banda con frequenza 2.4 GHz. Questo protocollo permette di gestire una rete con molti nodi a discapito del rispetto delle seguenti condizioni:
+\paragraph{Thymio Network}: La connessione wireless dei robot è basata sul protocollo \href{https://en.wikipedia.org/wiki/IEEE_802.15.4}{802.15.4} in banda con frequenza 2.4 GHz \cite{wikidotSettingWireless}. Questo protocollo permette di gestire una rete con molti nodi a discapito del rispetto delle seguenti condizioni:
 
 \begin{itemize}
     \item tutti i nodi devono trovarsi tutti nello stesso canale radio (sono disponibili 3 reti: [0, 1, 2])
@@ -485,12 +469,12 @@ Questo protocollo è stato scelto per la sua bassa potenza e la sua affidabilit�
 
 Il dispositivo è stato scelto per essere implementato nella demo per la notte dei ricercatori in quanto è un robot molto versatile e adatto a molteplici applicazioni. Inoltre, il robot è molto diffuso nelle scuole e nei laboratori di robotica educativa, quindi è un'ottima scelta per mostrare il potenziale di ScaFi in un contesto educativo.
 
-Questo piccolo robot nasce per essere programmato con linguaggi a blocchi come VPL, VPL3, Scratch, Blocky e non come Aseba, Python e Ros, tutti accessibili dalla suite dedicata \textit{``Thymio Suite''}.
-% //TODO: citare doc a tutti i linguaggi supportati dalla bibliografia
+Questo piccolo robot nasce per essere programmato con linguaggi a blocchi come VPL, VPL3, Scratch, Blocky e non come Aseba, Python e Ros, tutti accessibili dalla suite dedicata \textit{``Thymio Suite''} \cite{mobsyaThymioDevice}.
+
 Noi ci concentreremo sul uso di Python. 
 
 % //TODO: da scrivere meglio
-Python a differenza di altri linguaggi (ad esempio C/C++) è interpretato e non compilato. I linguaggi compilati prevedono la conversione del programma scritto in un linguaggio ad alto livello in linguaggio macchina per poi farlo eseguire dal processore, occorre quindi compilare il sorgente ad ogni nuova modifica per poi re-eseguirlo. Python, invece, è un linguaggio interpretato, il codice sorgente viene eseguito direttamente dal programma interprete, il quale esegue ogni comando riga per riga.
+Python a differenza di altri linguaggi (ad esempio C/C++) è interpretato e non compilato. I linguaggi compilati prevedono la conversione del programma scritto in un linguaggio ad alto livello in linguaggio macchina per poi farlo eseguire dal processore, occorre quindi compilare il sorgente ad ogni nuova modifica per poi re-eseguirlo. Python, invece, è un linguaggio interpretato, il codice sorgente viene eseguito direttamente dal programma interprete, il quale esegue ogni comando riga per riga \cite{robotadvanceUsingEducational}.
 
 \begin{figure}
     \centering
@@ -526,7 +510,7 @@ Un esempio di codice Aseba è il seguente \cref{lst:aseba-code}.
         callsub init
 \end{lstlisting}
 
-Il \textbf{Thymio Device Manager} è una delle feature della Thymio Suite, si occupa di gestire la rete dei Thymio. Inoltre ha il compito di tradurre il sorgente, scritto dall'utente, da linguaggio Aseba ad Aseba bytecode per poi eseguire il \textit{deploy} sul robot. Per l'utilizzo di Python, invece, è necessario l'utilizzo del modulo \textbf{tdmclient} che si occupa di far comunicare Python con il \ac{TDM} \cref{fig:tdmclient}. È necessario che la Thymio Suite sia in esecuzione per poter utilizzare il modulo \textbf{tdmclient}, il quale, a sua volta, necessita dell'utilizzo di \textbf{Python 3} come interprete.
+Il \textbf{Thymio Device Manager} è una delle feature della Thymio Suite, si occupa di gestire la rete dei Thymio. Inoltre ha il compito di tradurre il sorgente, scritto dall'utente, da linguaggio Aseba ad Aseba bytecode per poi eseguire il \textit{deploy} sul robot. Per l'utilizzo di Python, invece, è necessario l'utilizzo del modulo \textbf{tdmclient} che si occupa di far comunicare Python con il \ac{TDM} \cref{fig:tdmclient} \cite{pypiTdmclient}. È necessario che la Thymio Suite sia in esecuzione per poter utilizzare il modulo \textbf{tdmclient}, il quale, a sua volta, necessita dell'utilizzo di \textbf{Python 3} come interprete.
 
 Questo modulo permette di:
 \begin{itemize}
@@ -568,7 +552,7 @@ Si andrà ad esaminare ulteriormente questa feature di \textbf{tdmclient} nel ca
 
 \section{Aruco Tag}
 
-Gli Aruco marker sono tag quadrati che possono essere rilevati da una camera. Ogni tag è una matrice $4 \times 4$ ed ha un codice (intero) univoco associato che può essere rilevato da un algoritmo di visione artificiale\cref{fig:aruco-markers}. È rilevante notare che la matrice di ogni Aruco marker corrisponde ad uno stesso codice per ogni sua versione trasposta. 
+Gli Aruco marker sono tag quadrati che possono essere rilevati da una camera. Ogni tag è una matrice $4 \times 4$ ed ha un codice (intero) univoco associato che può essere rilevato da un algoritmo di visione artificiale\cref{fig:aruco-markers} \cite{opencvOpenCVDetection}. È rilevante notare che la matrice di ogni Aruco marker corrisponde ad uno stesso codice per ogni sua versione trasposta. 
 Questi tag sono molto utili per la localizzazione e la navigazione di robot autonomi. Sarà questo strumento che verrà utilizzato per la demo della notte dei ricercatori per la localizzazione e calcolo della direzione dei robot Thymio.
 
 \begin{figure}
@@ -685,7 +669,7 @@ Si è valutato anche l'utilizzo della libreria ScalaPy, che permette di sfruttar
 
 \section{Architettura server Flask}
 
-Nel nostro contesto si è sviluppato un server che comunica con due client\cref{fig:server-arc}:
+Il server sviluppato si occupa di gestire la comunicazione con due client\cref{fig:server-arc}:
 \begin{itemize}
     \item il client Thymio Device Manager (TDM) che comunica con i robot Thymio
     \item il client che ospita il programma aggregato
@@ -698,7 +682,11 @@ Nel nostro contesto si è sviluppato un server che comunica con due client\cref{
     \label{fig:server-arc}
 \end{figure}
 
+Come è possibile vedere in figura \cref{fig:server-arc} il programma aggregato utilizza una webcam per tracciare i robot, computate le posizioni e le direzioni dei robot, queste informazioni vengono elaborate dal programma aggregato ed al fine di completare il task vengono inviati comandi per ogni Thymio al server Flask che, attraverso \textbf{tdmclient} si occupa di eseguire le attuazioni richieste. 
+
 \section{File di configurazione}
+
+Per utilizzare i file di configurazione all'interno del progetto Scala è stata utilizzata la libreria \textbf{uPickle}. È una libreria performante che permette un parsing veloce ed intuitivo, inoltre non ha problemi di dipendenze quindi può essere utilizzata in qualsiasi progetto Scala senza produrre conflitti \cite{uPickle}.
 
 %----------------------------------------------------------------------------------------
 \chapter{Implementazione}
@@ -707,13 +695,76 @@ Nel nostro contesto si è sviluppato un server che comunica con due client\cref{
 
 \section{Implementazione del server Flask}
 
+Lato Server, sono di rilevanza le implementazioni per rilevare i robot Thymio nella rete \cref{lst:setup-thymios} e per ricevere, attraverso l'API \cref{lst:api} i comandi per controllarli \cref{lst:command-to-thymio}.
+
+\lstinputlisting[language=Python,label={lst:setup-thymios},caption={Funzione di setup per rilevare i Thymio nella rete}]{listings/getTymios.py}
+
+L'API è stata costruita sotto forma di richiesta GET con parametro un JSON contente l'identificato fisico univoco del Thymio, la potenza da erogare nel motore sinistro e destro (nel caso la potenza sia negativa il motore andrà in senso inverso) \cref{lst:api}.
+
+\lstinputlisting[language=php,label={lst:api},caption={API per il controllo dei Thymio}]{listings/api.url}
+
+\lstinputlisting[language=Python,label={lst:move-thymios},caption={Implementazione API per inivare un comando di movimento al Thymio}]{listings/moveThymio.py}
+
+Lato programma aggregato, invece, troviamo l'implementazione di una classe che nasconde ogni tipo di dettaglio implementativo per il controllo dei robot, sia Wave che Thymio \cref{lst:robot-control}.
+
+\lstinputlisting[language=Scala,label={lst:robot-control},caption={Classe per il controllo dei robot}]{listings/Robot.scala}
+
+Per gestire l'inserimento o la rimozione di nuovi robot nel sistema in modo dinamico si è scelto di utilizzare i file di configurazione \cref{lst:thymio-config} \cref{lst:wave-config}.
+
+\lstinputlisting[language=Python, label={lst:thymio-config},caption={File di configurazione per i robot Thymio}]{listings/thymio-config.json}
+
+\lstinputlisting[language=Python, label={lst:wave-config},caption={File di configurazione per i robot Wave}]{listings/wave-config.json}
+
+Questi file di configurazione vengono caricati utilizzando la libreria uPickle \cite{uPickle} \cref{lst:uPickle-read}.
+
+\lstinputlisting[language=Scala,label={lst:uPickle-read},caption={Lettura dei file di configurazione}]{listings/upickle.scala}
+
+
 \section{Esempi di Algoritmi AP applicati ai Robot Wave e Thymio nello stesso ambiente}
 
-You may also put some code snippet (which is NOT float by default), eg: \cref{lst:random-code}.
+\paragraph{Copia rotazione del Leader}
+Programma Aggregato per far ruotare i robot del sistema seguendo la direzione del leader \cref{lst:rotate-leader} \cref{fig:rotate-leader}.
 
-\lstinputlisting[float,language=Java,label={lst:random-code}]{listings/HelloWorld.java}
+\lstinputlisting[language=Scala,label={lst:rotate-leader},caption={Programma aggregato per far ruotare i robot del sistema seguendo la direzione del leader}]{listings/FollowLeaderRotating.scala}
 
-\section{Fancy formulas here}
+\begin{figure}
+    \centering
+    \includegraphics[width=.99\linewidth]{figures/rotate-leader.pdf}
+    \caption{Simulazione del programma aggregato per far ruotare i robot del sistema seguendo la direzione del leader .}
+    \label{fig:rotate-leader}
+\end{figure}
+
+\paragraph{Formazione a ``linea''}
+Programma aggregato che si occupa di allineare i robot del sistema al fine di creare una linea retta \cref{lst:line-shape} \cref{fig:line-shape-1} \cref{fig:line-shape-2}.
+
+\lstinputlisting[language=Scala,label={lst:line-shape},caption={Programma aggregato allineare i robot}]{listings/LineShape.scala}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.99\linewidth]{figures/line2.pdf}
+    \caption{Simulazione del programma aggregato per allineare i robot.}
+    \label{fig:line-shape-2}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.99\linewidth]{figures/line1.pdf}
+    \caption{Simulazione del programma aggregato per allineare i robot dalla dalla visuale del programma di tracking dei Aruco Tag (la linea rossa è  stata inserita in post produzione).}
+    \label{fig:line-shape-1}
+\end{figure}
+
+\paragraph{Formazione a ``cerchio''}
+
+Programma aggregato che si occupa di definire un leader e produrre una formazione circolare intorno ad esso \cref{lst:circle-shape}. È possibile notare dalla immagine \cref{fig:circle-formation} come il programma si comporti correttamente anche in situazioni anomale come la rimozione o l'inserimento di nuovo robot nell'ambiente.
+
+\lstinputlisting[language=Scala,label={lst:line-shape},caption={Programma aggregato allineare i robot}]{listings/CircleShape.scala}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.99\linewidth]{figures/circle.pdf}
+    \caption{Simulazione del programma aggregato per produrre un cerchio intorno ad un leader.}
+    \label{fig:line-shape-1}
+\end{figure}
 
 %----------------------------------------------------------------------------------------
 \chapter{Conclusione}
