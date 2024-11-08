@@ -74,19 +74,19 @@ Intro.
 % \end{figure}
 
 
-\section{Paradigma dell'Aggregate Programming}
+\section{Paradigma Aggregate Programming}
 
 \subsection{Evoluzione dei paradigmi di programmazione}
 
 L'Objective Oriented Programming è un paradigma nel senso stretto del termine poiché rappresenta un modo di organizzare e rappresentare un mondo. 
 Il paradigma in questione deve la sua potenza nella capacità di simulare entità reali ed è riassumibile con la frase \textit{Everything is an Object}. 
 È rilevante parlare di OOP in quanto il paradigma di programmazione funzionale, che è alla base di ScaFi, è un'estensione di esso. 
-Il potere della programmazione ad Oggetti (OOP), come detto precedentemente, risiede nella capacità di simulare un mondo e permette di farlo grazie agli ``oggetti'', essi sono istanze di Classi, le quali a loro volta sono strutture dati astratte che permettono ad ogni loro istanza di avere uno stato (definito dai \textit{fields}) e un comportamento (definito dai \textit{methods}).
-I pilastri della programmazione ad oggetti sono l'incapsulamento, l'ereditarietà e il polimorfismo.
+Il potere della programmazione ad Oggetti (OOP), come detto precedentemente, risiede nella capacità di simulare un mondo e permette di farlo grazie agli ``oggetti'', essi sono istanze di Classi, le quali a loro volta sono strutture dati astratte che permettono ad ogni loro istanza di avere uno stato (definito dai \textit{campi}) e un comportamento (definito dai \textit{metodi}).
+I pilastri della programmazione ad oggetti sono l'incapsulamento, l'ereditarietà ed il polimorfismo.
 
 Il difetto della programmazione ad oggetti è che richiede un particolare impegno nel gestire il sistema da realizzare all'aumentare della sua complessità. Altri paradigmi, come la programmazione funzionale, possono essere più adatti a determinati problemi.
 
-Nel caso della OOP abbiamo riassunto il paradigma con la frase \textit{``Everything is an Object''}, per la programmazione funzionale possiamo riassumerla con \textit{``Everything is a Function''}. Quando si parla di funzioni nel ambito della \ac{FP} si intendo \textbf{funzioni pure}\cite{Hunt2018} cioè senza effetti collaterali. Per effetti collaterali si intende che la funzione fa altro oltre a restituire un risultato. Un paio di esempi, presi da \texttt{Functional Programming in Scala}, sono:
+Nel caso della OOP abbiamo riassunto il paradigma con la frase \textit{``Everything is an Object''}, per la programmazione funzionale, invece, possiamo riassumerla con \textit{``Everything is a Function''}. Quando si parla di funzioni nel ambito della \ac{FP} si fa riferimento alle \textbf{funzioni pure}\cite{Hunt2018}, cioè funzioni ``prive di effetti collaterali''. Per funzione ``priva di effetti collaterali'' si intende una funzione che non fa altro oltre a restituire un risultato. Un paio di esempi, presi da \texttt{Functional Programming in Scala}, sono:
 
 \begin{itemize}
     \item Modifica di una variabile
@@ -95,7 +95,7 @@ Nel caso della OOP abbiamo riassunto il paradigma con la frase \textit{``Everyth
     \item ``Disegnare'' sullo schermo
 \end{itemize}
 
-Si potrebbe pensare che con l'uso della \ac{FP} si possano costruire solo programmi semplice, nella realtà non c'é alcuna limitazione sulla complessità del software da costruire poiché il paradigma della FP esprime un nuovo modo di pensare e scrivere il codice.
+Si potrebbe pensare che con l'uso della \ac{FP} si possano costruire solo programmi semplice, nella realtà non c'é alcuna limitazione sulla complessità del software da costruire poiché il paradigma della \ac{FP} non presenta reali estensioni strutturali al paradigma \ac{OOP}, bensì esprime un nuovo modo di pensare e scrivere il codice 
 
 \label{sec:fp}
 Nel dettaglio, per \textbf{funzione pura} si intende una funzione $f:A\to B$, (una funzione che prende un input di tipo $A$ e restituisce un output di tipo $B$) che mette in relazione ogni elemento di $A$ con esattamente un valore di $B$. Qualsiasi altra operazione che non sia utile a calcolare $f(a)=b$ con $a\in A$ e $b\in B$ deve essere intesa come effetto collaterale della funzione e quindi evitata se si vuole creare una funzione pura.
@@ -112,7 +112,7 @@ Un esempio di funzione non pura, con effetti collaterali, è la funzione che pre
     def print(a: Int): Unit = println(a)
 \end{lstlisting}
 
-Formalmente si può definire una funzione pura con il concetto di \ac{RT}\cite{Hunt2018}:
+Formalmente si può definire una funzione pura con il concetto di \ac{RT} \cite{Hunt2018}:
 
 \begin{quote}
     Una funzione $f$ è Referentially Transparent se per ogni contesto $C$ nel quale la funzione viene inserita, essa può essere sostituta dal risultato della stessa funzione $f$ senza condizionare il risultato di $C$.
@@ -122,9 +122,16 @@ Formalmente si può definire una funzione pura con il concetto di \ac{RT}\cite{H
 
 \subsection{Sistemi collettivi ed eterogenei} 
 
-Per comprendere il potenziale del paradigma dell'\ac{AP} è fondamentale definire quale tipo di problema si vuole risolvere. La crescita del mondo \ac{IoT} ha portato alla presenza di numerosi dispositivi connessi tra loro di ogni tipo e caratterizzati da protocolli di comunicazione eterogenei. Il mondo dell'IoT in continua evoluzione promette di migliore la produzione, gli spazi di lavoro e la sanità attraverso la raccolta e l'analisi di grandi quantità di dati. È nato di conseguenza il bisogno di progettare sistemi resistenti e resilienti che permettessero di gestire queste grandi quantità di dispositivi. È necessario che questi sistemi siano capaci di: adattarsi a cambiamenti imprevedibili, permettere l'implementazione di nuovi comportamenti, permettere una capacità di rilevazione e attuazione nel ambiente in modo distribuito e coordinato. Allo stato attuale della tecnologia è difficile progettare sistemi di questo tipo poiché non esistono framework che permettano di gestire in modo semplice e intuitivo la complessità di questi sistemi \cite{Beal2015} \cite{CasadeiPhDThesis}.
+L'Aggregate Programming è un concetto che nasce dal paradigma della ``macro programmazione''.
+Con \textit{paradigma di macro-programmazione} si intende la teoria (e la pratica) per la progettazione di singoli programmi che gestiscono il controllo di ``macro'' comportamenti, cioè comportamenti di collettivi di componenti. Questo paradigma nasce con lo scopo di astrarre il comportamento e le interazioni tra i singoli componenti del sistema \cite{Casadei2023}.
 
-Un'astrazione grafico del mondo IoT è presente in \cref{fig:iot-arc} \cite{Testa2022}. È possibile comprendere come ci sia uno strato contente i nodi (dispositivi)\footnote{HMI: Human-Machine-Interaction.}, uno strato che rappresenta la rete (internet) mediante la quale comunicano\footnote{Prima di accedere alla rete internet le informazioni dei sensori vengono raccolte dai Edge Gateway che si occupano di instradare le informazioni.} ed uno strato contente il mondo Cloud dove vengono raccolte tutte le informazioni prodotte dai nodi della rete e computate attraverso applicazioni complesse per l'analisi, la pianificazione, l'ottimizzazione ed altri scopi.
+Questa tecnologia mira a migliorare la progettazione, manutenzione e testing di programmi nell'ambito del controllo di dispositivi hardware di larga-scala. 
+
+Per comprendere il potenziale dell'\ac{AP}, che verrà esplorato nella sezione seguente, è fondamentale definire quale tipo di problema si vuole risolvere. 
+
+La crescita del mondo \ac{IoT} ha portato alla presenza di numerosi dispositivi connessi tra loro di ogni tipo e caratterizzati da protocolli di comunicazione eterogenei. Il mondo dell'IoT in continua evoluzione promette di migliore la produzione, gli spazi di lavoro e la sanità attraverso la raccolta e l'analisi di grandi quantità di dati. È nato, di conseguenza, il bisogno di progettare sistemi resistenti e resilienti con l'obiettivo di gestire queste grandi quantità di dispositivi. È necessario che questi sistemi siano capaci di: adattarsi a cambiamenti imprevedibili, permettere l'implementazione di nuovi comportamenti, permettere una capacità di rilevazione e attuazione nel ambiente in modo distribuito e coordinato. Allo stato attuale della tecnologia è difficile progettare sistemi di questo tipo poiché non esistono framework che permettano di gestire in modo semplice e intuitivo la complessità di questi sistemi \cite{Beal2015} \cite{CasadeiPhDThesis}.
+
+Un'astrazione grafica del mondo IoT è presente in \cref{fig:iot-arc} \cite{Testa2022}. È possibile comprendere come ci sia uno strato contente i nodi (dispositivi)\footnote{HMI: Human-Machine-Interaction.}, uno strato che rappresenta la rete (internet) mediante la quale comunicano\footnote{Prima di accedere alla rete internet le informazioni dei sensori vengono raccolte dai Edge Gateway che si occupano di instradare le informazioni.} ed uno strato contente il mondo Cloud dove vengono raccolte tutte le informazioni prodotte dai nodi della rete e computate, attraverso applicazioni complesse, per l'analisi, la pianificazione, l'ottimizzazione ed altri scopi.
 
 \begin{figure}
     \centering
@@ -133,9 +140,9 @@ Un'astrazione grafico del mondo IoT è presente in \cref{fig:iot-arc} \cite{Test
     \label{fig:iot-arc}
 \end{figure}
 
-Il problema di questa architettura è che inviare queste ingenti quantità di dati da un numero elevato di nodi può avere effetti negati sui costi, le disponibilità, la scalabilità e la latenza delle comunicazioni. Una delle soluzione trovate è quella di spostare la computazione più vicino possibile ai nodi della rete, in modo da ridurre la quantità di dati da inviare e la latenza delle comunicazioni. Questo approccio è chiamato \textit{Edge Computing} non è sempre conveniente applicarlo, dipende dal contesto (non sarebbe adatto nel caso i nodi abbiamo specifiche tecniche, come memoria e capacità di calcolo, deboli) \cite{Testa2022}. 
+Il problema di questa architettura è che inviare ingenti quantità di dati da un numero elevato di nodi può avere effetti negati sui costi, le disponibilità, la scalabilità e la latenza delle comunicazioni. Una delle soluzione trovate è quella di spostare la computazione più vicino possibile ai nodi della rete, in modo da ridurre la quantità di dati da inviare e la latenza delle comunicazioni. Questo approccio, chiamato \textit{Edge Computing}, non è sempre conveniente applicarlo, dipende dal contesto (ad esempio non sarebbe adatto nel caso i nodi abbiamo specifiche tecniche, come memoria e capacità di calcolo, deboli) \cite{Testa2022}. 
 
-Nella progettazione di sistemi per il controllo di sistemi aggregati\footnote{Sistemi caratterizzati da un insieme di dispositivi che collaborano tra di loro per raggiungere un obiettivo comune.} si sottolinea la necessità di meccanismi che rendano possibile ed intuitivo il riutilizzo e la capacità di composizione dei componenti così da poter costruire API\footnote{Application Programming Interface} a più strati.
+Nella progettazione di applicazioni per il controllo di sistemi aggregati, cioè sistemi caratterizzati da un insieme di dispositivi che collaborano tra di loro per raggiungere un obiettivo comune, si sottolinea la necessità di meccanismi che rendano possibile ed intuitivo il riutilizzo e la capacità di composizione dei componenti così da poter costruire API\footnote{Application Programming Interface} a più strati.
 
 Ci sono diversi esempi di sistemi aggregati che necessitano di un controllo distribuito e coordinato, un esempio è il controllo di droni in formazione. In questo caso, ogni drone deve essere in grado di comunicare con i propri vicini per mantenere la formazione, evitare collisioni e raggiungere l'obiettivo comune\cref{fig:drones}. Un altro esempio è il controllo di un gruppo di robot che devono esplorare un ambiente sconosciuto con lo scopo di raccogliere informazioni.
 
@@ -146,13 +153,9 @@ Ci sono diversi esempi di sistemi aggregati che necessitano di un controllo dist
     \label{fig:drones}
 \end{figure}
 
-Per andare in contro a queste necessità nasce il paradigma dell'\ac{AP} che da la nascita al concetto di \textit{intelligenza collettiva}.
-
 \subsection{Stato dell'arte}
 
-Nei capitoli precedenti si è esaminata l'evoluzione dal paradigma \ac{OOP} a quello \ac{FP}, la quale, ha permesso di gestire in modo più pratico progetti più complessi e semplificandone la manutenibilità. Una ulteriore, più specifica, evoluzione è quella portata dal paradigma dell'\ac{AP}. Quest'ultimo mira a rendere la progettazione, manutenzione e testing nell'ambito del controllo di dispositivi hardware di larga-scala (anche conosciuti come \textbf{collective adaptive systems (CAS)} \cite{Casadei2021}).
-
-L'\ac{AC} si basa sulla mappatura di un mondo cyber-fisico in un diverso modello logico. Da un punto di vista strutturale possiamo vedere un sistema aggregato come una rete di dispositivi capaci di computare ed equipaggiati con (o sui quali è possibile equipaggiare) sensori ed attuatori, che corrispondono ai nodi. I nodi sono connessi tra loro secondo una logica di vicinato, che può essere definita in base alla distanza fisica o alla comunicazione. Da un punto di vista comportamentale, invece, ogni nodo interpreta il programma aggregato solo in relazione al proprio contesto locale. Da un punto di vista delle interazioni, i nodi estraggono informazione dal proprio vicinato e propagano le proprie nello stesso contesto. Queste interazioni son ciò che permettono al contesto locale e globale di influenzarsi reciprocamente.
+L'\ac{AC} si basa sulla mappatura di un mondo cyber-fisico in un diverso modello logico. Da un punto di vista strutturale possiamo vedere un sistema aggregato come una rete di dispositivi, capaci di computare, equipaggiati con (o sui quali è possibile equipaggiare) sensori ed attuatori. Ogni dispositivo corrisponde ad un nodo e questi nodi sono connessi tra di loro secondo una logica di vicinato che può essere definita in base alla distanza fisica o alla comunicazione. Da un punto di vista comportamentale, invece, ogni nodo interpreta il programma aggregato solo in relazione al proprio contesto locale. Da un punto di vista delle interazioni, i nodi estraggono informazione dal proprio vicinato e propagano le proprie nello stesso contesto. Queste interazioni son ciò che permettono al contesto locale e globale di influenzarsi reciprocamente.
 
 La tecnica dell'\ac{AP} si basa su 3 principi fondamentali per la costruzione di sistemi robusti e resilienti:
 
@@ -179,14 +182,13 @@ Ogni dispositivo del proprio sistema aggregato esegue una computazione in modo a
     \item \textbf{Azione (inter-act)}: in questa fase il nodo effettua le seguenti azioni:
     \begin{enumerate}
         \item \textbf{Condivisione}: il nodo condivide il proprio \textit{export} verso i nodi del suo vicinato in formato broadcast
-        \item \textbf{Controllo attuatori}: l'output del nodo viene 
+        \item \textbf{Controllo attuatori}: l'output del nodo \\ viene 
         utilizzato per l'esecuzione di uno o più attuatori nel proprio ambiente
     \end{enumerate}
 \end{enumerate}
 
 
 Posizionandoci in un livello più implementativo troviamo i seguenti costrutti per la manipolazione dei campi \cite{Pianini2017}: 
-% //TODO: citare il paper ``Aggregate Programming for the Internet of Things'' per i seguenti costrutti
 
 \begin{itemize}
     \item \textbf{Functions}: funzioni $$ b(e_1,\dots,e_n) $$ applicate agli argomenti $e_1,\dots,e_n$. Possono essere sia funzioni matematiche, logiche o algoritmiche ma possono anche rappresentare sensori o attuatori.
@@ -211,7 +213,7 @@ Posizionandoci in un livello più implementativo troviamo i seguenti costrutti p
 Questo paradigma, proprio come quelli precedenti, non è privo di difetti. 
 Implementazioni di questo tipo sono difficili da integrare in sistemi programmati in modo più tradizionale, inoltre, dal punto di vista della programmazione sono mancanti i meccanismi per la gestione della concorrenza e della computazione dinamica dei campi. Il framework ScaFi, che vedremo nel prossimo capitolo, cerca di risolvere questi problemi.
 
-% //TODO: capitolo incompleto
+% //TODO: capitolo incompleto ?
 
 \section{ScaFi}
 
@@ -269,8 +271,7 @@ Gli elementi principali di questa interfaccia sono \cite{Casadei2022}:
     \item \verb|nbrvar(sensorName)|: permette di accedere (ad alto livello) ai sensori dei nodi vicini, simile ad \verb|nbr| ma valido per sensori forniti dalla piattaforma, questi sensori forniscono un valore per ciascun vicino
 \end{itemize}
 
-In ScaFi, i campi non sono reificati esplicitamente ma esistono solo a livello semantico, questo significa che un'espressione Scala non viene gestita come un'espressione di campo finché non viene passata all'interprete ScaFi.
-% //TODO: citare la tesi PhD di Casadei
+In ScaFi, i campi non sono reificati esplicitamente ma esistono solo a livello semantico, questo significa che un'espressione Scala non viene gestita come un'espressione di campo finché non viene passata all'interprete ScaFi \cite{CasadeiPhDThesis}.
 
 ScaFi fornisce alcuni operatori, detti anche \textit{blocchi}, di alto livello già implementati tipici dei sistemi aggregati \cite{Casadei2022}:
 
@@ -319,7 +320,7 @@ All'intero del Framework troviamo le API per progettazione dei sistemi aggregati
 
 \begin{itemize}
     \item \textbf{round-based}(\cref{fig:round-based}): è possibile eseguire l'attuazione al termine del prossimo round 
-    \item \textbf{long-standing}(\cref{fig:long-standong}): l'attuazione che si vuole eseguire è valida finché non viene revisionata o ritirata
+    \item \textbf{long-standing}(\cref{fig:long-standong}): l'attuazione \\ che si vuole eseguire è valida finché non viene revisionata o ritirata
 \end{itemize}
 
 \begin{figure}
@@ -351,10 +352,10 @@ rappresenta un movimento di $3.6 \frac{m}{s}$ lungo l'asse $x$. Una volta defini
 
 Un'altro blocco ``semplice'' è \verb|brownian| che genera un vettore di movimento casuale ad ogni round, è possibile definire uno scalare (\verb|scale|) che rappresenta la velocità massima del movimento casuale.
 
-Sono disponibili anche blocchi più complessi (\cref{lst:movement-module}), alcuni di questi simulati in \cref{fig:movement-simulations}:
+Sono disponibili anche blocchi più complessi (\cref{lst:movement-module}), alcuni di questi simulati in figura \cref{fig:movement-simulations}:
 \begin{itemize}
-    \item \verb|goTo|: permette di definire un target (posizione assoluta) alla quale un agente deve arrivare
-    \item \verb|explore|: definito uno spazio rettangolare con i valori \verb|minBound| e \verb|maxBound|, il blocco produce vettori da assegnare all'agente per esplorare l'intero spazio
+    \item \verb|goTo|: permette di definire un target (posizione assoluta) che gli agenti devono raggiungere
+    \item \verb|explore|: definito uno spazio rettangolare con i valori \verb|minBound| e \verb|maxBound|, il blocco produce vettori da assegnare agli agenti per esplorare l'intero spazio
     \item \verb|maintainTrajectory|: permette di mantenere un certo vettore di movimento per un certo periodo di tempo
     \item \verb|maintainUntil|: permette di mantenere un certo vettore di movimento fino a quando non viene raggiunta una certa condizione
     \item \verb|obstacleAvoidance|: genera vettori di movimento da assegnare agli agenti per evitare ostacoli
@@ -369,7 +370,7 @@ In figura \cref{fig:movement-simulations} \cite{Macroswarm} sono state simulate 
     \label{fig:movement-simulations}
 \end{figure}
 
-\begin{lstlisting}[language=Scala, label={lst:movement-module} caption={Funzioni del modulo di movimento}]
+\begin{lstlisting}[language=Scala, label={lst:movement-module}, caption={Funzioni del modulo di movimento}]
     // movimento casuale
     def brownian(scale: Double): Vector
     
@@ -387,9 +388,9 @@ In figura \cref{fig:movement-simulations} \cite{Macroswarm} sono state simulate 
     def obstacleAvoidance(obstacles: List[Vector]): Vector
 \end{lstlisting}
 
-Questi blocchi possono essere assemblati per costruirne di nuovi più complessi, ad esempio, per creare un comportamento ``muovi fino a destinazione evitando gli ostacoli'':
+Questi blocchi possono essere assemblati per costruirne di nuovi più complessi, ad esempio, per creare un comportamento ``muovi fino a destinazione evitando gli ostacoli'' possiamo implementare un blocco nuovo nel seguente modo \cref{lst:{lst:complex-movement} caption}:
 
-\begin{lstlisting}[language=Scala, label={lst:complex-movement} caption={Comportamento complesso}]
+\begin{lstlisting}[language=Scala, label={lst:complex-movement}, caption={Comportamento complesso}]
     def moveToTargetAvoidingObstacles(target: Point3D, obstacles: List[Vector]): Vector = {
         val targetMovement = goTo(target)
         val obstacleAvoidanceMovement = obstacleAvoidance(obstacles)
@@ -397,9 +398,9 @@ Questi blocchi possono essere assemblati per costruirne di nuovi più complessi,
     }
 \end{lstlisting}
 
-La composizione di questi blocchi permette di creare comportamenti complessi in modo semplice e intuitivo andando a sommare comportamenti più semplici. È importante andare a \textit{normalizzare} il risultato del comportamento complesso per produrre un singolo vettore nel caso in cui il movimento sia composto da più vettori.
+La composizione di questi blocchi permette di creare comportamenti complessi in modo semplice e intuitivo andando semplicemente a sommare comportamenti più semplici. È importante andare a \textit{normalizzare} il risultato del comportamento complesso per produrre un singolo vettore nel caso in cui il movimento sia composto da più vettori.
 
-\paragraph{Leader-based blocks} Per gestire un insieme di agenti in modo coordinato per raggiungere un obiettivo si è valutato che ci fosse la necessità di avere un nodo leader che si occupasse di coordinare gli altri nodi. Il leader può essere scelto secondo un certo criterio (ad esempio per le sue caratteristiche speciali oppure per la sua posizione all'interno del gruppo) oppure casualmente ma è anche possibile andare a creare un leader \textit{virtuale}, che quindi non è realmente presente nel ambiente. Allo stato attuale sono presenti solo due blocchi ritenuti essenziali:
+\paragraph{Leader-based blocks} Per gestire un insieme di agenti in modo coordinato al fine di raggiungere un obiettivo si è valutato che ci fosse la necessità di avere un nodo leader che si occupasse di coordinare gli altri nodi, proprio come succede nella natura nel caso dei branchi. Il leader può essere scelto secondo un certo criterio (ad esempio per le sue caratteristiche speciali oppure per la sua posizione all'interno del gruppo) oppure casualmente ma è anche possibile andare a creare un leader \textit{virtuale}, che quindi non è realmente presente nel ambiente. Allo stato attuale sono presenti solo due blocchi ritenuti essenziali:
 \begin{itemize}
     \item \verb|alignWithLeader|: permette di allineare la velocita degli agenti con quella del leader
     \item \verb|sinkAt|: permette di far convergere gli agenti verso il leader
@@ -417,7 +418,7 @@ Allo stato attuale del framework è possibile costruire in modo semplice le segu
     \item cerchio
 \end{itemize}
 
-Tutte e tre le formazioni \cref{fig:formation-simulations} \cite{Macroswarm} si possono muovere nello spazio e necessitano di un leader che può anche variare velocità, in quel caso i nodi vicini si adatteranno alla velocità del leader. Questo tipo di formazioni sono capaci di ricostruirsi anche nel caso cambi il numero di nodi oppure un fenomeno esterno vada a disturbarne la struttura.
+Tutte e tre le formazioni \cref{fig:formation-simulations} \cite{Macroswarm} si possono muovere nello spazio e necessitano di un leader. Nel caso il leader vada a variare la sua velocità di movimento i nodi vicini si adatteranno alla velocità del leader. Questo tipo di formazioni sono capaci di ricostruirsi anche nel caso cambi il numero di nodi oppure un fenomeno esterno vada a disturbarne la struttura.
 
 \begin{figure}
     \centering
@@ -570,10 +571,9 @@ Questo strumento è già presente nel sistema in questione.
 %----------------------------------------------------------------------------------------
 
 \section{Obiettivi}
-Il progetto \href{https://github.com/cric96/researcher-night-demo.git}{``researcher-night-demo''} è nato per dimostrare, attraverso simulazioni in ambiente reale, le potenzialità di ScaFi. L'obiettivo di questo progetto è dimostrare l'eterogeneità di questo tipo di sistemi andando ad estendere ai robot già implementati il supporto per un nuovo modello di robot, il Thymio, e andando a gestire i vincoli di compatibilità del sistema Thymio.
+Il progetto \href{https://github.com/cric96/researcher-night-demo.git}{``researcher-night-demo''} è nato per dimostrare, attraverso simulazioni in ambiente reale, le potenzialità di ScaFi. L'obiettivo di questo progetto è dimostrare l'eterogeneità di questo tipo di sistemi andando ad estendere ai robot già implementati il supporto per un nuovo modello di robot (Thymio \cref{fig:thymio-robot}. ) e andando a gestire gli eventuali vincoli di compatibilità.
 
-Inizialmente, la demo, presentava soltanto la possibilità di utilizzare i robot Wave \cref{fig:wave-robot}. I Wave sono robot equipaggiati da 4 ruote motrici (4WD), scocca d'acciaio ed un modulo ESP32 (microcontrollore programmabile) già implementato di software (open-source) con il quale si può comunicare tramite protocollo WiFi o Bluetooth.
-Il progetto è stato esteso per includere il modello di robot Thymio \cref{fig:thymio-robot}. 
+Inizialmente, la demo, presentava soltanto la possibilità di utilizzare i robot Wave \cref{fig:wave-robot}. I Wave sono robot equipaggiati da 4 ruote motrici (4WD), scocca d'acciaio ed un modulo ESP32 (microcontrollore programmabile) già implementato di software (open-source) che ne permette il controllo mezzo protocollo WiFi o Bluetooth.
 
 \begin{figure}
     \centering
@@ -598,14 +598,14 @@ Requisiti non funzionali:
 
 \section{Dominio}
 
-Il progetto è stato sviluppato in linguaggio Scala ed è formato da tre componenti fisiche:
+Il progetto è stato sviluppato in linguaggio Scala ed è formato da tre componenti fisiche fondamentali:
 \begin{itemize}
-    \item webcam per il tracciamento dei ArucoTag posizionati sopra ai robot
+    \item webcam per il tracciamento dei Aruco Tag posizionati sopra ai robot
     \item macchina che esegue il sistema aggregato e che comunica con i robot, solitamente un computer
-    \item robot (uno o più)
+    \item collettivo di robot
 \end{itemize}
 
-La struttura del progetto si basa sul principio di Macroswarm, posizionandosi ad un livello di astrazione abbastanza alto da nascondere i dettagli implementativi dei dispositivi che si vuole andare a controllare. Di seguito un breve sommario delle componenti principali del progetto:
+La struttura del progetto si basa sul principio di Macroswarm, posizionandosi ad un livello di astrazione abbastanza alto da nascondere i dettagli implementativi dei dispositivi che si vuole andare a controllare. Di seguito una breve descrizione delle componenti principali del progetto:
 
 \paragraph{Tracciamento robot}.
 Per il tracciamento dei robot attraverso la webcam è stato sviluppato un applicativo Java di visione artificiale che rileva i tag Aruco e ne calcola la posizione e l'orientamento.
@@ -663,7 +663,7 @@ Il progetto dispone anche di uno spazio per testare programmi aggregati in un am
 \label{chap:design}
 %----------------------------------------------------------------------------------------
 
-A seguito di un analisi delle caratteristiche dei robot Thymio e dei protocolli di comunicazione che esso mette a disposizione si è optato per l'utilizzo del modulo \textbf{tdmclient} nel contesto di un server sviluppato utilizzando il framework Flask. Questo framework è stato sviluppato per la creazione di applicazioni web e, in particolare, per la creazione di \textit{API RESTful}\footnote{Le API sono l'interfaccia che utilizzano due o più sistemi informatici per lo scambio sicuro di informazioni. REST è un'architettura software sulla quale si possono progettare le API}. Questo framework è stato scelto per la sua semplicità, la sua flessibilità, scalabilità e indipendenza dalla tecnologia utilizzata. 
+A seguito di un analisi delle caratteristiche dei robot Thymio e dei protocolli di comunicazione che esso mette a disposizione si è optato per l'utilizzo del modulo \textbf{tdmclient} nel contesto di un server sviluppato utilizzando il framework Flask. Questo framework è stato sviluppato per la creazione di applicazioni web e, in particolare, per la creazione di \textit{API RESTful}\footnote{Le API sono l'interfaccia che utilizzano due o più sistemi informatici per lo scambio sicuro di informazioni. REST è un'architettura software sulla quale si possono progettare le API}. 
 
 Si è valutato anche l'utilizzo della libreria ScalaPy, che permette di sfruttare i moduli Python all'interno di un programma Scala, per incorporare le funzionalità di tdmclient direttamente all'interno del sistema aggregato ma data la ``non stabilità'' del progettato ScalaPy si è deciso di non impiegare questa soluzione.
 
@@ -704,6 +704,15 @@ L'API è stata costruita sotto forma di richiesta GET con parametro un JSON cont
 \lstinputlisting[language=php,label={lst:api},caption={API per il controllo dei Thymio}]{listings/api.url}
 
 \lstinputlisting[language=Python,label={lst:move-thymios},caption={Implementazione API per inivare un comando di movimento al Thymio}]{listings/moveThymio.py}
+
+Per completezza è stato sviluppata una semplice interfaccia web per poter inviare i comandi ai robot Thymio \cref{fig:web-interface} e verificare che tutti i robot sono correttamente connessi alla rete.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.8\linewidth]{figures/web-interface.png}
+    \caption{Interfaccia web per il controllo dei robot Thymio}
+    \label{fig:web-interface}
+\end{figure}
 
 Lato programma aggregato, invece, troviamo l'implementazione di una classe che nasconde ogni tipo di dettaglio implementativo per il controllo dei robot, sia Wave che Thymio \cref{lst:robot-control}.
 
