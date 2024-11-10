@@ -9,7 +9,7 @@
 
 \school{\unibo}
 \programme{Corso di Laurea in Ingegneria e Scienze Informatiche}
-\title{Eterogeneità dei sistemi di Aggregate Programming: estensione del sistema ScaFi per l'uso di robot Thymio}
+\title{Eterogeneità dei sistemi di Aggregate Programming: un caso studio con WaveRobot e ThymioRobot}
 \author{Elvis Perlika}
 \date{\today}
 \subject{Objective Oriented Programming}
@@ -35,11 +35,10 @@
 \frontmatter\frontispiece
 
 \begin{abstract}	
-
-L'obiettivo di questa tesi è dimostrare come la macroprogrammazione e le tecnologie che derivano, come il framework ScaFi e la sua estensione MacroSwarm, risultino essere un paradigma di programmazione particolarmente efficace nella la progettazione di sistemi aggregati nel caso particolare dei sistemi eterogenei.
-L'esigenza di framework di questo tipo è dovuta alla sempre più frequente necessità di creare comportamenti collettivi in modo intuitivo, astraendo dalla logica dei singoli componenti del insieme da controllare.
-Nel contesto della progettazione di sistemi aggregati, l'Edge Computing è l'approccio più utilizzato, soprattutto nel mondo IoT per via del buon compromesso tra capacità computazionale e velocità di comunicazione tra i nodi della rete. Risulta però non in grado di identificare una qualche astrazione di ``Intelligenza Collettiva Emergente'' per via della sua natura fortemente concentra sull'aspetto funzionale dei singoli dispositivi. 
-La volontà di colmare questa lacuna e quindi di poter creare un intelligenza collettiva in modo efficace, intuitivo e che permetta di astrarre dalla tecnologia dei dispositivi dell'insieme su cui si vuole definire la strategia operativa ha dato origine al mondo dell'Aggregate Programming. I contesti di applicazione di queste tecnologie sono molteplici, ad esempio il controllo di sensori IoT per smart city oppure il controllo di droni in formazione per missioni di salvataggio. 
+    
+Il mondo IoT è in costante crescita e di conseguenza nasce la necessità di sviluppare sistemi aggregati, cioè formati da rilevanti quantità di nodi. L'Edge Computing è, ad oggi, l'approccio più utilizzato. Il motivo risiede nel buon compromesso tra capacità computazionale e velocità di comunicazione tra i nodi della rete. Risulta però non in grado di identificare una qualche astrazione di ``Intelligenza Collettiva Emergente'' per via della sua natura fortemente concentra sull'aspetto funzionale dei singoli dispositivi.
+La volontà di colmare questa lacuna e quindi di poter creare un'intelligenza distribuita in modo efficace, intuitivo e che permetta di astrarre dalla tecnologia dei dispositivi dell'insieme su cui si vuole definire la strategia operativa ha dato origine al mondo dell'Aggregate Computing. I contesti di applicazione di queste tecnologie sono molteplici, dal controllo di sensori IoT per smart city al controllo di droni in formazione per missioni di salvataggio.
+L'obiettivo di questa tesi progettuale è dimostrare come la macroprogrammazione e le tecnologie che ne derivano, come il framework ScaFi e la sua estensione MacroSwarm, risultino essere un paradigma di programmazione particolarmente efficace nella progettazione di sistemi aggregati eterogenei, cioè formati da dispositivi con caratteristiche e protocolli di comunicazione diversi. Si andrà a discute il caso studio dell'integrazione dei robot Thymio in un programma aggregato.
 
 \end{abstract}
 
@@ -60,7 +59,7 @@ La volontà di colmare questa lacuna e quindi di poter creare un intelligenza co
 \label{chap:introduction}
 %----------------------------------------------------------------------------------------
 
-Negli ultimi anni, il numero di dispositivi interconnessi ha conosciuto una crescita esponenziale, soprattutto nel contesto dell'Internet of Things (IoT). Con un’ampia varietà di dispositivi eterogenei, dalle telecamere di sorveglianza ai sensori industriali, il mondo si sta popolando di sistemi intelligenti capaci di raccogliere, analizzare e scambiare dati in tempo reale. Questa proliferazione porta alla necessità di una tecnologia che possa coordinare il comportamento di gruppi di dispositivi in modo efficace, resiliente e scalabile, soprattutto in contesti dinamici e complessi. In questo scenario, tecniche di controllo collettivo e paradigmi di programmazione aggregata si rivelano fondamentali per garantire che i dispositivi possano operare in sinergia verso obiettivi comuni, gestendo autonomamente le interazioni locali e contribuendo a un comportamento globale emergente.
+Negli ultimi anni, il numero di dispositivi interconnessi ha conosciuto una crescita esponenziale, soprattutto nel contesto dell'Internet of Things (IoT). Con un'ampia varietà di dispositivi eterogenei, dalle telecamere di sorveglianza ai sensori industriali, il mondo si sta popolando di sistemi intelligenti capaci di raccogliere, analizzare e scambiare dati in tempo reale. Questa proliferazione porta alla necessità di una tecnologia che possa coordinare il comportamento di gruppi di dispositivi in modo efficace, resiliente e scalabile, soprattutto in contesti dinamici e complessi. In questo scenario, tecniche di controllo collettivo e paradigmi di programmazione aggregata si rivelano fondamentali per garantire che i dispositivi possano operare in sinergia verso obiettivi comuni, gestendo autonomamente le interazioni locali e contribuendo a un comportamento globale emergente.
 
 Nel tempo si è compreso che un approccio possibile potesse essere quello di rendere i dispositivi della rete una sorta di ``superorganismo'' in grado di gestirsi autonomamente e che necessiti, eventualmente, di comandi ad alto livello dai amministratori del sistema.
 
@@ -82,16 +81,9 @@ TODO: da finire
 %     \label{fig:random-image}
 % \end{figure}
 
-
 \section{Paradigma Aggregate Programming}
 
-\subsection{Evoluzione dei paradigmi di programmazione}
-
-L'Objective Oriented Programming è un paradigma nel senso stretto del termine poiché rappresenta un modo di organizzare e rappresentare un mondo. 
-Il paradigma in questione deve la sua potenza nella capacità di simulare entità reali ed è riassumibile con la frase \textit{Everything is an Object}. 
-È rilevante parlare di OOP in quanto il paradigma di programmazione funzionale, su cui si basa il linguaggio Scala, è un'estensione di esso. 
-Il potere della programmazione ad Oggetti (OOP), come detto precedentemente, risiede nella capacità di simulare un mondo e permette di farlo grazie agli ``oggetti'', essi sono istanze di Classi, le quali a loro volta sono strutture dati astratte che permettono ad ogni loro istanza di avere uno stato (definito dai \textit{campi}) ed un comportamento (definito dai \textit{metodi}).
-I pilastri della programmazione ad oggetti sono l'incapsulamento, l'ereditarietà ed il polimorfismo.
+\subsection{Scala}
 
 Il difetto della programmazione ad oggetti è che richiede un particolare impegno nel gestire i sistemi da realizzare all'aumentare della loro complessità. Altri paradigmi, come la programmazione funzionale, sono stati sviluppati per risolvere questo problema.
 
@@ -104,22 +96,12 @@ Nel caso della OOP abbiamo riassunto il paradigma con la frase \textit{``Everyth
     \item ``Disegnare'' sullo schermo
 \end{itemize}
 
-Si potrebbe pensare che con l'uso della \ac{FP} si possano costruire solo programmi semplice, nella realtà non c'é alcuna limitazione sulla complessità del software da costruire poiché il paradigma della \ac{FP} non rappresenta reali estensioni strutturali al paradigma \ac{OOP}, bensì esprime un nuovo modo di pensare e scrivere il codice. È possibile immaginare tale paradigma come una filosofia.
+Si potrebbe pensare che con l'uso della \ac{FP} si possano costruire solo programmi semplice, nella realtà non c'é alcuna limitazione sulla complessità del software da costruire poiché questo paradigma non rappresenta reali estensioni strutturali al paradigma \ac{OOP}, bensì esprime un nuovo modo di pensare e scrivere il codice. È possibile immaginare tale paradigma come una filosofia nel mondo della programmazione.
 
 \label{sec:fp}
 Nel dettaglio, per \textbf{funzione pura} si intende una funzione $f:A\to B$, (una funzione che prende un input di tipo $A$ e restituisce un output di tipo $B$) che mette in relazione ogni elemento di $A$ con esattamente un valore di $B$. Qualsiasi altra operazione che non sia utile a calcolare $f(a)=b$ con $a\in A$ e $b\in B$ deve essere intesa come effetto collaterale della funzione e quindi evitata se si vuole creare una funzione pura.
 
 Un esempio di funzione pura, senza effetti collaterali, è la funzione di somma che prende in input due valori e ne restituisce la loro somma \cref{lst:sum-function}. 
-
-\begin{lstlisting}[language=Scala, label={lst:sum-function}, caption={Esempio di funzione pura in Scala}]
-    def sum(a: Int, b: Int): Int = a + b
-\end{lstlisting}
-
-Un esempio di funzione non pura, con effetti collaterali, è la funzione che prende in input un valore e lo stampa a schermo \cref{lst:print-function}.
-
-\begin{lstlisting}[language=Scala, label={lst:print-function}, caption={Esempio di funzione non pura in Scala}]
-    def print(a: Int): Unit = println(a)
-\end{lstlisting}
 
 Formalmente si può definire una funzione pura con il concetto di \ac{RT} \cite{Hunt2018}:
 
@@ -127,13 +109,22 @@ Formalmente si può definire una funzione pura con il concetto di \ac{RT} \cite{
     Una funzione $f$ è Referentially Transparent se per ogni contesto $C$ nel quale la funzione viene inserita, essa può essere sostituta dal risultato della stessa funzione $f$ senza condizionare il risultato di $C$.
 \end{quote}
 
-È proprio questa proprietà che permette ad un programma progettato con approccio funzionale di essere maggiormente scalabile e mantenibile.
+In oltre, la programmazione funzionale incoraggia l'uso di di dati immutabili, il che significa che una volta creato un dato, non viene modificato. Questo riduce le possibilità di errori difficili da tracciare, perché le funzioni non alterano lo stato globale ma restituiscono nuovi valori. Nei progetti complessi, ciò rende più facile comprendere e prevedere il comportamento del codice.  Grazie all'immutabilità e alle funzioni pure, la programmazione funzionale è particolarmente adatta per il calcolo parallelo e concorrente. L'assenza di modifiche condivise tra le funzioni evita il problema dei \textit{race condition}, che si verifica quando due processi cercano di accedere o modificare contemporaneamente lo stesso dato. Questo è cruciale per la scalabilità nei sistemi complessi.
+
+Queste proprietà rendono i programmi facili da testare e da correggere nel caso di bug. Di conseguenza rendono un programma progettato con approccio funzionale di essere maggiormente scalabile e mantenibile.
 
 \subsection{Sistemi collettivi ed eterogenei} 
 
 Per comprendere il potenziale dell'\ac{AP}, che verrà esplorato nella sezione seguente, è fondamentale definire quale tipo di problema si vuole risolvere. 
 
-La crescita del mondo \ac{IoT} ha portato alla presenza di numerosi dispositivi connessi tra loro di ogni tipo e caratterizzati da protocolli di comunicazione eterogenei. Il mondo dell'IoT in continua evoluzione promette di migliore la produzione, gli spazi di lavoro e la sanità attraverso la raccolta e l'analisi di grandi quantità di dati. È nato, di conseguenza, il bisogno di progettare sistemi resistenti e resilienti con l'obiettivo di gestire queste grandi quantità di dispositivi. È necessario che questi sistemi siano capaci di: adattarsi a cambiamenti imprevedibili, permettere l'implementazione di nuovi comportamenti, permettere una capacità di rilevazione e attuazione nel ambiente in modo distribuito e coordinato. Allo stato attuale della tecnologia è difficile e costoso progettare sistemi di questo tipo poiché non esistono framework che permettano di gestirne, in modo semplice e intuitivo la complessità \cite{Beal2015} \cite{CasadeiPhDThesis}.
+La crescita del mondo \ac{IoT} ha portato alla presenza di numerosi dispositivi connessi tra loro. Dispositivi di ogni tipologia e caratterizzati da protocolli di comunicazione eterogenei. Il mondo dell'IoT, in continua evoluzione promette di migliore la produzione, gli spazi di lavoro e la sanità attraverso la raccolta e l'analisi di grandi quantità di dati. È nato, di conseguenza, il bisogno di progettare sistemi resistenti e resilienti con l'obiettivo di gestire queste grandi quantità di dispositivi e dati. È necessario che questi sistemi siano capaci di: 
+\begin{itemize}
+    \item adattarsi a cambiamenti imprevedibili: i contesti in cui operano i dispositivi possono cambiare in modo imprevedibile, ad esempio a causa di guasti o malfunzionamenti e prevedere tutti gli scenari risulta essere altamente complesso. 
+    \item permettere l'implementazione di nuovi comportamenti: la nascita di nuovi bisogni, variazioni nel ambiente, evoluzione delle tecnologie, ottimizzazione delle risorse o modifiche delle normative richiedono la capacità di implementare nuovi comportamenti in modo rapido ed efficace. 
+    \item permettere una capacità di rilevazione e attuazione nel ambiente in modo distribuito e coordinato: la raccolta di informazioni coordinata è cruciale nello sviluppo di un'intelligenza avanzata e la capacità di attuare azioni in modo coordinato è fondamentale per il raggiungimento di obiettivi comuni evitando conflitti e sovrapposizioni. 
+\end{itemize}
+
+Allo stato attuale della tecnologia è difficile e costoso progettare sistemi di questo tipo poiché non esistono framework che permettano di gestirne, in modo semplice e intuitivo, la complessità \cite{Beal2015} \cite{CasadeiPhDThesis}.
 
 Un'astrazione grafica del mondo IoT è presente in \cref{fig:iot-arc} \cite{Testa2022}. È possibile comprendere come ci sia uno strato contente i nodi (dispositivi)\footnote{HMI: Human-Machine-Interaction.}, uno strato che rappresenta la rete (internet) mediante la quale comunicano\footnote{Prima di accedere alla rete internet le informazioni dei sensori vengono raccolte dai Edge Gateway che si occupano di instradare le informazioni.} ed uno strato contente il mondo Cloud dove vengono raccolte tutte le informazioni prodotte dai nodi della rete e computate, attraverso applicazioni complesse, per l'analisi, la pianificazione, l'ottimizzazione ed altri scopi.
 
@@ -144,13 +135,26 @@ Un'astrazione grafica del mondo IoT è presente in \cref{fig:iot-arc} \cite{Test
     \label{fig:iot-arc}
 \end{figure}
 
-Il problema di questa architettura è ritrovabile nelle problematiche nascenti dall'inviare ingenti quantità di dati da un numero elevato di nodi. Problema che può provocare effetti negativi sui costi, le disponibilità, la scalabilità e la latenza delle comunicazioni. Una delle soluzione trovate è quella di spostare la computazione più vicino possibile ai nodi della rete, in modo da ridurre la quantità di dati da inviare e di conseguenza ridurre i problemi di latenza nelle comunicazioni. Questo approccio, chiamato \textit{Edge Computing}, non è sempre conveniente applicarlo, dipende dal contesto (ad esempio non sarebbe adatto nel caso i nodi abbiamo specifiche tecniche, come memoria e capacità di calcolo, deboli) \cite{Testa2022}. 
+Il problema di questa architettura è ritrovabile nelle problematiche nascenti dall'inviare ingenti quantità di dati da un numero elevato di nodi. Problema che può provocare effetti negativi sui costi, le disponibilità, la scalabilità della piattaforma e la latenza delle comunicazioni. Una delle soluzione trovate è quella di spostare la computazione più vicino possibile ai nodi della rete, in modo da ridurre la quantità di dati da inviare e di conseguenza ridurre i problemi di latenza nelle comunicazioni. Questo approccio, chiamato \textit{Edge Computing} consiste in quattro passaggi principali: 
 
-% Nella progettazione di applicazioni per il controllo di sistemi aggregati, cioè sistemi caratterizzati da un insieme di dispositivi che collaborano tra di loro per raggiungere un obiettivo comune, si sottolinea la necessità di meccanismi che rendano possibile ed intuitivo il riutilizzo e la capacità di composizione dei componenti così da poter costruire API\footnote{Application Programming  Interface} a più strati.
+\begin{enumerate}
+    \item raccolta dati
+    \item pre-processamento locale dei dati sorgente
+    \item definita una strategia immediata 
+    \item condivisione della strategia con il Cloud o pre-processamento dei dati sul Cloud
+\end{enumerate}
 
-Sono numerosi i casi di sistemi collettivi che necessitano di un controllo distribuito e coordinato, un esempio è il controllo di droni in formazione. In questo caso, ogni drone deve essere in grado di comunicare con i propri vicini per mantenere la formazione, evitare collisioni e raggiungere l'obiettivo comune\cref{fig:drones}. Un altro esempio è il controllo di un gruppo di robot che devono esplorare un ambiente sconosciuto con lo scopo di raccogliere informazioni.
+Per quanto semplice, questo approccio va a mettere in una situazione dis stress le organizzazioni di applicazioni IoT. Inoltre, non è sempre conveniente applicarlo, dipende dal contesto. Ad esempio non sarebbe adatto nel caso i nodi abbiamo specifiche tecniche, come memoria e capacità di calcolo, deboli \cite{Testa2022}. 
 
-È chiara la necessità di una tecnologia che permetta di costruire nuove applicazioni per il controllo di collettivi di dispositivi senza dover andare a definire i singoli comportamenti dei dispositivi, bensì trattando questi singoli dispositivi come un unico superorganismo.
+Andando ad osservare nel dettaglio solo i dispositivi di questa architettura complessa è possibile notare come molto spesso, anche se in apparenza impercettibile, è presente un aspetto collettivo che merita di essere considerato. Preso un sistema in cui è presente una gestione dei dati distribuita, nella quale i nodi della rete condividono le proprie informazioni e quelle che hanno ricevuto da altri nodi al fine di raggiungere un obiettivo comune, se questo sistema è in grado di adattarsi ai cambiamenti e continuare nella realizzazione del task è possibile che esso vada a far emergere una forma di intelligenza collettiva autonoma. 
+
+La forza di un sistema del genere sta nella sua resilienza: ogni nodo può operare localmente con regole relativamente semplici, ma la somma delle interazioni può produrre una risposta globale complessa e adattabile. Tale struttura è particolarmente efficace in contesti in cui è richiesta una risposta flessibile e continua agli imprevisti, come nei casi di reti neurali distribuite, sistemi di swarm robotics, e ambienti IoT (Internet of Things) su larga scala.
+
+Questa intelligenza distribuita può, quindi, essere considerata autonoma nella misura in cui non richiede una gestione centralizzata per adattarsi o evolversi, riuscendo a creare soluzioni nuove senza un controllo diretto. Questo fenomeno diventa particolarmente evidente in situazioni di problem-solving distribuito, dove i nodi, seguendo semplici protocolli di comunicazione e scambio, ottimizzano il risultato collettivo migliorando così la capacità del sistema di raggiungere obiettivi complessi.
+
+Sono numerosi i casi di sistemi collettivi che necessitano di un controllo distribuito e coordinato. Un esempio pratico di questa intelligenza collettiva autonoma si può vedere nelle reti di sensori distribuiti, che monitorano in tempo reale fenomeni ambientali (come incendi, movimenti sismici o cambiamenti climatici). Ogni sensore condivide dati con quelli vicini e l'intero sistema è in grado di rilevare e rispondere ad anomalie senza un controllo centrale. Questo comportamento emergente, basato su regole locali e interazioni dinamiche, rende questi sistemi più robusti, adattabili e affidabili in contesti complessi. Un altro esempio è il controllo di droni in formazione. In questo caso, ogni drone deve essere in grado di comunicare con i propri vicini per mantenere la formazione, evitare collisioni e raggiungere l'obiettivo comune\cref{fig:drones}.
+
+È chiara la necessità di una tecnologia che permetta di costruire nuove applicazioni (o comportamenti) per il controllo di collettivi di dispositivi senza dover andare a definire i singoli comportamenti dei dispositivi, bensì trattando questi singoli dispositivi come un unico superorganismo.
 
 \begin{figure}
     \centering
@@ -166,27 +170,27 @@ L'Aggregate Programming è un concetto che nasce dal paradigma della ``macro pro
 Con \textit{paradigma di macro-programmazione} si intende la teoria (e la pratica) per la progettazione di singoli programmi che gestiscono il controllo di ``macro'' comportamenti, cioè comportamenti di collettivi di componenti. La definizione data in letteratura è  la seguente:
 
 \begin{quote}
-    Paradigma astratto per programmare il comportamento (macro) scopico di sistemi formati da entità computazionali.
+    Paradigma astratto per programmare il comportamento (macro) scopico di sistemi formati da entità computazionali. \cite{Casadei2023}
 \end{quote}
 
 Questo paradigma nasce con lo scopo di astrarre il comportamento e le interazioni tra i singoli componenti del sistema e si basa su quattro principi fondamentali \cite{Casadei2023}:
 
 \begin{itemize}
-    \item \textit{Distinzione micro-macro.} Per \textit{micro} si intendono le entità del sistema, mentre per \textit{macro} si intende il comportamento del sistema, il suo stato, la sua struttura.
+    \item \textit{Distinzione micro-macro.} Per \textit{micro} si intendono le singole entità del ambiente, mentre per \textit{macro} si intende il comportamento del sistema, il suo stato, la sua struttura.
     \item \textit{Prospettiva macroscopica.} Il programmatore si concentra principalmente sul comportamento macroscopico del sistema, piuttosto che sul comportamento dei singoli componenti, questo non esclude osservazioni a livello microscopico.
-    \item \textit{Macro-programma.} Il risultato del lavoro di programmazione restituisce il macro-programma, cioè il programma che definisce il comportamento macroscopico del sistema.
+    \item \textit{Macro-programma.} L'attività di sviluppo genera un macro-programma, ovvero un codice che specifica la logica di funzionamento macroscopica.
     \item \textit{Mappatura macro a micro.} Anche conosciuta come \textit{mappatura globale a locale}, è la logica che permette al macro-programma di compiere le specifiche attuazioni a livello microscopico per completare il task.
 \end{itemize}
 
 Questa teoria e la tecnologia che ne deriva mira a migliorare la progettazione, manutenzione e testing di programmi nell'ambito del controllo di dispositivi hardware di larga-scala. 
 
-L' Aggregate Computing (AC) che nasce dal paradigma della ``macro programmazione'' si basa sulla mappatura di un mondo cyber-fisico in un nuovo modello logico. Da un punto di vista strutturale possiamo vedere un sistema \textbf{aggregato} come una rete di dispositivi, capaci di computare, equipaggiati con (o sui quali è possibile equipaggiare) sensori ed attuatori. Ogni dispositivo corrisponde ad un nodo e questi nodi sono connessi tra di loro secondo una logica di vicinato che può essere definita in base alla distanza fisica o alla comunicazione. Da un punto di vista comportamentale, invece, ogni nodo interpreta il programma aggregato solo in relazione al proprio contesto locale. Da un punto di vista delle interazioni, i nodi estraggono informazione dal proprio vicinato e propagano le proprie nello stesso contesto. Queste interazioni son ciò che permettono al contesto locale e globale di influenzarsi reciprocamente.
+L'Aggregate Computing (AC) che nasce dal paradigma della ``macro programmazione'' si basa sulla mappatura di un mondo cyber-fisico in un nuovo modello logico. Da un punto di vista strutturale possiamo vedere un sistema \textbf{aggregato} come una rete di dispositivi, capaci di computare, equipaggiati con (o sui quali è possibile equipaggiare) sensori ed attuatori. Ogni dispositivo corrisponde ad un nodo e questi nodi sono connessi tra di loro secondo una logica di vicinato che può essere definita in base alla distanza fisica o alla comunicazione. Da un punto di vista comportamentale, invece, ogni nodo interpreta il programma aggregato solo in relazione al proprio contesto locale. Da un punto di vista delle interazioni, i nodi estraggono informazione dal proprio vicinato e propagano le proprie nello stesso contesto. Queste interazioni son ciò che permettono al contesto locale e globale di influenzarsi reciprocamente.
 
-La tecnica dell' Aggregate Computing si basa su tre principi fondamentali per la costruzione di sistemi robusti e resilienti:
+La tecnica dell'Aggregate Computing si basa su tre principi fondamentali per la costruzione di sistemi robusti e resilienti:
 
 \begin{itemize}
-    \item I dettagli implementativi dei sistemi hardware che si vuole andare a manipolare devono essere nascosti così da permettere ai programmatori di concentrarsi solo sulla logica di alto livello del sistema, in alcuni casi è possibile che questa astrazione delle specifiche di basso livello sia tale da poter essere pensato come uno spazio continuo, invece di un insieme di dispositivi separati. Per esempio, invece di immaginarci una stanza piena di sensori, la trattiamo come una area unificata definita da un flusso continuo di dati.
-    \item Il programma manipola le strutture dati della rete di dispositivi sia in funzione della loro estensione spaziale che di quella temporale. Approccio particolare utile in sistemi in cui l'informazione cambia in base al luogo.
+    \item I dettagli implementativi dei sistemi hardware che si vuole andare a manipolare devono essere nascosti così da permettere ai programmatori di concentrarsi solo sulla logica di alto livello del sistema. In alcuni casi è possibile che questa astrazione delle specifiche di basso livello sia tale da poter pensare al dominio come uno spazio continuo, invece di un insieme di dispositivi separati. Per esempio, invece di immaginarci una stanza piena di sensori, la trattiamo come una area unificata definita da un flusso continuo di dati.
+    \item Il programma manipola le strutture dati della rete di dispositivi sia in funzione della loro estensione spaziale che di quella temporale. Approccio particolarmente utile in sistemi in cui l'informazione cambia in base al luogo.
     \item Ogni dispositivo della rete esegue le operazioni necessarie in autonomia, coordinandosi con i dispositivi vicini attraverso meccanismi robusti e resilienti. In questo modo il sistema rimane fluido ed efficiente anche in situazioni anomale, ad esempio causate dal guasto di un qualche dispositivo.
 \end{itemize}
 
@@ -196,7 +200,7 @@ Nel secondo caso, ogni dispositivo della rete ha il compito di compiere tutte le
 Il nuovo paradigma, invece, prevede la scomposizione in componenti del programma assegnato ad ogni dispositivo, ogni componente esegue un compito specifico e comunica principalmente solo con i componenti dello stesso tipo presenti nel suo intorno per eseguire un servizio ed eventualmente con un altro componente presente nello stesso dispositivo al fine di realizzare una nuova soluzione inerente ad un'altro servizio. Le componenti sono una astrazioni dei \textit{campi di calcolo}.
 
 Per \textit{campo di calcolo} o \textit{computationals field} si intende la mappatura degli elementi del dominio in cui si opera in un insieme di valori.
-I campi di calcolo vengono utilizzati per standardizzare le interazioni tra i dispositivi, permettendo di analizzare e progettare sistemi distribuiti in modo più semplice e intuitivo. L'idea di campo prende ispirazione dai campi fisici, ad esempio quello magnetico. Ogni dispositivo della rete è considerato come un punto nello spazio ed il campo rappresenta un dato valore assegnato ad ognuno di questi punti. I campi rappresentazione, quindi, un'astrazione ad alto livello dei dispositivi. I valori restituiti dalla mappatura possono essere chiamati \textit{campi} o \textit{fields} ed il loro insieme rappresenta lo stato di un sistema in un dato istante \cite{Audrito2019}.
+I campi di calcolo vengono utilizzati per standardizzare le interazioni tra i dispositivi, permettendo di analizzare e progettare sistemi distribuiti in modo più semplice e intuitivo. L'idea di campo prende ispirazione dai campi fisici, ad esempio quello magnetico o quello gravitazionale. Ogni dispositivo della rete è considerato come un punto nello spazio ed il campo rappresenta un dato valore assegnato ad ognuno di questi punti. I campi rappresentazione, quindi, un'astrazione ad alto livello dei dispositivi. I valori restituiti dalla mappatura possono essere chiamati \textit{campi} o \textit{fields} ed il loro insieme rappresenta lo stato di un sistema in un dato istante \cite{Audrito2019}.
 
 Questo approccio è generalmente utilizzato per un controllo prolungato dei dispositivi della rete. È ideale per reti di dispositivi sulle quali si vuole eseguire task che necessitano un gran numero di rilevazioni (ad esempio utilizzando sensori), computazioni ed attuazioni nello spazio e nel tempo.
 
@@ -209,7 +213,7 @@ Ogni dispositivo del proprio sistema aggregato esegue una computazione in modo a
     \begin{enumerate}
         \item \textbf{Condivisione}: il nodo condivide il proprio \textit{export} verso i nodi del suo vicinato in formato broadcast
         \item \textbf{Controllo attuatori}: l'output del nodo \\ viene 
-        utilizzato per l'esecuzione di uno o più attuatori nel proprio ambiente
+        utilizzato per l'esecuzione di uno o più attuazioni nel proprio ambiente
     \end{enumerate}
 \end{enumerate}
 
@@ -230,22 +234,22 @@ Posizionandoci in un livello più implementativo troviamo i seguenti costrutti p
     permette di andare a definire sotto spazio del campo principiale in base ad una condizione $e$ sul quale poi andare ad eseguire certe istruzioni invece di altre. È importante che le istruzioni riferite ad un certo sotto spazio non abbiano effetti su altri sotto spazi.
 \end{itemize}
 
-Le di tecnologie di Aggregate Computing non sono prive di difetti. 
+Le tecnologie sviluppate con approccio \ac{AP} non sono prive di difetti. 
 Implementazioni di questo tipo sono difficili da integrare in sistemi già programmati in modo più tradizionale, inoltre, dal punto di vista della programmazione sono mancanti i meccanismi per la gestione della concorrenza e della computazione dinamica dei campi. Il framework ScaFi, che vedremo nel prossimo capitolo, cerca di risolvere questi problemi.
 
 % //TODO: capitolo incompleto ?
 
 \section{ScaFi}
 
-ScaFi è un toolkit open-source scritto in linguaggio Scala per l'\ac{AC} per la progettazione ad alto livello di sistemi aggregati.
-Il termine ScaFi deriva dalla unione di Scala e Fields. Scala è un linguaggio java-like moderno e flessibile progettato per unificare il paradigma \ac{OOP} e quello \ac{FP}. È stato progettato per essere coinciso e facilmente leggibile, inoltre si basa sulla Java Virtual Machine, la quale permette l'utilizzo delle librerie Java. L'utilizzo della JVM e la flessibilità del linguaggio sono state le caratteristiche chiave per il raggiungimento della popolarità di questo linguaggio. Il termine Field invece deriva dai \textit{field calculus} (campi di calcolo) di cui abbiamo parlato nei capitoli precedenti.
+ScaFi è un toolkit open-source scritto in linguaggio Scala per lo sviluppo per lo sviluppo ad alto livello di sistemi aggregati costruito sulle basi dell'Aggregate Programming.
+Il termine ScaFi deriva dalla unione di \textbf{Scala} e \textbf{Fields}. Scala è un linguaggio java-like moderno e flessibile progettato per unificare il paradigma \ac{OOP} e quello \ac{FP}. È stato progettato per essere coinciso e facilmente leggibile, inoltre si basa sulla Java Virtual Machine, la quale permette l'utilizzo delle librerie Java. L'utilizzo della JVM e la flessibilità del linguaggio sono state le caratteristiche chiave per il raggiungimento della popolarità di questo linguaggio. Il termine Field invece deriva dai \textit{field calculus} (campi di calcolo) di cui abbiamo parlato nei capitoli precedenti.
 
 L'Architettura di ScaFi \cite{Casadei2022} è riassumibile nella immagine \cref{fig:scafi-arc}.
 
 \begin{figure}
     \centering
     \includegraphics[width=.8\linewidth]{figures/scafi-arc.jpg}
-    \caption{Architettura del framework ScaFi}
+    \caption{Architettura ad alto livello del framework ScaFi}
     \label{fig:scafi-arc}
 \end{figure}
 
@@ -260,6 +264,15 @@ Ispezionando la figura, troviamo:
     \item \textbf{spala}: (``spatial scala'') si tratta di un \textit{middleware} che permette di eseguire programmi \ac{AC} basati sugli attori ed è indipendente dal DSL di ScaFi
     \item \textbf{scafi-distributed}: layer integrativo per l'utilizzo di \textbf{spala} in ScaFi
 \end{itemize}
+
+\paragraph{scafi-core} Questo modulo\cref{fig:core-arc} espone l'incarnazione dell'interfaccia di un \textbf{AggregateProgram}, questo singolo programma si occupa di definire l'intera operatività del insieme dei dispositivi della rete. Andare a mischiare una sottoclasse di \verb|AggregateProgram| con l'interfaccia \verb|Gradients| permette di creare una 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\linewidth]{figures/core-arc.png}
+    \caption{Architettura del modulo scafi-core}
+    \label{fig:core-arc}
+\end{figure}
 
 \begin{quote}
     \centering
