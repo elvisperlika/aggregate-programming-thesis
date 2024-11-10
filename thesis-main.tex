@@ -36,10 +36,10 @@
 
 \begin{abstract}	
 
-L'obiettivo di questa tesi è dimostrare come la macroprogrammazione, e quindi le tecnologie che ne derivano, come il framework ScaFi e la sua estensione MacroSwarm, risultino essere un paradigma di programmazione particolarmente efficace nella la progettazione di sistemi aggregati eterogenei. 
+L'obiettivo di questa tesi è dimostrare come la macroprogrammazione e le tecnologie che derivano, come il framework ScaFi e la sua estensione MacroSwarm, risultino essere un paradigma di programmazione particolarmente efficace nella la progettazione di sistemi aggregati nel caso particolare dei sistemi eterogenei.
 L'esigenza di framework di questo tipo è dovuta alla sempre più frequente necessità di creare comportamenti collettivi in modo intuitivo, astraendo dalla logica dei singoli componenti del insieme da controllare.
 Nel contesto della progettazione di sistemi aggregati, l'Edge Computing è l'approccio più utilizzato, soprattutto nel mondo IoT per via del buon compromesso tra capacità computazionale e velocità di comunicazione tra i nodi della rete. Risulta però non in grado di identificare una qualche astrazione di ``Intelligenza Collettiva Emergente'' per via della sua natura fortemente concentra sull'aspetto funzionale dei singoli dispositivi. 
-La volontà di colmare questa lacuna e quindi di poter creare un intelligenza collettiva in modo efficace, intuitivo e che permetta di astrarre dalla tecnologia dei dispositivi dell'insieme su cui si vuole definire la strategia operativa ha dato origine al mondo dell'Aggregate Programming. I contesti di applicazione di queste tecnologie sono molteplici, ad esempio il controllo di sensori IoT per smart city oppure il controllo di droni in formazione per missioni di salvataggio.
+La volontà di colmare questa lacuna e quindi di poter creare un intelligenza collettiva in modo efficace, intuitivo e che permetta di astrarre dalla tecnologia dei dispositivi dell'insieme su cui si vuole definire la strategia operativa ha dato origine al mondo dell'Aggregate Programming. I contesti di applicazione di queste tecnologie sono molteplici, ad esempio il controllo di sensori IoT per smart city oppure il controllo di droni in formazione per missioni di salvataggio. 
 
 \end{abstract}
 
@@ -64,9 +64,9 @@ Negli ultimi anni, il numero di dispositivi interconnessi ha conosciuto una cres
 
 Nel tempo si è compreso che un approccio possibile potesse essere quello di rendere i dispositivi della rete una sorta di ``superorganismo'' in grado di gestirsi autonomamente e che necessiti, eventualmente, di comandi ad alto livello dai amministratori del sistema.
 
+TODO: da finire
 
-
-\paragraph{Struttura della tesi}
+\paragraph{Struttura della tesi} Nel capitolo \cref{chap:background} si andranno ad approfondire tutte le tecnologie rilevanti per 
 
 %----------------------------------------------------------------------------------------
 \chapter{Background}
@@ -195,7 +195,7 @@ L'approccio \ac{AP} nella progettazione di sistemi è profondamente diverso clas
 Nel secondo caso, ogni dispositivo della rete ha il compito di compiere tutte le operazioni richieste per il raggiungimento della soluzione e simultaneamente comunicare con gli altri dispositivi della rete. Questo approccio, seppur semplice, è poco scalabile e difficile da mantenere al crescere della complessità del sistema \cite{Pianini2017}. 
 Il nuovo paradigma, invece, prevede la scomposizione in componenti del programma assegnato ad ogni dispositivo, ogni componente esegue un compito specifico e comunica principalmente solo con i componenti dello stesso tipo presenti nel suo intorno per eseguire un servizio ed eventualmente con un altro componente presente nello stesso dispositivo al fine di realizzare una nuova soluzione inerente ad un'altro servizio. Le componenti sono una astrazioni dei \textit{campi di calcolo}.
 
-L' \ac{AP} ha permesso la creazione di framework come ScaFi, Protelis e MacroSwarm. Alla base di questo approccio c'é concetto dei sopracitati \textit{campi di calcolo}. Per \textit{campo di calcolo} o \textit{computationals field} si intende la mappatura degli elementi del dominio in cui si opera in un insieme di valori.
+Per \textit{campo di calcolo} o \textit{computationals field} si intende la mappatura degli elementi del dominio in cui si opera in un insieme di valori.
 I campi di calcolo vengono utilizzati per standardizzare le interazioni tra i dispositivi, permettendo di analizzare e progettare sistemi distribuiti in modo più semplice e intuitivo. L'idea di campo prende ispirazione dai campi fisici, ad esempio quello magnetico. Ogni dispositivo della rete è considerato come un punto nello spazio ed il campo rappresenta un dato valore assegnato ad ognuno di questi punti. I campi rappresentazione, quindi, un'astrazione ad alto livello dei dispositivi. I valori restituiti dalla mappatura possono essere chiamati \textit{campi} o \textit{fields} ed il loro insieme rappresenta lo stato di un sistema in un dato istante \cite{Audrito2019}.
 
 Questo approccio è generalmente utilizzato per un controllo prolungato dei dispositivi della rete. È ideale per reti di dispositivi sulle quali si vuole eseguire task che necessitano un gran numero di rilevazioni (ad esempio utilizzando sensori), computazioni ed attuazioni nello spazio e nel tempo.
@@ -612,7 +612,6 @@ Requisiti funzionali:
 
 Requisiti non funzionali:
 \begin{itemize}
-    \item Refactoring del codice Java per il tracciamento dei robot.
     \item Velocità nelle comunicazioni con i nuovi robot integrati.
 \end{itemize}
 
@@ -676,7 +675,6 @@ In demo si trova la reale implementazione del sistema aggregato che produce le a
 
 \paragraph{Mock}
 Il progetto dispone anche di uno spazio per testare programmi aggregati in un ambiente simulato implementato utilizzando la libreria \verb|JavaFX|. Questo ambiente permette di vedere i nodi della rete e le connessioni tra di essi.
-
 
 %----------------------------------------------------------------------------------------
 \chapter{Design}
@@ -752,7 +750,6 @@ Questi file di configurazione vengono caricati utilizzando la libreria uPickle \
 
 \lstinputlisting[language=Scala,label={lst:uPickle-read},caption={Lettura dei file di configurazione}]{listings/upickle.scala}
 
-
 \section{Esempi di Algoritmi AP applicati ai Robot Wave e Thymio nello stesso ambiente}
 
 \paragraph{Copia rotazione del Leader}
@@ -802,6 +799,8 @@ Programma aggregato che si occupa di definire un leader e produrre una formazion
 %----------------------------------------------------------------------------------------
 \chapter{Conclusione}
 \label{chap:conclusione}
+
+In questa tesi abbiamo dimostrato come sia possibile e semplice andare ad espandere il dominio del sistema che si vuole andare a controllare utilizzando un sistema aggregato. Nonostante la comunicazione con i robot Thymio sia stata gestita in linguaggio 
 %----------------------------------------------------------------------------------------
 
 %----------------------------------------------------------------------------------------
@@ -809,8 +808,6 @@ Programma aggregato che si occupa di definire un leader e produrre una formazion
 %----------------------------------------------------------------------------------------
 
 \backmatter
-
-\nocite{*} % Remove this as soon as you have the first citation
 
 \bibliographystyle{alpha}
 \bibliography{bibliography}
