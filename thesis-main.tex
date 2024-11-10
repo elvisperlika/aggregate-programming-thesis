@@ -184,23 +184,53 @@ Questo paradigma nasce con lo scopo di astrarre il comportamento e le interazion
 
 Questa teoria e la tecnologia che ne deriva mira a migliorare la progettazione, manutenzione e testing di programmi nell'ambito del controllo di dispositivi hardware di larga-scala. 
 
-L'Aggregate Computing (AC) che nasce dal paradigma della ``macro programmazione'' si basa sulla mappatura di un mondo cyber-fisico in un nuovo modello logico. Da un punto di vista strutturale possiamo vedere un sistema \textbf{aggregato} come una rete di dispositivi, capaci di computare, equipaggiati con (o sui quali è possibile equipaggiare) sensori ed attuatori. Ogni dispositivo corrisponde ad un nodo e questi nodi sono connessi tra di loro secondo una logica di vicinato che può essere definita in base alla distanza fisica o alla comunicazione. Da un punto di vista comportamentale, invece, ogni nodo interpreta il programma aggregato solo in relazione al proprio contesto locale. Da un punto di vista delle interazioni, i nodi estraggono informazione dal proprio vicinato e propagano le proprie nello stesso contesto. Queste interazioni son ciò che permettono al contesto locale e globale di influenzarsi reciprocamente.
+L'Aggregate Computing (AC) si basa sulla mappatura di un mondo cyber-fisico in un nuovo modello logico. Da un punto di vista strutturale possiamo vedere un sistema \textbf{aggregato} come una rete di dispositivi, capaci di computare, equipaggiati con (o sui quali è possibile equipaggiare) sensori ed attuatori. Ogni dispositivo corrisponde ad un nodo e questi nodi sono connessi tra di loro secondo una logica di vicinato che può essere definita in base alla distanza fisica o alla comunicazione. Da un punto di vista comportamentale, invece, ogni nodo interpreta il programma aggregato solo in relazione al proprio contesto locale. Da un punto di vista delle interazioni, i nodi estraggono informazione dal proprio vicinato e propagano le proprie nello stesso contesto. Queste interazioni son ciò che permettono al contesto locale e globale di influenzarsi reciprocamente.
 
 La tecnica dell'Aggregate Computing si basa su tre principi fondamentali per la costruzione di sistemi robusti e resilienti:
 
 \begin{itemize}
-    \item I dettagli implementativi dei sistemi hardware che si vuole andare a manipolare devono essere nascosti così da permettere ai programmatori di concentrarsi solo sulla logica di alto livello del sistema. In alcuni casi è possibile che questa astrazione delle specifiche di basso livello sia tale da poter pensare al dominio come uno spazio continuo, invece di un insieme di dispositivi separati. Per esempio, invece di immaginarci una stanza piena di sensori, la trattiamo come una area unificata definita da un flusso continuo di dati.
-    \item Il programma manipola le strutture dati della rete di dispositivi sia in funzione della loro estensione spaziale che di quella temporale. Approccio particolarmente utile in sistemi in cui l'informazione cambia in base al luogo.
-    \item Ogni dispositivo della rete esegue le operazioni necessarie in autonomia, coordinandosi con i dispositivi vicini attraverso meccanismi robusti e resilienti. In questo modo il sistema rimane fluido ed efficiente anche in situazioni anomale, ad esempio causate dal guasto di un qualche dispositivo.
+    \item \textbf{Aspetto strutturale.} I dettagli implementativi dei sistemi hardware che si vuole andare a manipolare devono essere nascosti così da permettere ai programmatori di concentrarsi solo sulla logica di alto livello del sistema. In alcuni casi è possibile che questa astrazione delle specifiche di basso livello sia tale da poter pensare al dominio come uno spazio continuo, invece di un insieme di dispositivi separati. Per esempio, invece di immaginarci una stanza piena di sensori, la trattiamo come una area unificata definita da un flusso continuo di dati \cref{fig:points-to-gradient}.
+    \item \textbf{Aspetto comportamentale.} Il programma manipola le strutture dati della rete di dispositivi sia in funzione della loro estensione spaziale che di quella temporale. Approccio particolarmente utile in sistemi in cui l'informazione cambia in base al luogo \cref{fig:different-function}.
+    \item \textbf{Aspetto interazionale.} Ogni dispositivo della rete esegue le operazioni necessarie in autonomia, coordinandosi con i dispositivi vicini attraverso meccanismi robusti e resilienti. In questo modo il sistema rimane fluido ed efficiente anche in situazioni anomale, ad esempio causate dal guasto di un qualche dispositivo \cref{fig:lost-nodes}.
 \end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\linewidth]{figures/points-to-gradient.pdf}
+    \caption{Da sensori di temperatura $d_i \thinspace \forall i \in {\text{\{Insieme dei sensori.\}}}$ a spazio continuo di temperatura $t(x,y,z)$.}
+    \label{fig:points-to-gradient}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\linewidth]{figures/different-function.pdf}
+    \caption{Manipolazioni diverse in base al luogo. In questo caso sensori più vicini al centro della stanza hanno un comportamento diverso rispetto a quelli più vicini alle pareti.}
+    \label{fig:different-function}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\linewidth]{figures/lost-nodes.pdf}
+    \caption{Sistema che si adatta alla perdita di nodi inserendo nuovi collegamenti.}
+    \label{fig:lost-nodes}
+\end{figure}
 
 Dalla tecnologia dell'Aggregate Computing nasce anche la volontà di definire un metodo per la programmazione di sistemi aggregati: l'Aggregate Programming (AP). 
 L'approccio \ac{AP} nella progettazione di sistemi è profondamente diverso classico approccio ``dispositivo centrico''.
 Nel secondo caso, ogni dispositivo della rete ha il compito di compiere tutte le operazioni richieste per il raggiungimento della soluzione e simultaneamente comunicare con gli altri dispositivi della rete. Questo approccio, seppur semplice, è poco scalabile e difficile da mantenere al crescere della complessità del sistema \cite{Pianini2017}. 
-Il nuovo paradigma, invece, prevede la scomposizione in componenti del programma assegnato ad ogni dispositivo, ogni componente esegue un compito specifico e comunica principalmente solo con i componenti dello stesso tipo presenti nel suo intorno per eseguire un servizio ed eventualmente con un altro componente presente nello stesso dispositivo al fine di realizzare una nuova soluzione inerente ad un'altro servizio. Le componenti sono una astrazioni dei \textit{campi di calcolo}.
 
-Per \textit{campo di calcolo} o \textit{computationals field} si intende la mappatura degli elementi del dominio in cui si opera in un insieme di valori.
-I campi di calcolo vengono utilizzati per standardizzare le interazioni tra i dispositivi, permettendo di analizzare e progettare sistemi distribuiti in modo più semplice e intuitivo. L'idea di campo prende ispirazione dai campi fisici, ad esempio quello magnetico o quello gravitazionale. Ogni dispositivo della rete è considerato come un punto nello spazio ed il campo rappresenta un dato valore assegnato ad ognuno di questi punti. I campi rappresentazione, quindi, un'astrazione ad alto livello dei dispositivi. I valori restituiti dalla mappatura possono essere chiamati \textit{campi} o \textit{fields} ed il loro insieme rappresenta lo stato di un sistema in un dato istante \cite{Audrito2019}.
+% //TODO: capire cosa ho scritto e se ha senso quello scritto qui sotto
+% Il nuovo paradigma, invece, prevede la scomposizione in componenti del programma assegnato ad ogni dispositivo, ogni componente esegue un compito specifico e comunica principalmente solo con i componenti dello stesso tipo presenti nel suo intorno per eseguire un servizio ed eventualmente con un altro componente presente nello stesso dispositivo al fine di realizzare una nuova soluzione inerente ad un'altro servizio. Le componenti sono una astrazioni dei \textit{campi di calcolo}.
+
+Per \textit{campi computazionali} o \textit{computational fields} si intende la mappatura degli elementi del dominio in cui si opera in un insieme di valori \cref{fig:device-to-value}.
+I campi vengono utilizzati per standardizzare le interazioni tra i dispositivi, permettendo di analizzare e progettare sistemi distribuiti in modo più semplice e intuitivo. L'idea di campo prende ispirazione dai campi fisici, come quello magnetico o quello gravitazionale. Ogni dispositivo della rete è considerato come un punto nello spazio ed il campo rappresenta un dato valore assegnato ad ognuno di questi punti. I campi, quindi, rappresentano un'astrazione ad alto livello dei dispositivi. L'insieme dei valori restituiti dalla mappatura rappresenta lo stato di un sistema in un dato istante \cite{Audrito2019}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\linewidth]{figures/device-to-value.pdf}
+    \caption{Da dispositivi $d_i \thinspace \forall i \in {\text{\{Insieme dei dispositivi.\}}}$ a valori $f(d_i)$.}
+    \label{fig:device-to-value}
+\end{figure}
 
 Questo approccio è generalmente utilizzato per un controllo prolungato dei dispositivi della rete. È ideale per reti di dispositivi sulle quali si vuole eseguire task che necessitano un gran numero di rilevazioni (ad esempio utilizzando sensori), computazioni ed attuazioni nello spazio e nel tempo.
 
