@@ -21,6 +21,7 @@
 % Definition of acronyms
 \acrodef{IoT}{Internet of Thing}
 \acrodef{vm}[VM]{Virtual Machine}
+\acrodef{JVM}{Java Virtual Machine}
 \acrodef{FP}{Functional Programming}
 \acrodef{RT}{Referential Transparency}
 \acrodef{AP}{Aggregate Programming}
@@ -59,13 +60,14 @@ L'obiettivo di questa tesi progettuale è dimostrare come la macroprogrammazione
 \label{chap:introduction}
 %----------------------------------------------------------------------------------------
 
-Negli ultimi anni, il numero di dispositivi interconnessi ha conosciuto una crescita esponenziale, soprattutto nel contesto dell'Internet of Things (IoT). Con un'ampia varietà di dispositivi eterogenei, dalle telecamere di sorveglianza ai sensori industriali, il mondo si sta popolando di sistemi intelligenti capaci di raccogliere, analizzare e scambiare dati in tempo reale. Questa proliferazione porta alla necessità di una tecnologia che possa coordinare il comportamento di gruppi di dispositivi in modo efficace, resiliente e scalabile, soprattutto in contesti dinamici e complessi. In questo scenario, tecniche di controllo collettivo e paradigmi di programmazione aggregata si rivelano fondamentali per garantire che i dispositivi possano operare in sinergia verso obiettivi comuni, gestendo autonomamente le interazioni locali e contribuendo a un comportamento globale emergente.
+Negli ultimi anni, il numero di dispositivi interconnessi ha conosciuto una crescita esponenziale, soprattutto nel contesto dell'Internet of Things (IoT). Con un'ampia varietà di dispositivi eterogenei, dalle telecamere di sorveglianza ai sensori industriali, il mondo si sta popolando di sistemi intelligenti capaci di raccogliere, analizzare e scambiare dati in tempo reale. Questa proliferazione porta alla necessità crescente di una tecnologia che possa coordinare il comportamento di gruppi di dispositivi in modo efficace, resiliente e scalabile, soprattutto in contesti dinamici e complessi. In questo scenario, tecniche di controllo collettivo e paradigmi di programmazione aggregata si rivelano fondamentali per garantire che i dispositivi possano operare in sinergia verso obiettivi comuni, gestendo autonomamente le interazioni locali e contribuendo a un comportamento globale emergente. È proprio questo il maggior beneficio della programmazione aggregata, poter creare comportamenti collettivi trascurando gli aspetti comportamentali dei singoli agenti. 
+Nel tempo si è compreso che un approccio possibile potesse essere quello di rendere i dispositivi della rete una sorta di ``superorganismo'' in grado di gestirsi autonomamente e che necessiti, eventualmente, solo di comandi ad alto livello dai amministratori del sistema nel caso se ne voglia modificare la strategia. Un esempio di ``superorganismo'' è la \textit{folla} che, pur essendo composta da singoli individui, si muove come un unico organismo che, in certe situazioni, si divide in sottoinsiemi e anche essi si comportano come un unico organismo. 
+Per poter far emergere al meglio una intelligenza collettiva anche in sistemi in cui potrebbe non essere immediatamente evidente, è nata la teoria dell'Aggregate Computing. Questa teoria prevede di astrarre dalla tecnologia e dal comportamento dei singoli agenti dell'aggregazione portando l'ambiente reale (o simulato) su cui operano ad essere visualizzato come un campo continuo definito solo dai valori che i singoli agenti restituiscono. La rappresentazione di ogni agente in un valore è detta \textit{calcolo del campo} ed è il nucleo di tale teoria.
+Questo lavoro vuole proprio dimostrare come con la possibilità di avere un astrazione totale dalle componenti che andranno a risolvere un certo task in un certo ambiente diventa possibile, con l'avanzare delle tecnologie e delle richieste, integrare nuovi componenti più qualitativi e preformanti senza dover variare la struttura del sistema ma semplicemente integrando, eventualmente, nuove interfacce di comunicazione. Utilizzando le basi definite dal framework ScaFi per la progettazione di programmi aggregati è nato Macroswarm che porta l'intuitività nella costruzione di tali programmi ad un nuovo livello e sarà tale tecnologia ad essere utilizzata nella realizzazione di questo caso studio. 
 
-Nel tempo si è compreso che un approccio possibile potesse essere quello di rendere i dispositivi della rete una sorta di ``superorganismo'' in grado di gestirsi autonomamente e che necessiti, eventualmente, di comandi ad alto livello dai amministratori del sistema.
+% //TODO: da finire ?
 
-TODO: da finire
-
-\paragraph{Struttura della tesi} Nel capitolo \cref{chap:background} si andranno ad approfondire tutte le tecnologie rilevanti per 
+\paragraph{Struttura della tesi} \cref{chap:background} approfondiremo della lacuna che queste tecnologie vogliono colmare, il linguaggio Scala, i framework per la produzione di Aggregate Program e le tecnologie usate per la realizzazione del caso studio. \cref{chap:analisi} analisi del problema, obiettivi e requisiti fondamentali per la realizzazione del caso studio. \cref{chap:design} architettura della infrastruttura per la comunicazione tra i nuovi robot integrati (Thymio) ed il programma aggregato. \cref{chap:implementazione} sorgenti delle sezioni di codice più rilevanti nello sviluppo del sistema di integrazione del Robot Thymio e test di validazione del sistema aggregato con diversi comportamenti collettivi. In fine \cref{chap:conclusione} conclusioni e sviluppi futuri.
 
 %----------------------------------------------------------------------------------------
 \chapter{Background}
@@ -81,41 +83,9 @@ TODO: da finire
 %     \label{fig:random-image}
 % \end{figure}
 
-\section{Paradigma Aggregate Programming}
+\section{Sistemi collettivi ed eterogenei} 
 
-\subsection{Scala}
-
-Il difetto della programmazione ad oggetti è che richiede un particolare impegno nel gestire i sistemi da realizzare all'aumentare della loro complessità. Altri paradigmi, come la programmazione funzionale, sono stati sviluppati per risolvere questo problema.
-
-Nel caso della OOP abbiamo riassunto il paradigma con la frase \textit{``Everything is an Object''}, per la programmazione funzionale, invece, possiamo riassumerla con \textit{``Everything is a Function''}. Quando si parla di funzioni nel ambito della \ac{FP} si fa riferimento alle \textbf{funzioni pure}\cite{Hunt2018}, cioè funzioni ``prive di effetti collaterali''. Per funzione ``priva di effetti collaterali'' si intende una funzione che non fa altro oltre a restituire un risultato. Un paio di esempi, presi da \texttt{Functional Programming in Scala}, sono:
-
-\begin{itemize}
-    \item Modifica di una variabile
-    \item Modifica del campo di un oggetto
-    \item Leggere da o scrivere su un file
-    \item ``Disegnare'' sullo schermo
-\end{itemize}
-
-Si potrebbe pensare che con l'uso della \ac{FP} si possano costruire solo programmi semplice, nella realtà non c'é alcuna limitazione sulla complessità del software da costruire poiché questo paradigma non rappresenta reali estensioni strutturali al paradigma \ac{OOP}, bensì esprime un nuovo modo di pensare e scrivere il codice. È possibile immaginare tale paradigma come una filosofia nel mondo della programmazione.
-
-\label{sec:fp}
-Nel dettaglio, per \textbf{funzione pura} si intende una funzione $f:A\to B$, (una funzione che prende un input di tipo $A$ e restituisce un output di tipo $B$) che mette in relazione ogni elemento di $A$ con esattamente un valore di $B$. Qualsiasi altra operazione che non sia utile a calcolare $f(a)=b$ con $a\in A$ e $b\in B$ deve essere intesa come effetto collaterale della funzione e quindi evitata se si vuole creare una funzione pura.
-
-Un esempio di funzione pura, senza effetti collaterali, è la funzione di somma che prende in input due valori e ne restituisce la loro somma \cref{lst:sum-function}. 
-
-Formalmente si può definire una funzione pura con il concetto di \ac{RT} \cite{Hunt2018}:
-
-\begin{quote}
-    Una funzione $f$ è Referentially Transparent se per ogni contesto $C$ nel quale la funzione viene inserita, essa può essere sostituta dal risultato della stessa funzione $f$ senza condizionare il risultato di $C$.
-\end{quote}
-
-In oltre, la programmazione funzionale incoraggia l'uso di di dati immutabili, il che significa che una volta creato un dato, non viene modificato. Questo riduce le possibilità di errori difficili da tracciare, perché le funzioni non alterano lo stato globale ma restituiscono nuovi valori. Nei progetti complessi, ciò rende più facile comprendere e prevedere il comportamento del codice.  Grazie all'immutabilità e alle funzioni pure, la programmazione funzionale è particolarmente adatta per il calcolo parallelo e concorrente. L'assenza di modifiche condivise tra le funzioni evita il problema dei \textit{race condition}, che si verifica quando due processi cercano di accedere o modificare contemporaneamente lo stesso dato. Questo è cruciale per la scalabilità nei sistemi complessi.
-
-Queste proprietà rendono i programmi facili da testare e da correggere nel caso di bug. Di conseguenza rendono un programma progettato con approccio funzionale di essere maggiormente scalabile e mantenibile.
-
-\subsection{Sistemi collettivi ed eterogenei} 
-
-Per comprendere il potenziale dell'\ac{AP}, che verrà esplorato nella sezione seguente, è fondamentale definire quale tipo di problema si vuole risolvere. 
+Per comprendere il potenziale dell'\ac{AP}, che verrà esplorato nelle sezioni seguenti, è fondamentale definire quale tipo di problema si vuole risolvere. 
 
 La crescita del mondo \ac{IoT} ha portato alla presenza di numerosi dispositivi connessi tra loro. Dispositivi di ogni tipologia e caratterizzati da protocolli di comunicazione eterogenei. Il mondo dell'IoT, in continua evoluzione promette di migliore la produzione, gli spazi di lavoro e la sanità attraverso la raccolta e l'analisi di grandi quantità di dati. È nato, di conseguenza, il bisogno di progettare sistemi resistenti e resilienti con l'obiettivo di gestire queste grandi quantità di dispositivi e dati. È necessario che questi sistemi siano capaci di: 
 \begin{itemize}
@@ -163,7 +133,59 @@ Sono numerosi i casi di sistemi collettivi che necessitano di un controllo distr
     \label{fig:drones}
 \end{figure}
 
-\subsection{Stato dell'arte}
+\section{Scala}
+
+Per la realizzazione del progetto di questa tesi si è scelto di utilizzare il linguaggio di programmazione Scala ma per comprenderlo meglio è necessario fare una breve introduzione alla programmazione funzionale.
+
+È possibile riassumere il paradigma della programmazione funzionale con la frase \textit{``Everything is a Function''}. Quando si parla di funzioni in quest'ambito si fa riferimento alle \textbf{funzioni pure}\cite{Hunt2018}, cioè funzioni ``prive di effetti collaterali''. Con l'espressione ``priva di effetti collaterali'' si intende una funzione che non fa altro oltre a restituire un risultato (come la modifica del campo di un oggetto o la scrittura/lettura su file).
+
+\label{sec:fp}
+Nel dettaglio, per \textbf{funzione pura} si intende una funzione $f:A\to B$, (una funzione che prende un input di tipo $A$ e restituisce un output di tipo $B$) che mette in relazione ogni elemento di $A$ con esattamente un valore di $B$. Qualsiasi altra operazione che non sia utile a calcolare $f(a)=b$ con $a\in A$ e $b\in B$ deve essere intesa come effetto collaterale della funzione e quindi evitata se si vuole creare una funzione pura.
+
+Un esempio di funzione pura, senza effetti collaterali, è la funzione di somma che prende in input due valori e ne restituisce la loro somma. 
+
+Si potrebbe pensare che con l'uso della \ac{FP} si possano costruire solo programmi semplice, nella realtà non c'é alcuna limitazione sulla complessità del software da costruire poiché questo paradigma non rappresenta reali estensioni strutturali al paradigma \ac{OOP}, bensì esprime un nuovo modo di pensare e scrivere il codice. È possibile immaginare tale paradigma come una filosofia nel mondo della programmazione.
+
+In oltre, la programmazione funzionale incoraggia l'uso di dati immutabili, il che significa che una volta creato un dato, non viene modificato. Questo riduce le possibilità di errori difficili da tracciare, perché le funzioni non alterano lo stato globale ma restituiscono nuovi valori. Nei progetti complessi, ciò rende più facile comprendere e prevedere il comportamento del codice.  Grazie all'immutabilità e alle funzioni pure, la programmazione funzionale è particolarmente adatta per il calcolo parallelo e concorrente. L'assenza di modifiche condivise tra le funzioni evita il problema dei \textit{race condition}, che si verifica quando due processi cercano di accedere o modificare contemporaneamente lo stesso dato. Questo è cruciale per la scalabilità nei sistemi complessi.
+
+Queste proprietà rendono i programmi facili da testare e da correggere nel caso di bug. Di conseguenza rendono un programma progettato con approccio funzionale di essere maggiormente scalabile e mantenibile.
+
+Scala è un linguaggio Java-like moderno e flessibile progettato per unificare il paradigma \ac{OOP} e quello \ac{FP}.  È stato creato da \textbf{Martin Odersky} ed è molto utilizzato per applicazioni di tipo Big Data, elaborazione distribuita e backend.
+
+Caratteristiche principali di Scala:
+\begin{itemize}
+    \item Orientato agli oggetti: Significa che ogni valore è un oggetto. Supporta classi, oggetti, eredità e polimorfismo come in Java.
+    \item Funzionale: Scala integra concetti di programmazione funzionale, come funzioni pure, immutabilità, e supporta anche higher-order functions (funzioni che accettano altre funzioni come argomenti o che ritornano funzioni). Le funzioni sono trattate come “valori di prima classe,” ovvero possono essere passate e manipolate come dati.
+    \item Sintassi concisa: Scala è progettato per ridurre il codice \textit{boilerplate} (codice ridondante) presente in linguaggi come Java. Ad esempio, la gestione dei getter e setter delle proprietà viene automatizzata grazie alle case classes e alla sintassi compatta di Scala.
+    \item Tipi statici avanzati: Scala ha un sistema di tipi statici potente e flessibile, che permette di rilevare molti errori a tempo di compilazione. Supporta tipi generici, tipi astratti e altre funzionalità avanzate, come i traits (simili alle interfacce in Java, ma con possibilità di implementare metodi).
+    \item Compatibilità con Java: Scala è completamente compatibile con Java. Può usare qualsiasi libreria Java, il che lo rende ideale per progetti che devono integrarsi con applicazioni Java esistenti o fare uso dell'ecosistema Java.
+\end{itemize}
+
+L'utilizzo della \ac{JVM} e la flessibilità del linguaggio sono state le caratteristiche chiave per il raggiungimento della popolarità di questo linguaggio.
+
+Non è, però, privo di difetti:
+
+\begin{itemize}
+    \item Curva di apprendimento ripida: La combinazione di OOP e FP può essere complessa da apprendere per chi è abituato a linguaggi puramente orientati agli oggetti.
+    \item Tempi di compilazione più lunghi: Scala può avere tempi di compilazione più lenti rispetto a Java, specialmente per progetti molto grandi.
+\end{itemize}
+
+\begin{quote}
+    \centering
+    Quindi perché usare Scala?
+\end{quote}
+
+Il motivo per cui Scala è un linguaggio particolarmente adatto per la programmazione di sistemi di \ac{AC} è dovuto proprio alla sua flessibilità, essa permette di lavorare sui campi di calcolo, che necessitano di essere supportati dalle seguenti proprietà, in modo molto naturale:
+
+\begin{itemize}
+    \item una sintassi coincisa per definire funzioni sui campi, le quali in Scala sono le espressioni standard
+    \item meccanismi di controllo sul \textit{quando} e \textit{come} le espressioni vengono valutate
+    \item capacità di calcolare lo stato di un campo basandosi sulle informazioni più recenti dei nodi presenti nel suo intorno
+\end{itemize}
+
+In Scala ogni valore è un oggetto ed i comportamenti vengono definiti attraverso i metodi. Per implementare un campo di calcolo in Scala andremo a definire gli operato dei campi attraverso la definizione di metodi che verranno interpretati dagli oggetti sui quali sono stati chiamati. Gli oggetti, in questo modo, possono essere visti come macchine virtuali in locale per l'esecuzione degli operatori di campo.
+
+\section{Stato dell'arte}
 
 L'Aggregate Programming è un concetto che nasce dal paradigma della ``macro programmazione''.
 
@@ -260,7 +282,7 @@ Posizionandoci in un livello più implementativo troviamo i seguenti costrutti p
     \item \textbf{Functions}: funzioni $$ b(e_1,\dots,e_n) $$ applicate agli argomenti $e_1,\dots,e_n$. Possono essere sia funzioni matematiche, logiche o algoritmiche ma possono anche rappresentare sensori o attuatori.
     \item \textbf{Dynamics}: $$ rep(x \leftarrow v){s_1;\dots;s_n} $$ rappresenta un una variabile di stato locale $x$, inizialmente inizializzata con il valore $v$ e che può essere modificata dalle istruzioni $s_1,\dots,s_n$. In questo modo si definisce un campo dinamico.
     \item \textbf{Interaction}: $$ nbr(s) $$ permette di fare una query di un certo valore rispetto al vicinato 
-% //TODO: risutudiare e sistemare Interaction
+% //TODO: ristudiare e sistemare Interaction
     \item \textbf{Restrictions}: $$
         \begin{array}{l}
         \text{if } e \\
@@ -280,7 +302,7 @@ Implementazioni di questo tipo sono difficili da integrare in sistemi già progr
 \section{ScaFi}
 
 ScaFi è un toolkit open-source scritto in linguaggio Scala per lo sviluppo per lo sviluppo ad alto livello di sistemi aggregati costruito sulle basi dell'Aggregate Programming.
-Il termine ScaFi deriva dalla unione di \textbf{Scala} e \textbf{Fields}. Scala è un linguaggio Java-like moderno e flessibile progettato per unificare il paradigma \ac{OOP} e quello \ac{FP}. È stato progettato per essere coinciso e facilmente leggibile, inoltre si basa sulla Java Virtual Machine, la quale permette l'utilizzo delle librerie Java. L'utilizzo della JVM e la flessibilità del linguaggio sono state le caratteristiche chiave per il raggiungimento della popolarità di questo linguaggio. Il termine Field invece deriva dai \textit{field calculus} di cui abbiamo parlato nei capitoli precedenti.
+Il termine ScaFi deriva dalla unione di \textbf{Scala} e \textbf{Fields}. Il termine Field deriva dai \textit{field calculus} di cui abbiamo parlato nei capitoli precedenti.
 
 L'Architettura di ScaFi \cite{Casadei2022} è riassumibile nella immagine \cref{fig:scafi-arc}.
 
@@ -302,7 +324,7 @@ Ispezionando la figura, troviamo:
     \item \textbf{scafi-distributed}: layer integrativo per l'utilizzo di \textbf{spala} in ScaFi
 \end{itemize}
 
-\paragraph{scafi-core} Questo modulo\cref{fig:core-arc} espone l'incarnazione dell'interfaccia di un \textbf{AggregateProgram}, questo singolo programma si occupa di definire l'intera operatività del insieme dei dispositivi della rete. Andare a mischiare una sottoclasse di \verb|AggregateProgram| con l'interfaccia \verb|Gradients| permette di creare una 
+\paragraph{scafi-core} Questo modulo\cref{fig:core-arc} espone l'incarnazione dell'interfaccia di un \textbf{AggregateProgram}, questo singolo programma si occupa di definire l'intera operatività del insieme dei dispositivi della rete. Andare ad assemblare una sottoclasse di \verb|AggregateProgram| con l'interfaccia \verb|Gradients| permette di creare una funzione di gradiente che si sviluppa (nello spazio e nel tempo) partendo dai nodi sorgente ed espandendosi verso i nodi destinazione.
 
 \begin{figure}
     \centering
@@ -310,21 +332,6 @@ Ispezionando la figura, troviamo:
     \caption{Architettura del modulo scafi-core}
     \label{fig:core-arc}
 \end{figure}
-
-\begin{quote}
-    \centering
-    Perché usare Scala?
-\end{quote}
-
-Il motivo per cui Scala è un linguaggio particolarmente adatto per la programmazione di sistemi di \ac{AC} è dovuto proprio alla sua flessibilità, essa permette di lavorare sui campi di calcolo, che necessitano di essere supportati dalle seguenti proprietà, in modo molto naturale:
-
-\begin{itemize}
-    \item una sintassi coincisa per definire funzioni sui campi, le quali in Scala sono le espressioni standard
-    \item meccanismi di controllo sul \textit{quando} e \textit{come} le espressioni vengono valutate
-    \item capacità di calcolare lo stato di un campo basandosi sulle informazioni più recenti dei nodi presenti nel suo intorno
-\end{itemize}
-
-In Scala ogni valore è un oggetto ed i comportamenti vengono definiti attraverso i metodi. Per implementare un campo di calcolo in Scala andremo a definire gli operato dei campi attraverso la definizione di metodi che verranno interpretati dagli oggetti sui quali sono stati chiamati. Gli oggetti, in questo modo, possono essere visti come macchine virtuali in locale per l'esecuzione degli operatori di campo.
 
 Di seguito l'interfaccia fondamentale per la definizione di un campo di calcolo in Scala (\cref{lst:constructs-scala}):
 
@@ -672,6 +679,17 @@ Inizialmente, la demo, presentava soltanto la possibilità di utilizzare i robot
     \label{fig:wave-robot}
 \end{figure}
 
+A livello strutturale il sistema è caratterizzato da un Environment che rappresenta il mondo in cui gli agenti si muovono e raccolgono dati mediante Sensori, un EnvironmentProvider che si occupa di carpire le informazioni utili sugli agenti e sull'Environment per fornirle al programma aggregato, programma aggregato che computa le informazioni ricevute dal EnvironmentProvider ed elabora il comportamento più performante per raggiungere l'obiettivo definito ed in fine un sistema di Attuazione che trasforma il comportamento definito dal programma aggregato in azioni che producono un effetto nel mondo reale (\cref{fig:uml}).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.8\linewidth]{figures/uml.png}
+    \caption{UML del sistema}
+    \label{fig:uml}
+\end{figure}
+
+% //TODO: da completare con un diagramma delle classi 
+
 \section{Requisiti}
 
 Requisiti funzionali:
@@ -694,7 +712,7 @@ Requisiti non funzionali:
 \label{chap:design}
 %----------------------------------------------------------------------------------------
 
-A seguito di un analisi delle caratteristiche dei robot Thymio e dei protocolli di comunicazione che esso mette a disposizione si è optato per l'utilizzo del modulo \textbf{tdmclient} nel contesto di un server sviluppato utilizzando il framework Flask. Questo framework è stato sviluppato per la creazione di applicazioni web e, in particolare, per la creazione di \textit{API RESTful}\footnote{Le API sono l'interfaccia che utilizzano due o più sistemi informatici per lo scambio sicuro di informazioni. REST è un'architettura software sulla quale si possono progettare le API}. 
+A seguito di un analisi delle caratteristiche dei robot Thymio e dei protocolli di comunicazione che esso mette a disposizione si è optato per l'utilizzo del modulo \textbf{tdmclient} nel contesto di un server sviluppato utilizzando il framework Flask. Questo framework è stato sviluppato per la creazione di applicazioni web e, in particolare, per la creazione di \textit{API RESTful}\footnote{Le API sono l'interfaccia che utilizzano due o più sistemi informatici per lo scambio sicuro di informazioni. REST è un'architettura software sulla quale si possono progettare le API} da utilizzare per la comunicazione tra il server e il client che esegue il programma aggregato. 
 
 Si è valutato anche l'utilizzo della libreria ScalaPy, che permette di sfruttare i moduli Python all'interno di un programma Scala, per incorporare le funzionalità di tdmclient direttamente all'interno del sistema aggregato ma data la ``non stabilità'' del progettato ScalaPy si è deciso di non impiegare questa soluzione.
 
@@ -703,17 +721,19 @@ Si è valutato anche l'utilizzo della libreria ScalaPy, che permette di sfruttar
 Il server sviluppato si occupa di gestire la comunicazione con due client\cref{fig:server-arc}:
 \begin{itemize}
     \item il client Thymio Device Manager (TDM) che comunica con i robot Thymio
-    \item il client che ospita il programma aggregato
+    \item il client che ospita ed esegue il programma aggregato
 \end{itemize}
 
 \begin{figure}
     \centering
     \includegraphics[width=.8\linewidth]{figures/server-arc.pdf}
-    \caption{Architettura del server Flask}
+    \caption{Design della soluzione proposta con l'implementazione del server Flask}
     \label{fig:server-arc}
 \end{figure}
 
-Come è possibile vedere in figura \cref{fig:server-arc} il programma aggregato utilizza una webcam per tracciare i robot, computate le posizioni e le direzioni dei robot, queste informazioni vengono elaborate dal programma aggregato ed al fine di completare il task vengono inviati comandi per ogni Thymio al server Flask che, attraverso \textbf{tdmclient} si occupa di eseguire le attuazioni richieste. 
+Il programma aggregato utilizza una webcam per tracciare i robot, computate le posizioni e le direzioni dei robot, queste informazioni vengono elaborate dal programma aggregato ed al fine di completare il task vengono inviati comandi per ogni Thymio al server Flask che, attraverso \textbf{tdmclient} si occupa di eseguire le attuazioni richieste \cref{fig:}. 
+
+% //TODO: da completare con un diagramma di sequenza
 
 %----------------------------------------------------------------------------------------
 \chapter{Implementazione}
@@ -808,8 +828,7 @@ Lato programma aggregato, invece, troviamo l'implementazione di una classe che n
 
 \lstinputlisting[language=Scala,label={lst:robot-control},caption={Classe per il controllo dei robot}]{listings/Robot.scala}
 
-\chapter{Validazione}
-\label{chap:validazione}
+\section{Validazione}
 
 Di seguito si riportano alcuni esempi di algoritmi aggregati applicati ai robot Wave e Thymio nello stesso ambiente per dimostrare che i requisiti sono stati soddisfatti mantenendo flessibilità, autonomia e eterogeneità del sistema.
 
@@ -875,7 +894,8 @@ Questi file di configurazione vengono caricati utilizzando la libreria uPickle \
 \chapter{Conclusione}
 \label{chap:conclusione}
 
-In questa tesi abbiamo dimostrato come sia possibile e semplice andare ad espandere il dominio del sistema che si vuole andare a controllare utilizzando un sistema aggregato. Nonostante la comunicazione con i robot Thymio sia stata gestita in linguaggio 
+In questa tesi abbiamo dimostrato come sia possibile e semplice andare ad espandere il dominio, in funzione dell'integrazione di nuovi dispositivi robotici, del sistema che si si sta progettando utilizzando un sistema aggregato. La corretta integrazione, all'interno del orchestratore, del robot Thymio ha richiesto la sola implementazione di un'interfaccia sulla quale il sistema aggregato agisce per completare il ``round'' con la fase di ``act''. 
+Nei lavori futuri si prevede una continua integrazione di nuovi robot e nuovi comportamenti che muovano l'insieme di robot in un ambiente caratterizzato da ostacoli. 
 %----------------------------------------------------------------------------------------
 
 %----------------------------------------------------------------------------------------
