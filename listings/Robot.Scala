@@ -17,18 +17,7 @@ case class WaveRobot(ip: String, val id: Int) extends Robot derives ReadWriter:
   def spinRight(): Unit =
     requests.get(url = s"http://$ip/js?json=${Command(0.20, -0.20).toJson}")
     lastCommandWasNoOp = false
-  def spinLeft(): Unit =
-    requests.get(url = s"http://$ip/js?json=${Command(-0.20, 0.20).toJson}")
-    lastCommandWasNoOp = false
-  def forward(): Unit =
-    requests.get(url = s"http://$ip/js?json=${Command(-0.08, -0.08).toJson}")
-    lastCommandWasNoOp = false
-  def backward(): Unit =
-    requests.get(url = s"http://$ip/js?json=${Command(0.08, 0.08).toJson}")
-    lastCommandWasNoOp = false
-  def intensities(left: Double, right: Double): Unit =
-    requests.get(url = s"http://$ip/js?json=${Command(left, right).toJson}")
-    lastCommandWasNoOp = false
+  ...
   override def nop(): Unit =
     if !lastCommandWasNoOp then requests.get(url = s"http://$ip/js?json=${Command(0, 0).toJson}")
     else ()
@@ -44,12 +33,7 @@ case class WaveRobot(ip: String, val id: Int) extends Robot derives ReadWriter:
 case class ThymioRobot(val physicalId: String, val id: Int, val name: String) extends Robot derives ReadWriter:
   override def spinRight(): Unit =
     requests.get(url = s"http://localhost:52000/thymio?json=${Command(physicalId, +50, -50).toJson}")
-  override def spinLeft(): Unit =
-    requests.get(url = s"http://localhost:52000/thymio?json=${Command(physicalId, -50, +50).toJson}")
-  override def forward(): Unit =
-    requests.get(url = s"http://localhost:52000/thymio?json=${Command(physicalId, +100, +100).toJson}")
-  override def backward(): Unit =
-    requests.get(url = s"http://localhost:52000/thymio?json=${Command(physicalId, -100, -100).toJson}")
+  ...
   override def nop(): Unit =
     requests.get(url = s"http://localhost:52000/thymio?json=${Command(physicalId, 0, 0).toJson}")
   override def intensities(left: Double, right: Double): Unit = {}
