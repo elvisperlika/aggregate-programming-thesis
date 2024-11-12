@@ -688,8 +688,6 @@ A livello strutturale il sistema è caratterizzato da un Environment che rappres
     \label{fig:uml}
 \end{figure}
 
-% //TODO: da completare con un diagramma delle classi 
-
 \section{Requisiti}
 
 Requisiti funzionali:
@@ -716,6 +714,15 @@ A seguito di un analisi delle caratteristiche dei robot Thymio e dei protocolli 
 
 Si è valutato anche l'utilizzo della libreria ScalaPy, che permette di sfruttare i moduli Python all'interno di un programma Scala, per incorporare le funzionalità di tdmclient direttamente all'interno del sistema aggregato ma data la ``non stabilità'' del progettato ScalaPy si è deciso di non impiegare questa soluzione.
 
+In figura \cref{fig:classi} è possibile vedere l'architettura del intero sistema con le classi principali che lo compongono. Definito un ambiente \verb|DemoEnvironment| lo si popola di agenti che nel nostro contesto sono \verb|Robot| (che a loro volta possono essere di tipo \verb|Wave| o \verb|Thymio|). Il \verb|DemoEnvironment| è in grado di fornire le informazioni necessarie al \verb|AggregateOrchestrator| che, a sua volta, computa le informazioni ricevute e produce le attuazioni da eseguire \verb|RobotUpdate|. Queste attuazioni vengono decodificate dai \verb|Robot| che le trasformano in effetti tangibili nel mondo reale. Per permettere all'orchestratore di definire i comportamenti più adatti è necessario definire un \verb|EnvironmentProvider| che si occupa di fornire le informazioni necessarie. Nel nostro caso si tratta di una (tele) \verb|Camera|.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.99\linewidth]{figures/classi.jpg}
+    \caption{Diagramma delle classi}
+    \label{fig:classi}
+\end{figure}
+
 \section{Architettura server Flask}
 
 Il server sviluppato si occupa di gestire la comunicazione con due client\cref{fig:server-arc}:
@@ -727,13 +734,18 @@ Il server sviluppato si occupa di gestire la comunicazione con due client\cref{f
 \begin{figure}
     \centering
     \includegraphics[width=.8\linewidth]{figures/server-arc.pdf}
-    \caption{Design della soluzione proposta con l'implementazione del server Flask}
+    \caption{Design ad alto livello della soluzione proposta con l'implementazione del server Flask}
     \label{fig:server-arc}
 \end{figure}
 
-Il programma aggregato utilizza una webcam per tracciare i robot, computate le posizioni e le direzioni dei robot, queste informazioni vengono elaborate dal programma aggregato ed al fine di completare il task vengono inviati comandi per ogni Thymio al server Flask che, attraverso \textbf{tdmclient} si occupa di eseguire le attuazioni richieste \cref{fig:}. 
+Il programma aggregato al fine di completare il task invia comandi per ogni Thymio al server Flask che, attraverso il modulo \textbf{tdmclient} si occupa di eseguire le attuazioni richieste. In \cref{fig:sequence} è possibile comprendere meglio il flusso di comunicazione tra i vari componenti del sistema. 
 
-% //TODO: da completare con un diagramma di sequenza
+\begin{figure}
+    \centering
+    \includegraphics[width=.99\linewidth,angle=90]{figures/sequence.jpg}
+    \caption{Diagramma di sequenza delle comunicazioni per il controllo dei Thymio Robot}
+    \label{fig:sequence}
+\end{figure}
 
 %----------------------------------------------------------------------------------------
 \chapter{Implementazione}
