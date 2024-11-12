@@ -85,9 +85,9 @@ Questo lavoro vuole proprio dimostrare come con la possibilità di avere un astr
 
 \section{Sistemi collettivi ed eterogenei} 
 
-Per comprendere il potenziale dell'\ac{AP}, che verrà esplorato nelle sezioni seguenti, è fondamentale definire quale tipo di problema si vuole risolvere. 
+% Per comprendere il potenziale dell'\ac{AP}, che verrà esplorato nelle sezioni seguenti, è fondamentale definire quale tipo di problema si vuole risolvere. 
 
-La crescita del mondo \ac{IoT} ha portato alla presenza di numerosi dispositivi connessi tra loro. Dispositivi di ogni tipologia e caratterizzati da protocolli di comunicazione eterogenei. Il mondo dell'IoT, in continua evoluzione promette di migliore la produzione, gli spazi di lavoro e la sanità attraverso la raccolta e l'analisi di grandi quantità di dati. È nato, di conseguenza, il bisogno di progettare sistemi resistenti e resilienti con l'obiettivo di gestire queste grandi quantità di dispositivi e dati. È necessario che questi sistemi siano capaci di: 
+La crescita del mondo \ac{IoT} ha portato alla presenza di numerosi dispositivi connessi tra loro. Dispositivi di ogni tipologia e caratterizzati da protocolli di comunicazione eterogenei. Questo settore, in continua evoluzione promette di migliore la produzione, gli spazi di lavoro e la sanità attraverso la raccolta e l'analisi di grandi quantità di dati. È nato, di conseguenza, il bisogno di progettare sistemi resistenti e resilienti con l'obiettivo di gestire queste grandi quantità di dispositivi e dati ed è necessario che questi sistemi siano capaci di: 
 \begin{itemize}
     \item adattarsi a cambiamenti imprevedibili: i contesti in cui operano i dispositivi possono cambiare in modo imprevedibile, ad esempio a causa di guasti o malfunzionamenti e prevedere tutti gli scenari risulta essere altamente complesso. 
     \item permettere l'implementazione di nuovi comportamenti: la nascita di nuovi bisogni, variazioni nel ambiente, evoluzione delle tecnologie, ottimizzazione delle risorse o modifiche delle normative richiedono la capacità di implementare nuovi comportamenti in modo rapido ed efficace. 
@@ -96,7 +96,7 @@ La crescita del mondo \ac{IoT} ha portato alla presenza di numerosi dispositivi 
 
 Allo stato attuale della tecnologia è difficile e costoso progettare sistemi di questo tipo poiché non esistono framework che permettano di gestirne, in modo semplice e intuitivo, la complessità \cite{Beal2015} \cite{CasadeiPhDThesis}.
 
-Un'astrazione grafica del mondo IoT è presente in \cref{fig:iot-arc} \cite{Testa2022}. È possibile comprendere come ci sia uno strato contente i nodi (dispositivi)\footnote{HMI: Human-Machine-Interaction.}, uno strato che rappresenta la rete (internet) mediante la quale comunicano\footnote{Prima di accedere alla rete internet le informazioni dei sensori vengono raccolte dai Edge Gateway che si occupano di instradare le informazioni.} ed uno strato contente il mondo Cloud dove vengono raccolte tutte le informazioni prodotte dai nodi della rete e computate, attraverso applicazioni complesse, per l'analisi, la pianificazione, l'ottimizzazione ed altri scopi.
+Un'astrazione grafica del mondo IoT è presente in \cref{fig:iot-arc} \cite{Testa2022}. È possibile comprendere come ci sia uno strato contente i nodi (dispositivi)\footnote{HMI: Human-Machine-Interaction.}, uno strato che rappresenta la rete (internet) mediante la quale comunicano\footnote{Prima di accedere alla rete internet le informazioni dei sensori vengono raccolte dai Edge Gateway che si occupano di elaborare ed instradare le informazioni.} ed uno strato contente il mondo Cloud dove vengono raccolte tutte le informazioni prodotte dai nodi della rete e computate, attraverso applicazioni complesse, per l'analisi, la pianificazione, l'ottimizzazione ed altri scopi.
 
 \begin{figure}
     \centering
@@ -105,26 +105,26 @@ Un'astrazione grafica del mondo IoT è presente in \cref{fig:iot-arc} \cite{Test
     \label{fig:iot-arc}
 \end{figure}
 
-Il problema di questa architettura è ritrovabile nelle problematiche nascenti dall'inviare ingenti quantità di dati da un numero elevato di nodi. Problema che può provocare effetti negativi sui costi, le disponibilità, la scalabilità della piattaforma e la latenza delle comunicazioni. Una delle soluzione trovate è quella di spostare la computazione più vicino possibile ai nodi della rete, in modo da ridurre la quantità di dati da inviare e di conseguenza ridurre i problemi di latenza nelle comunicazioni. Questo approccio, chiamato \textit{Edge Computing} consiste in quattro passaggi principali: 
+Il problema di questa architettura risiede nell'invio di ingenti quantità di dati da un numero elevato di nodi. Problema che può provocare effetti negativi sui costi, le disponibilità, la scalabilità della piattaforma e la latenza delle comunicazioni. Una delle soluzione trovate è quella di spostare la computazione più vicino possibile ai nodi della rete, in modo da ridurre la quantità di dati da inviare e di conseguenza ridurre i problemi di latenza nelle comunicazioni. Questo approccio, chiamato \textit{Edge Computing} consiste in quattro passaggi principali: 
 
 \begin{enumerate}
     \item raccolta dati
     \item pre-processamento locale dei dati sorgente
-    \item definita una strategia immediata 
+    \item definire una strategia immediata 
     \item condivisione della strategia con il Cloud o pre-processamento dei dati sul Cloud
 \end{enumerate}
 
-Per quanto semplice, questo approccio va a mettere in una situazione dis stress le organizzazioni di applicazioni IoT. Inoltre, non è sempre conveniente applicarlo, dipende dal contesto. Ad esempio non sarebbe adatto nel caso i nodi abbiamo specifiche tecniche, come memoria e capacità di calcolo, deboli \cite{Testa2022}. 
+Per quanto semplice, questo approccio va a mettere in una situazione di stress le organizzazioni produttrici di applicazioni e servizi IoT. Inoltre, non è sempre conveniente applicarlo, dipende dal contesto. Ad esempio non sarebbe adatto nel caso i nodi abbiamo specifiche tecniche, come memoria e capacità di calcolo, deboli \cite{Testa2022}. 
 
 Andando ad osservare nel dettaglio solo i dispositivi di questa architettura complessa è possibile notare come molto spesso, anche se in apparenza impercettibile, è presente un aspetto collettivo che merita di essere considerato. Preso un sistema in cui è presente una gestione dei dati distribuita, nella quale i nodi della rete condividono le proprie informazioni e quelle che hanno ricevuto da altri nodi al fine di raggiungere un obiettivo comune, se questo sistema è in grado di adattarsi ai cambiamenti e continuare nella realizzazione del task è possibile che esso vada a far emergere una forma di intelligenza collettiva autonoma. 
 
 La forza di un sistema del genere sta nella sua resilienza: ogni nodo può operare localmente con regole relativamente semplici, ma la somma delle interazioni può produrre una risposta globale complessa e adattabile. Tale struttura è particolarmente efficace in contesti in cui è richiesta una risposta flessibile e continua agli imprevisti, come nei casi di reti neurali distribuite, sistemi di swarm robotics, e ambienti IoT (Internet of Things) su larga scala.
 
-Questa intelligenza distribuita può, quindi, essere considerata autonoma nella misura in cui non richiede una gestione centralizzata per adattarsi o evolversi, riuscendo a creare soluzioni nuove senza un controllo diretto. Questo fenomeno diventa particolarmente evidente in situazioni di problem-solving distribuito, dove i nodi, seguendo semplici protocolli di comunicazione e scambio, ottimizzano il risultato collettivo migliorando così la capacità del sistema di raggiungere obiettivi complessi.
+Questa intelligenza distribuita può, quindi, essere considerata autonoma nella misura in cui non richiede una gestione decentralizzata per adattarsi o evolversi, riuscendo a creare soluzioni nuove senza un controllo diretto. Questo fenomeno diventa particolarmente evidente in situazioni di problem-solving distribuito, dove i nodi, seguendo semplici protocolli di comunicazione e scambio, ottimizzano il risultato collettivo e provocando un miglioramento delle capacità del sistema nel raggiungere gli obiettivi prefissati.
 
-Sono numerosi i casi di sistemi collettivi che necessitano di un controllo distribuito e coordinato. Un esempio pratico di questa intelligenza collettiva autonoma si può vedere nelle reti di sensori distribuiti, che monitorano in tempo reale fenomeni ambientali (come incendi, movimenti sismici o cambiamenti climatici). Ogni sensore condivide dati con quelli vicini e l'intero sistema è in grado di rilevare e rispondere ad anomalie senza un controllo centrale. Questo comportamento emergente, basato su regole locali e interazioni dinamiche, rende questi sistemi più robusti, adattabili e affidabili in contesti complessi. Un altro esempio è il controllo di droni in formazione. In questo caso, ogni drone deve essere in grado di comunicare con i propri vicini per mantenere la formazione, evitare collisioni e raggiungere l'obiettivo comune\cref{fig:drones}.
+Sono numerosi i casi di sistemi collettivi che necessitano di un controllo distribuito e coordinato. Un esempio pratico di questa intelligenza collettiva autonoma si può vedere nelle reti di sensori distribuiti, che monitorano in tempo reale fenomeni ambientali (come incendi, movimenti sismici o cambiamenti climatici). Ogni sensore condivide dati con quelli vicini e l'intero sistema è in grado di rilevare e rispondere ad anomalie senza un controllo centrale. Un altro esempio è il controllo di droni in formazione, in questo caso, ogni drone deve essere in grado di comunicare con i propri vicini per mantenere la formazione, evitare collisioni e raggiungere l'obiettivo comune\cref{fig:drones}.
 
-È chiara la necessità di una tecnologia che permetta di costruire nuove applicazioni (o comportamenti) per il controllo di collettivi di dispositivi senza dover andare a definire i singoli comportamenti dei dispositivi, bensì trattando questi singoli dispositivi come un unico superorganismo.
+È chiara la necessità di una tecnologia che permetta di costruire nuove applicazioni (o comportamenti) per il controllo di collettivi di dispositivi senza dover andare a definire i singoli comportamenti dei dispositivi, bensì trattando l'unione di questi singoli dispositivi come un unico superorganismo.
 
 \begin{figure}
     \centering
@@ -135,7 +135,7 @@ Sono numerosi i casi di sistemi collettivi che necessitano di un controllo distr
 
 \section{Scala}
 
-Per la realizzazione del progetto di questa tesi si è scelto di utilizzare il linguaggio di programmazione Scala ma per comprenderlo meglio è necessario fare una breve introduzione alla programmazione funzionale.
+Per la realizzazione del progetto di questa tesi si è scelto di utilizzare il linguaggio di programmazione Scala. Per comprenderlo meglio è necessario fare una breve introduzione alla programmazione funzionale.
 
 È possibile riassumere il paradigma della programmazione funzionale con la frase \textit{``Everything is a Function''}. Quando si parla di funzioni in quest'ambito si fa riferimento alle \textbf{funzioni pure}\cite{Hunt2018}, cioè funzioni ``prive di effetti collaterali''. Con l'espressione ``priva di effetti collaterali'' si intende una funzione che non fa altro oltre a restituire un risultato (come la modifica del campo di un oggetto o la scrittura/lettura su file).
 
@@ -148,7 +148,7 @@ Si potrebbe pensare che con l'uso della \ac{FP} si possano costruire solo progra
 
 In oltre, la programmazione funzionale incoraggia l'uso di dati immutabili, il che significa che una volta creato un dato, non viene modificato. Questo riduce le possibilità di errori difficili da tracciare, perché le funzioni non alterano lo stato globale ma restituiscono nuovi valori. Nei progetti complessi, ciò rende più facile comprendere e prevedere il comportamento del codice.  Grazie all'immutabilità e alle funzioni pure, la programmazione funzionale è particolarmente adatta per il calcolo parallelo e concorrente. L'assenza di modifiche condivise tra le funzioni evita il problema dei \textit{race condition}, che si verifica quando due processi cercano di accedere o modificare contemporaneamente lo stesso dato. Questo è cruciale per la scalabilità nei sistemi complessi.
 
-Queste proprietà rendono i programmi facili da testare e da correggere nel caso di bug. Di conseguenza rendono un programma progettato con approccio funzionale di essere maggiormente scalabile e mantenibile.
+Queste proprietà rendono i programmi facili da testare e da correggere nel caso di bug. Di conseguenza rendono un programma progettato con approccio funzionale maggiormente scalabile e mantenibile.
 
 Scala è un linguaggio Java-like moderno e flessibile progettato per unificare il paradigma \ac{OOP} e quello \ac{FP}.  È stato creato da \textbf{Martin Odersky} ed è molto utilizzato per applicazioni di tipo Big Data, elaborazione distribuita e backend.
 
@@ -200,13 +200,13 @@ Questo paradigma nasce con lo scopo di astrarre il comportamento e le interazion
 \begin{itemize}
     \item \textit{Distinzione micro-macro.} Per \textit{micro} si intendono le singole entità del ambiente, mentre per \textit{macro} si intende il comportamento del sistema, il suo stato, la sua struttura.
     \item \textit{Prospettiva macroscopica.} Il programmatore si concentra principalmente sul comportamento macroscopico del sistema, piuttosto che sul comportamento dei singoli componenti, questo non esclude osservazioni a livello microscopico.
-    \item \textit{Macro-programma.} L'attività di sviluppo genera un macro-programma, ovvero un codice che specifica la logica di funzionamento macroscopica.
+    \item \textit{Macro-programma.} L'attività di sviluppo genera un ``macroprogramma'', ovvero un codice che specifica la logica di funzionamento macroscopica (globale).
     \item \textit{Mappatura macro a micro.} Anche conosciuta come \textit{mappatura globale a locale}, è la logica che permette al macro-programma di compiere le specifiche attuazioni a livello microscopico per completare il task.
 \end{itemize}
 
 Questa teoria e la tecnologia che ne deriva mira a migliorare la progettazione, manutenzione e testing di programmi nell'ambito del controllo di dispositivi hardware di larga-scala. 
 
-L'Aggregate Computing (AC) si basa sulla mappatura di un mondo cyber-fisico in un nuovo modello logico. Da un punto di vista strutturale possiamo vedere un sistema \textbf{aggregato} come una rete di dispositivi, capaci di computare, equipaggiati con (o sui quali è possibile equipaggiare) sensori ed attuatori. Ogni dispositivo corrisponde ad un nodo e questi nodi sono connessi tra di loro secondo una logica di vicinato che può essere definita in base alla distanza fisica o alla comunicazione. Da un punto di vista comportamentale, invece, ogni nodo interpreta il programma aggregato solo in relazione al proprio contesto locale. Da un punto di vista delle interazioni, i nodi estraggono informazione dal proprio vicinato e propagano le proprie nello stesso contesto. Queste interazioni son ciò che permettono al contesto locale e globale di influenzarsi reciprocamente.
+L'Aggregate Computing (AC) si basa sulla mappatura di un mondo cyber-fisico in un nuovo modello logico. Da un punto di vista strutturale un sistema \textbf{aggregato} è una rete di dispositivi, capaci di computare, equipaggiati con (o sui quali è possibile equipaggiare) sensori ed attuatori. Ogni dispositivo corrisponde ad un nodo e questi nodi sono connessi tra di loro secondo una logica di vicinato che può essere definita in base alla distanza fisica o alla comunicazione. Da un punto di vista comportamentale, invece, ogni nodo interpreta il programma aggregato solo in relazione al proprio contesto locale. Da un punto di vista delle interazioni, i nodi estraggono informazione dal proprio vicinato e propagano le proprie nello stesso contesto. Queste interazioni son ciò che permettono al contesto locale e globale di influenzarsi reciprocamente.
 
 La tecnica dell'Aggregate Computing si basa su tre principi fondamentali per la costruzione di sistemi robusti e resilienti:
 
@@ -254,7 +254,7 @@ I campi vengono utilizzati per standardizzare le interazioni tra i dispositivi, 
     \label{fig:device-to-value}
 \end{figure}
 
-Questo approccio è generalmente utilizzato per un controllo prolungato dei dispositivi della rete. È ideale per reti di dispositivi sulle quali si vuole eseguire task che necessitano un gran numero di rilevazioni (ad esempio utilizzando sensori), computazioni ed attuazioni nello spazio e nel tempo.
+Questo approccio è generalmente utilizzato per un controllo prolungato dei dispositivi della rete. È ideale per reti di dispositivi sulle quali si vuole eseguire task che necessitano un gran numero di rilevazioni (utilizzando sensori), computazioni ed attuazioni nello spazio e nel tempo.
 
 Ogni dispositivo del proprio sistema aggregato esegue una computazione in modo asincrono attraverso i \textbf{sense-compute-(inter)act rounds}\label{sec:sense-compute-interact} \cite{Macroswarm}, ogni round è composto da tre fasi concettuali \cref{fig:sca-round} \cite{Casadei2021-2}:
 
@@ -301,8 +301,7 @@ Implementazioni di questo tipo sono difficili da integrare in sistemi già progr
 
 \section{ScaFi}
 
-ScaFi è un toolkit open-source scritto in linguaggio Scala per lo sviluppo per lo sviluppo ad alto livello di sistemi aggregati costruito sulle basi dell'Aggregate Programming.
-Il termine ScaFi deriva dalla unione di \textbf{Scala} e \textbf{Fields}. Il termine Field deriva dai \textit{field calculus} di cui abbiamo parlato nei capitoli precedenti.
+ScaFi è un toolkit open-source scritto in linguaggio Scala ideato per lo sviluppo ad alto livello di sistemi aggregati. Questo toolkit è costruito sulle basi dell'Aggregate Programming ed il termine ScaFi deriva dalla unione di \textbf{Scala} e \textbf{Fields}. Il termine Field deriva dai \textit{field calculus} di cui abbiamo parlato nei capitoli precedenti.
 
 L'Architettura di ScaFi \cite{Casadei2022} è riassumibile nella immagine \cref{fig:scafi-arc}.
 
@@ -350,7 +349,7 @@ Gli elementi principali di questa interfaccia sono \cite{Casadei2022}:
 
 In ScaFi, i campi non sono reificati esplicitamente ma esistono solo a livello semantico, questo significa che un'espressione Scala non viene gestita come un'espressione di campo finché non viene passata all'interprete ScaFi \cite{CasadeiPhDThesis}.
 
-ScaFi fornisce alcuni operatori, detti anche \textit{blocchi}, di alto livello già implementati tipici dei sistemi aggregati \cite{Casadei2022} (le immagini sono tratte da \cite{CasadeiPhDThesis}):
+ScaFi fornisce alcuni operatori di alto livello per la sviluppo di comportamenti collettivi \cite{Casadei2022} (le immagini sono tratte da \cite{CasadeiPhDThesis}):
 
 \begin{itemize}
     \item \textbf{Leader election (definizione di un leader)}: Blocco 
@@ -393,9 +392,8 @@ ScaFi fornisce alcuni operatori, detti anche \textit{blocchi}, di alto livello g
 
 \section{Macroswarm}
 
-Macroswarm è un framework per la programmazione di sistemi di robotica distribuita basato su ScaFi e che estende lo stesso ScaFi. Macroswarm nasce con l'avanzare delle tecnologie ed il crescente interesse verso il controllo di flotte di dispositivi come droni, robot, veicoli o folle di persone definite da dispositivi portatili/indossabili in modo.
+Macroswarm è un framework che estende il toolkit ScaFi  per la programmazione di sistemi di robotica distribuita. Macroswarm nasce con l'avanzare delle tecnologie ed il crescente interesse verso il controllo di flotte di dispositivi come droni, robot, veicoli o folle di persone definite da dispositivi portatili/indossabili in modo.
 Si è voluto, quindi, creare un framework che permettesse di programmare sistemi distribuiti di robot in modo semplice ed intuitivo secondo degli \textit{swarm behavior}\footnote{Comportamenti di sciame/flotta}, permettendo di concentrarsi solo sulla logica di alto livello del sistema. Questo framework è stato scelto per il progetto in esamina.
-Il paradigma \ac{AP} e di conseguenza ScaFi sono state scelte naturali per la progettazione di tale framework (\cref{fig:macro-swarm-arc}) \cite{Macroswarm}.
 
 \begin{figure}
     \centering
@@ -701,10 +699,6 @@ Requisiti non funzionali:
     \item Velocità nelle comunicazioni con i nuovi robot integrati.
 \end{itemize}
 
-\section{Dominio}
-
-% //TODO: da fare e finire
-
 %----------------------------------------------------------------------------------------
 \chapter{Design}
 \label{chap:design}
@@ -714,7 +708,7 @@ A seguito di un analisi delle caratteristiche dei robot Thymio e dei protocolli 
 
 Si è valutato anche l'utilizzo della libreria ScalaPy, che permette di sfruttare i moduli Python all'interno di un programma Scala, per incorporare le funzionalità di tdmclient direttamente all'interno del sistema aggregato ma data la ``non stabilità'' del progettato ScalaPy si è deciso di non impiegare questa soluzione.
 
-In figura \cref{fig:classi} è possibile vedere l'architettura del intero sistema con le classi principali che lo compongono. Definito un ambiente \verb|DemoEnvironment| lo si popola di agenti che nel nostro contesto sono \verb|Robot| (che a loro volta possono essere di tipo \verb|Wave| o \verb|Thymio|). Il \verb|DemoEnvironment| è in grado di fornire le informazioni necessarie al \verb|AggregateOrchestrator| che, a sua volta, computa le informazioni ricevute e produce le attuazioni da eseguire \verb|RobotUpdate|. Queste attuazioni vengono decodificate dai \verb|Robot| che le trasformano in effetti tangibili nel mondo reale. Per permettere all'orchestratore di definire i comportamenti più adatti è necessario definire un \verb|EnvironmentProvider| che si occupa di fornire le informazioni necessarie. Nel nostro caso si tratta di una (tele) \verb|Camera|.
+In figura \cref{fig:classi} è possibile vedere l'architettura dell'intero sistema con le classi principali che lo compongono. Definito un ambiente \verb|DemoEnvironment| lo si popola di agenti che nel nostro contesto sono \verb|Robot| (che a loro volta possono essere di tipo \verb|Wave| o \verb|Thymio|). Il \verb|DemoEnvironment| è in grado di fornire le informazioni necessarie al \verb|AggregateOrchestrator| che, a sua volta, computa le informazioni ricevute e produce le attuazioni da eseguire \verb|RobotUpdate|. Queste attuazioni vengono decodificate dai \verb|Robot| che le trasformano in effetti tangibili nel mondo reale. Per permettere all'orchestratore di definire i comportamenti più adatti è necessario definire un \verb|EnvironmentProvider| che si occupa di fornire le informazioni necessarie. Nel nostro caso si tratta di una (tele) \verb|Camera|.
 
 \begin{figure}
     \centering
@@ -907,7 +901,7 @@ Questi file di configurazione vengono caricati utilizzando la libreria uPickle \
 \label{chap:conclusione}
 
 In questa tesi abbiamo dimostrato come sia possibile e semplice andare ad espandere il dominio, in funzione dell'integrazione di nuovi dispositivi robotici, del sistema che si si sta progettando utilizzando un sistema aggregato. La corretta integrazione, all'interno del orchestratore, del robot Thymio ha richiesto la sola implementazione di un'interfaccia sulla quale il sistema aggregato agisce per completare il ``round'' con la fase di ``act''. 
-Nei lavori futuri si prevede una continua integrazione di nuovi robot e nuovi comportamenti che muovano l'insieme di robot in un ambiente caratterizzato da ostacoli. 
+Nei lavori futuri si prevede una continua integrazione di nuovi robot e nuovi comportamenti che muovano l'insieme di robot in un ambiente caratterizzato da ostacoli.
 %----------------------------------------------------------------------------------------
 
 %----------------------------------------------------------------------------------------
